@@ -9,6 +9,14 @@ int main() {
 	pugi::xml_parse_result result = doc.load_file(directorio.c_str());
 
 	for (pugi::xml_node_iterator nodo = doc.begin(); nodo != doc.end(); nodo++) {
+		if (nodo->name() == "Esfera") {
 		
+		}
+		else if (nodo->name() == "Cilindro") {
+		
+		}
+		else if (nodo->name() == "Poligono") {
+		
+		}
 	}
 }

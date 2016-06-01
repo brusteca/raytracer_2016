@@ -21,6 +21,7 @@ raices bhaskara(float a, float b, float c) {
 	if (b*b - 4 * a*c == 0.0) {
 		retorno.cantidad = Una;
 		retorno.a = b*b / (2 * a);
+		retorno.b = 0.0;
 	}
 	else if (b*b - 4 * a*c < 0.0) {
 		retorno.cantidad = Cero;

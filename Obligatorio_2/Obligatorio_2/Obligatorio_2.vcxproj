@@ -122,6 +122,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="clases\Cilindro.h" />
+    <ClInclude Include="clases\Poligono.h" />
     <ClInclude Include="clases\Punto.h" />
     <ClInclude Include="clases\Esfera.h" />
     <ClInclude Include="clases\Shape.h" />

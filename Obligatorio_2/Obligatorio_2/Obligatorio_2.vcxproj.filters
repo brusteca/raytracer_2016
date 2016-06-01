@@ -32,5 +32,11 @@
     <ClInclude Include="clases\Utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="clases\Cilindro.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="clases\Poligono.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

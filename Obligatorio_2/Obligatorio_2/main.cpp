@@ -1,5 +1,11 @@
 #include "pugixml-1.7/src/pugixml.hpp"
 
+#include "clases\Cilindro.h"
+#include "clases\Esfera.h"
+#include "clases\Poligono.h"
+#include "clases\Utils.h"
+#include "clases\Shape.h"
+
 using namespace std;
 
 int main() {

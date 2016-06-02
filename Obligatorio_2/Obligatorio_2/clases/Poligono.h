@@ -2,7 +2,10 @@
 #ifndef POLIGONO_H
 #define POLIGONO_H
 
+#include <iostream>
+
 #include "Shape.h"
+#include "Utils.h"
 
 using namespace std;
 
@@ -33,9 +36,11 @@ class Poligono : public Shape {
 			cantidad = c;
 			// Hallar datos del plano con los primeros 3 puntos
 			// Si A, B y C son los puntos, entonces normal = (B-A) x (C-A)
-			normal = (ps[1] + ps[0].negado()) *(ps[2] + ps[0].negado());
+			normal = (ps[1] + ps[0].negado()).productoVectorial((ps[2] + ps[0].negado()));
+			cout << "(" << normal.getX() << "," << normal.getY() << "," << normal.getZ() << ")" << endl;
 			// 'd' se haya mediante N . P = -d, siendo P un punto del plano (se utiliza el primero).
 			d = -(normal * ps[0]);
+			cout << "d = " << d << endl;
 
 			// Se debe chequear que todos los puntos dados pertenezcan al mismo plano, sinó el polígono será inválido
 			// NO IMPLEMENTADO 
@@ -50,13 +55,15 @@ class Poligono : public Shape {
 		Punto* colisionaCon(Punto p1, Punto p2) {
 			if (cantidad < 3)
 				return NULL;
+			cout << "Cantidad bien" << endl;
 			/* 
 			 * Colisionar rayo con el plano
 			 * Considero ecuación paramétrica del rayo: p1 + t * (p2 - p1)
 			 * Entonces t = -(N . p1 + d) / (N . (p2 - p1)), donde N es la normal del plano			 
 			*/
 			// Calculo N . p2 para ver si hay intersección
-			float denominador = normal * (p2);
+			float denominador = normal * (p2 - p1);
+			cout << "Denominador: " << denominador << endl;
 			if (denominador == 0.0)
 				return NULL;
 			// Denominador no es cero, puedo continuar
@@ -66,15 +73,15 @@ class Poligono : public Shape {
 			// Proyectar ortogonalmente todo el plano sobre la dirección con mayor módulo en su normal.
 			Punto normalProyectada(0.0,0.0,0.0);
 			Punto* puntosProyectados = new Punto[cantidad];
-			if ((abs(normal.getX()) >= abs(normal.getY())) && (abs(normal.getX()) >= abs(normal.getZ())))
+			if ((absFloat(normal.getX()) >= absFloat(normal.getY())) && (absFloat(normal.getX()) >= absFloat(normal.getZ())))
 				for (int i = 0; i < cantidad; i++) {
 					puntosProyectados[i] = Punto(puntos[i].getY(),puntos[i].getZ(),0.0);
 				}
-			else if ((abs(normal.getY()) >= abs(normal.getX())) && (abs(normal.getY()) >= abs(normal.getZ())))
+			else if ((absFloat(normal.getY()) >= absFloat(normal.getX())) && (absFloat(normal.getY()) >= absFloat(normal.getZ())))
 				for (int i = 0; i < cantidad; i++) {
 					puntosProyectados[i] = Punto(puntos[i].getX(), puntos[i].getZ(), 0.0);
 				}
-			else if ((abs(normal.getZ()) >= abs(normal.getX())) && (abs(normal.getZ()) >= abs(normal.getY())))
+			else if ((absFloat(normal.getZ()) >= absFloat(normal.getX())) && (absFloat(normal.getZ()) >= absFloat(normal.getY())))
 				for (int i = 0; i < cantidad; i++) {
 					puntosProyectados[i] = Punto(puntos[i].getX(), puntos[i].getY(), 0.0);
 				}
@@ -92,7 +99,7 @@ class Poligono : public Shape {
 				// Los resultados fueron calculados previamente
 				paralelismo = -(puntosProyectados[i + 1].getY() - puntosProyectados[i].getY());
 				if (paralelismo != 0.0) {
-					t2 = (puntosProyectados[i] - interseccion->getY())/paralelismo;
+					t2 = (puntosProyectados[i].getY() - interseccion->getY())/paralelismo;
 					if ((t2 >= 0.0) && (t2 < 1.0)) {
 						t1 = puntosProyectados[i].getX() - interseccion->getX() + (puntosProyectados[i + 1].getX() - puntosProyectados[i].getX()) * t2;
 						if (t1 >= 0)

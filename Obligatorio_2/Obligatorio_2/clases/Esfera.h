@@ -2,6 +2,8 @@
 #ifndef ESFERA_H
 #define ESFERA_H
 
+#include <iostream>
+
 #include "Shape.h"
 #include "Punto.h"
 #include "Utils.h"

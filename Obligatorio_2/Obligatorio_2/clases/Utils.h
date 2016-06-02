@@ -35,6 +35,13 @@ raices bhaskara(float a, float b, float c) {
 	return retorno;
 };
 
+float absFloat(float a) {
+	if (a < 0)
+		return -a;
+	else
+		return a;
+}
+
 
 #endif
 

@@ -45,6 +45,7 @@ class Punto{
 			x = p.x;
 			y = p.y;
 			z = p.z;
+			return *this;
 		};
 		float operator* (Punto p) {
 			return productoInterno(p);
@@ -55,6 +56,9 @@ class Punto{
 		Punto operator- (Punto p) {
 			return *this + p.negado();
 		}
+		bool operator== (Punto p) {
+			return ((x == p.x) && (y == p.y) && (z == p.z));
+		}		
 
 };
 

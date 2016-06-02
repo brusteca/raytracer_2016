@@ -61,11 +61,56 @@ class Poligono : public Shape {
 				return NULL;
 			// Denominador no es cero, puedo continuar
 			float t = (-(normal * p1 + d)) / denominador;
-			Punto interseccion = p1 + (p2 - p1).productoEscalar(t);
+			Punto* interseccion = new Punto (p1 + (p2 - p1).productoEscalar(t));
 			// Hallada la intersección con el plano, debemos ver si ese punto pertenece al polígono en sí.
-			// Lanzar un rayo desde el punto de contacto en cualquier dirección, en este caso dirección hacia el primer punto del polígono
-			// Rayo : interseccion + t2 * (puntos[0] - interseccion)
-			// Recta entre vértices v1 y v2: v1 + tv * (v2 - v1)
+			// Proyectar ortogonalmente todo el plano sobre la dirección con mayor módulo en su normal.
+			Punto normalProyectada(0.0,0.0,0.0);
+			Punto* puntosProyectados = new Punto[cantidad];
+			if ((abs(normal.getX()) >= abs(normal.getY())) && (abs(normal.getX()) >= abs(normal.getZ())))
+				for (int i = 0; i < cantidad; i++) {
+					puntosProyectados[i] = Punto(puntos[i].getY(),puntos[i].getZ(),0.0);
+				}
+			else if ((abs(normal.getY()) >= abs(normal.getX())) && (abs(normal.getY()) >= abs(normal.getZ())))
+				for (int i = 0; i < cantidad; i++) {
+					puntosProyectados[i] = Punto(puntos[i].getX(), puntos[i].getZ(), 0.0);
+				}
+			else if ((abs(normal.getZ()) >= abs(normal.getX())) && (abs(normal.getZ()) >= abs(normal.getY())))
+				for (int i = 0; i < cantidad; i++) {
+					puntosProyectados[i] = Punto(puntos[i].getX(), puntos[i].getY(), 0.0);
+				}
+			// Ahora podemos trabajar en dos dimensiones, lo que simplifica ampliamente los cálculos					
+			// Lanzar un rayo desde el punto de contacto en cualquier dirección, en este caso dirección (1,0)	
+			// Contar intersecciones con fronteras del polígono, si hay impar entonces está dentro.
+			int cantIntersecciones = 0;
+			/*
+			 * Rayo: interseccion + t1 * (1,0,0)
+			 * Frontera entre vértices v1 y v2: v1 + t2 * (v2 - v1)
+			 * t1 >= 0 y 0 <= t2 < 1 son las condiciones de choque exitoso.
+			 */
+			float t1, t2, paralelismo;
+			for (int i = 0; i < cantidad - 1; i++) {
+				// Los resultados fueron calculados previamente
+				paralelismo = -(puntosProyectados[i + 1].getY() - puntosProyectados[i].getY());
+				if (paralelismo != 0.0) {
+					t2 = (puntosProyectados[i] - interseccion->getY())/paralelismo;
+					if ((t2 >= 0.0) && (t2 < 1.0)) {
+						t1 = puntosProyectados[i].getX() - interseccion->getX() + (puntosProyectados[i + 1].getX() - puntosProyectados[i].getX()) * t2;
+						if (t1 >= 0)
+							cantIntersecciones++;
+					}
+				}
+			}
+			Punto* retorno;
+			if (cantIntersecciones % 2 == 1)
+				retorno = interseccion;
+			else {
+				retorno = NULL;
+				delete interseccion;
+				interseccion = NULL;
+			}
+			delete[] puntosProyectados;
+			return retorno;
+
 		};
 
 		~Poligono() {

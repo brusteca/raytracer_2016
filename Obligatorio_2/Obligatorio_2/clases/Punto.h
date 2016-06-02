@@ -35,6 +35,11 @@ class Punto{
 		float getY() { return y; };
 		float getZ() { return z; };
 
+		//Setters
+		void setX(float a) { x = a; };
+		void setY(float a) { y = a; };
+		void setZ(float a) { z = a; };
+
 		// Operadores
 		Punto operator= (Punto p) {
 			x = p.x;

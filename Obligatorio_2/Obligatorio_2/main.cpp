@@ -1,6 +1,7 @@
 #define byte unsigned char
+#define BPP 24			//3 8bit rgb values
 
-
+#include <iostream>
 #include "pugixml-1.7/src/pugixml.hpp"
 #include "FreeImage.h"
 
@@ -18,8 +19,10 @@ int main() {
 		
 	}
 
+	//generar imagen
 	int width, height;
 	width = height = 100;
+
 	byte * red_value = new byte[width*height];
 	byte * green_value = new byte[width*height];
 	byte * blue_value = new byte[width*height];
@@ -27,23 +30,32 @@ int main() {
 	for (int y = 0; y<height; y++)
 		for (int x = 0; x<width; x++)
 		{
-			red_value[y*width + height] = 0;
-			green_value[y*width + height] = 255;
-			blue_value[y*width + height] = 0;
+			red_value[y*width + x] = 0;
+			green_value[y*width + x] = 255;
+			blue_value[y*width + x] = 0;
 		}
+
+	for (int y = 0; y < height/2; y++) {
+		red_value[y * width] = 255;
+	}
 
 	//imprimir imagen
-	FILE *f;
-	errno_t err = fopen_s(&f, "out.ppm", "w+");;
-	fprintf(f, "P6\n%i %i 255\n", width, height);
-	for (int y = 0; y<height; y++)
-		for (int x = 0; x<width; x++)
+	FreeImage_Initialise();
+	FIBITMAP * bitmap = FreeImage_Allocate(width, height, BPP);
+	RGBQUAD color;
+	if (!bitmap)
+		perror("No se genero el bitmap");
+	for (int y = 0; y < height; ++y)
+		for (int x = 0; x < width; ++x)
 		{
-			fputc(red_value[y*width + height], f);   // 0 .. 255
-			fputc(green_value[y*width + height], f); // 0 .. 255
-			fputc(blue_value[y*width + height], f);  // 0 .. 255
+			color.rgbRed = red_value[y*width + x];
+			color.rgbGreen = green_value[y*width + x];
+			color.rgbBlue = blue_value[y*width + x];
+			FreeImage_SetPixelColor(bitmap, x,y, &color);
+
 		}
-	fclose(f);
 
-
+	if (FreeImage_Save(FIF_PNG, bitmap, "test.png"))
+		cout << "Imagen guardada exitosamente!" << endl;
+	FreeImage_DeInitialise();
 }

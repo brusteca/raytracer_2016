@@ -14,8 +14,8 @@ class Cilindro : public Shape {
 		Punto centroBase;
 		float altura;
 	public:
-		Cilindro() { radio = altura = 0.0; centroBase = Punto(0, 0, 0); };
-		Cilindro(float r, Punto cB, float a) {
+		Cilindro() : Shape() { radio = altura = 0.0; centroBase = Punto(0, 0, 0); };
+		Cilindro(float r, Punto cB, float a) : Shape() {
 			radio = r;
 			altura = a;
 			centroBase = cB;

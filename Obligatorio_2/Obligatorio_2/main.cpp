@@ -2,6 +2,7 @@
 
 
 #include "pugixml-1.7/src/pugixml.hpp"
+#include "FreeImage.h"
 
 using namespace std;
 

@@ -37,7 +37,7 @@ class Esfera : public Shape {
 					break;
 				case Una: 
 					resultado = new Punto[1];
-					resultado[0] = Punto(xA, yA, zA);
+					resultado[0] = p1 + (p1 - p2).productoEscalar(rcs.a);
 					return 1;
 					break;
 				case Dos: 

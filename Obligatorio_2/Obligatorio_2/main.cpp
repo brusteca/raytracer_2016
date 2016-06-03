@@ -2,6 +2,9 @@
 #define BPP 24			//3 8bit rgb values
 
 #include <iostream>
+#include <iomanip>
+#include <ctime>
+
 #include "pugixml-1.7/src/pugixml.hpp"
 #include "FreeImage.h"
 
@@ -55,7 +58,14 @@ int main() {
 
 		}
 
+	auto t = std::time(nullptr);
+	auto tm = *std::localtime(&t);
+	std::cout << std::put_time(&tm, "%d-%m-%Y %H-%M-%S") << std::endl;
+
 	if (FreeImage_Save(FIF_PNG, bitmap, "test.png"))
 		cout << "Imagen guardada exitosamente!" << endl;
 	FreeImage_DeInitialise();
+
+	int i;
+	cin >> i;
 }

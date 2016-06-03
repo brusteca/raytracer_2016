@@ -119,7 +119,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="testing\test01.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\pugixml-1.7\scripts\pugixml_vs2015.vcxproj">

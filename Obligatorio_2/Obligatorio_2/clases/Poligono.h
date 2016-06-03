@@ -9,6 +9,9 @@
 
 using namespace std;
 
+/* Cosas para arreglar: que el último vértice forme arista con el primero
+	y ver el caso de rayo desde afuera del polígono y que entre en contacto con un vértice*/
+
 /* 
  * La clase polígono no admite figuras de menos de 3 puntos.
  * Los polígonos se reconocen en el sentido en que sus vértices son enviados,
@@ -21,7 +24,7 @@ class Poligono : public Shape {
 		int cantidad;
 		// Atributos para cálculo de intersecciones
 		Punto normal;
-		float d;
+		float d; // Coeficiente de traslación de plano.
 	public:
 		Poligono() { puntos = NULL; cantidad = 0; normal = Punto(); d = 0.0; };
 		Poligono(Punto* ps, int c) {
@@ -36,11 +39,9 @@ class Poligono : public Shape {
 			cantidad = c;
 			// Hallar datos del plano con los primeros 3 puntos
 			// Si A, B y C son los puntos, entonces normal = (B-A) x (C-A)
-			normal = (ps[1] + ps[0].negado()).productoVectorial((ps[2] + ps[0].negado()));
-			cout << "(" << normal.getX() << "," << normal.getY() << "," << normal.getZ() << ")" << endl;
+			normal = (ps[1] + ps[0].negado()).productoVectorial((ps[2] + ps[0].negado()));			
 			// 'd' se haya mediante N . P = -d, siendo P un punto del plano (se utiliza el primero).
-			d = -(normal * ps[0]);
-			cout << "d = " << d << endl;
+			d = -(normal * ps[0]);			
 
 			// Se debe chequear que todos los puntos dados pertenezcan al mismo plano, sinó el polígono será inválido
 			// NO IMPLEMENTADO 
@@ -52,26 +53,23 @@ class Poligono : public Shape {
 				2) Si hay colisión entonces averiguar si el rayo cae dentro del polígono.
 				
 		*/
-		Punto* colisionaCon(Punto p1, Punto p2) {
+		int colisionaCon(Punto p1, Punto p2, Punto resultado) {
 			if (cantidad < 3)
-				return NULL;
-			cout << "Cantidad bien" << endl;
+				return 0;
 			/* 
 			 * Colisionar rayo con el plano
 			 * Considero ecuación paramétrica del rayo: p1 + t * (p2 - p1)
 			 * Entonces t = -(N . p1 + d) / (N . (p2 - p1)), donde N es la normal del plano			 
 			*/
-			// Calculo N . p2 para ver si hay intersección
-			float denominador = normal * (p2 - p1);
-			cout << "Denominador: " << denominador << endl;
+			// Calculo N . (p2 - p1) para ver si hay intersección
+			float denominador = normal * (p2 - p1);			
 			if (denominador == 0.0)
-				return NULL;
+				return 0;
 			// Denominador no es cero, puedo continuar
 			float t = (-(normal * p1 + d)) / denominador;
-			Punto* interseccion = new Punto (p1 + (p2 - p1).productoEscalar(t));
+			Punto interseccion = Punto (p1 + (p2 - p1).productoEscalar(t));
 			// Hallada la intersección con el plano, debemos ver si ese punto pertenece al polígono en sí.
 			// Proyectar ortogonalmente todo el plano sobre la dirección con mayor módulo en su normal.
-			Punto normalProyectada(0.0,0.0,0.0);
 			Punto* puntosProyectados = new Punto[cantidad];
 			if ((absFloat(normal.getX()) >= absFloat(normal.getY())) && (absFloat(normal.getX()) >= absFloat(normal.getZ())))
 				for (int i = 0; i < cantidad; i++) {
@@ -99,25 +97,32 @@ class Poligono : public Shape {
 				// Los resultados fueron calculados previamente
 				paralelismo = -(puntosProyectados[i + 1].getY() - puntosProyectados[i].getY());
 				if (paralelismo != 0.0) {
-					t2 = (puntosProyectados[i].getY() - interseccion->getY())/paralelismo;
+					t2 = (puntosProyectados[i].getY() - interseccion.getY())/paralelismo;
 					if ((t2 >= 0.0) && (t2 < 1.0)) {
-						t1 = puntosProyectados[i].getX() - interseccion->getX() + (puntosProyectados[i + 1].getX() - puntosProyectados[i].getX()) * t2;
+						t1 = puntosProyectados[i].getX() - interseccion.getX() + (puntosProyectados[i + 1].getX() - puntosProyectados[i].getX()) * t2;
 						if (t1 >= 0)
 							cantIntersecciones++;
 					}
 				}
 			}
-			Punto* retorno;
-			if (cantIntersecciones % 2 == 1)
-				retorno = interseccion;
-			else {
-				retorno = NULL;
-				delete interseccion;
-				interseccion = NULL;
+			// Caso especial de último vértice con primero
+			paralelismo = -(puntosProyectados[0].getY() - puntosProyectados[cantidad - 1].getY());
+			if (paralelismo != 0.0) {
+				t2 = (puntosProyectados[cantidad - 1].getY() - interseccion.getY()) / paralelismo;
+				if ((t2 >= 0.0) && (t2 < 1.0)) {
+					t1 = puntosProyectados[cantidad - 1].getX() - interseccion.getX() + (puntosProyectados[0].getX() - puntosProyectados[0].getX()) * t2;
+					if (t1 >= 0)
+						cantIntersecciones++;
+				}
 			}
 			delete[] puntosProyectados;
-			return retorno;
-
+			if (cantIntersecciones % 2 == 1) {
+				resultado = interseccion;
+				return 1;
+			}
+			else {
+				return 0;
+			}						
 		};
 
 		~Poligono() {

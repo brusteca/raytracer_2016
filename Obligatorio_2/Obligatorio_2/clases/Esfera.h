@@ -20,7 +20,7 @@ class Esfera : public Shape {
 			radio = r;
 			centro = Punto(x,y,z);
 		};
-		Punto* colisionaCon(Punto p1, Punto p2) {
+		int colisionaCon(Punto p1, Punto p2, Punto &resultado) {
 			float bhaA = pow(p1.getX() - p2.getX(),2) + pow(p1.getY() - p2.getY(),2)  + pow(p1.getZ() - p2.getZ(),2);
 			float bhaB = 2 * ((p1.getX() - p2.getX())*(p1.getX() - centro.getX()) + (p1.getY() - p2.getY())*(p1.getY() - centro.getY()) + (p1.getZ() - p2.getZ())*(p1.getZ() - centro.getZ()));
 			float bhaC = pow(p1.getX() - centro.getX(),2) + pow(p1.getY() - centro.getY(), 2) + pow(p1.getZ() - centro.getZ(), 2) + pow(radio,2);
@@ -32,27 +32,30 @@ class Esfera : public Shape {
 			float yB = p1.getY() + rcs.b * (p1.getY() - p2.getY());
 			float zB = p1.getZ() + rcs.b * (p1.getZ() - p2.getZ());
 			switch (rcs.cantidad) {
-				case Cero: return NULL;
+				case Cero: return 0;
 					break;
-				case Una: return new Punto(xA,yA,zA);
+				case Una: 
+					resultado = Punto(xA, yA, zA);
+					return 1;
 					break;
 				case Dos: 
 					if (zA <= zB) {
 						if (zA >= 0)
-							return new Punto(xA,yA,zA);
+							resultado = Punto(xA,yA,zA);
 						else if (zB >= 0)
-							return new Punto(xB, yB, zB);
+							resultado = Punto(xB, yB, zB);
 						else
-							return NULL;
+							return 0;
 					}
 					else if (zB <= zA) {
 						if (zB >= 0)
-							return new Punto(xB, yB, zB);
+							resultado = Punto(xB, yB, zB);
 						else if (zA >= 0)
-							return new Punto(xA, yA, zA);
+							resultado = Punto(xA, yA, zA);
 						else
-							return NULL;
+							return 0;
 					}
+					return 2;
 					break;
 			}
 		};

@@ -53,7 +53,7 @@ class Poligono : public Shape {
 				2) Si hay colisión entonces averiguar si el rayo cae dentro del polígono.
 				
 		*/
-		int colisionaCon(Punto p1, Punto p2, Punto resultado) {
+		int colisionaCon(Punto p1, Punto p2, Punto* resultado) {
 			if (cantidad < 3)
 				return 0;
 			/* 
@@ -117,7 +117,8 @@ class Poligono : public Shape {
 			}
 			delete[] puntosProyectados;
 			if (cantIntersecciones % 2 == 1) {
-				resultado = interseccion;
+				resultado = new Punto[1];
+				resultado[0] = interseccion;
 				return 1;
 			}
 			else {

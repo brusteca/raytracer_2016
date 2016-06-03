@@ -12,7 +12,7 @@ class Shape{
 	public:
 		Shape() {};
 		// Retorna NULL si no hay intersección, si la hay retorna el punto con menor z positivo.
-		virtual int colisionaCon(Punto p1, Punto p2, Punto resultado) = 0;
+		virtual int colisionaCon(Punto p1, Punto p2, Punto* resultado) = 0;
 		~Shape() {};
 };
 

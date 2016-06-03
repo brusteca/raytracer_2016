@@ -5,11 +5,10 @@
 using namespace std;
 
 class Punto{
-	private:
+	public:
 		float x;
 		float y;
 		float z;
-	public:
 		Punto() { x = y = z = 0; };
 		Punto(float a, float b, float c) {
 			x = a; y = b; z = c;

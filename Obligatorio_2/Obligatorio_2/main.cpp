@@ -21,7 +21,7 @@
 
 using namespace std;
 
-void guardarImagen(int width, int height, byte* red_value, byte* green_value, byte* blue_value) {
+void guardarImagen(int width, int height, Color* colores) {
 	FreeImage_Initialise();
 	FIBITMAP * bitmap = FreeImage_Allocate(width, height, BPP);
 	RGBQUAD color;
@@ -30,9 +30,9 @@ void guardarImagen(int width, int height, byte* red_value, byte* green_value, by
 	for (int y = 0; y < height; ++y)
 		for (int x = 0; x < width; ++x)
 		{
-			color.rgbRed = red_value[y*width + x];
-			color.rgbGreen = green_value[y*width + x];
-			color.rgbBlue = blue_value[y*width + x];
+			color.rgbRed = colores[y*width + x].red;
+			color.rgbGreen = colores[y*width + x].green;
+			color.rgbBlue = colores[y*width + x].blue;
 			FreeImage_SetPixelColor(bitmap, x, y, &color);
 
 		}
@@ -77,7 +77,14 @@ int main(int argc, char** argv) {
 
 		}
 		else if (nombre == "Luz") {
-
+			Luz luz(Punto(
+						stof(nodo->attribute("x").value()), 
+						stof(nodo->attribute("y").value()), 
+						stof(nodo->attribute("z").value())
+					), 
+					stof(nodo->attribute("int").value())
+					);
+			mundo.luces.push_back(luz);
 		}
 		else if (nombre == "Background") {
 
@@ -95,7 +102,7 @@ int main(int argc, char** argv) {
 			posicionCamara = Punto(stof(nodo->attribute("x").value()), stof(nodo->attribute("y").value()), stof(nodo->attribute("z").value()));
 		}
 	}
-	// Control de heigh y width, si son menores a 2, abortar
+	// Control de height y width, si son menores a 2, abortar
 	if ((height < 2) || (width < 2)) {
 		cout << "Error: la resolución no es suficiente " << endl;
 		return 1;
@@ -145,22 +152,7 @@ int main(int argc, char** argv) {
 		}
 	}
 
-	//generar imagen
-	//width = height = 100; // Comentado para utilizar resolución
-
-	byte * red_value = new byte[width*height];
-	byte * green_value = new byte[width*height];
-	byte * blue_value = new byte[width*height];
-
-	for (int y = 0; y<height; y++)
-		for (int x = 0; x<width; x++)
-		{
-			red_value[y*width + x] = matriz[y*width + x].red; // = 0
-			green_value[y*width + x] = matriz[y*width + x].green; // = 255
-			blue_value[y*width + x] = matriz[y*width + x].blue; // = 0
-		}
-
 	//imprimir imagen
-	guardarImagen(width, height, red_value, green_value, blue_value);
+	guardarImagen(width, height, matriz);
 
 }

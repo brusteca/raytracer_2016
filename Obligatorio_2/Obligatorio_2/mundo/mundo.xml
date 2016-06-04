@@ -1,8 +1,8 @@
 <!-- Información de cámara e imágen -->
-<Resolucion height="100" width="100"/>
+<Resolucion height="1000" width="1000"/>
 <PosicionCamara x="0.0" y="0.0" z="-3.0" /> 
 <PuntosVentana xI="-2.0" yI="-2.0" xD="2.0" yD="2.0" prof="0.0"/>
 <!-- Información de Color -->
 <Background red="0" green="0" blue="0" />
 <!-- Objetos -->
-<Esfera radio="1.0" x="0.0" y="0.0" z="3.0"/>
+<Esfera radio="2.0" x="0.0" y="0.0" z="3.0"/>

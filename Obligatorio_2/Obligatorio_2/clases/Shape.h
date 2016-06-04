@@ -14,7 +14,7 @@ class Shape{
 		float refraccion;
 		Color color;
 	public:
-		Shape() { reflexion = refraccion = 0.0; };
+		Shape() { reflexion = refraccion = 0.0; color.red = 255; color.green = 0; color.blue = 0; };
 		Shape(float refle, float refra) {
 			reflexion = refle;
 			refraccion = refra;

@@ -154,16 +154,12 @@ int main(int argc, char** argv) {
 	for (int y = 0; y<height; y++)
 		for (int x = 0; x<width; x++)
 		{
-			red_value[y*width + x] = 0;
-			green_value[y*width + x] = 255;
-			blue_value[y*width + x] = 0;
+			red_value[y*width + x] = matriz[y*width + x].red; // = 0
+			green_value[y*width + x] = matriz[y*width + x].green; // = 255
+			blue_value[y*width + x] = matriz[y*width + x].blue; // = 0
 		}
 
-	for (int y = 0; y < height/2; y++) {
-		red_value[y * width] = 255;
-	}
-
 	//imprimir imagen
-	//guardarImagen(width, height, red_value, green_value, blue_value);
+	guardarImagen(width, height, red_value, green_value, blue_value);
 
 }

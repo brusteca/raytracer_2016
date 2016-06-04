@@ -20,7 +20,7 @@ class Shape{
 			refraccion = refra;
 		};
 		// Retorna NULL si no hay intersección, si la hay retorna el punto con menor z positivo.
-		virtual int colisionaCon(Punto p1, Punto p2, Punto* resultado) = 0;
+		virtual int colisionaCon(Punto p1, Punto p2, Punto* &resultado) = 0;
 		virtual Color calcularColor(Punto colision, Punto p1, Punto p2) { return color; };
 		~Shape() {};
 };

@@ -38,5 +38,11 @@
     <ClInclude Include="clases\Poligono.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="clases\Luz.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="clases\Mundo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

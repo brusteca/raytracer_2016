@@ -135,6 +135,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clases\Cilindro.h" />
+    <ClInclude Include="clases\Luz.h" />
+    <ClInclude Include="clases\Mundo.h" />
     <ClInclude Include="clases\Poligono.h" />
     <ClInclude Include="clases\Punto.h" />
     <ClInclude Include="clases\Esfera.h" />

@@ -20,7 +20,7 @@ class Cilindro : public Shape {
 			altura = a;
 			centroBase = cB;
 		};
-		Punto* colisionaCon(Punto p1, Punto p2) {
+		int colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 			
 		};
 		~Cilindro() {};

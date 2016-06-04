@@ -15,6 +15,7 @@
 #include "clases\Poligono.h"
 #include "clases\Utils.h"
 #include "clases\Color.h"
+#include "clases\Mundo.h"
 #include "clases\Punto.h"
 #include "clases\Shape.h"
 
@@ -49,9 +50,9 @@ void guardarImagen(int width, int height, byte* red_value, byte* green_value, by
 }
 
 
-int main() {
+int main(int argc, char** argv) {
 	// Leer archivo xml y construir shapes
-	string directorio;
+	string directorio = "mundo/mundo.xml";
 	pugi::xml_document doc;
 	pugi::xml_parse_result result = doc.load_file(directorio.c_str());
 
@@ -60,50 +61,91 @@ int main() {
 	int width, height;
 	width = height = 0;
 	float profundidadVentana = 0.0;
+	Color backgroundColor;
+	backgroundColor.blue = backgroundColor.green = backgroundColor.red = 0;
 	for (pugi::xml_node_iterator nodo = doc.begin(); nodo != doc.end(); nodo++) {
-		if (nodo->name() == "Esfera") {
+		string nombre = string(nodo->name());
+		if (nombre == "Esfera") {
+			Punto centro(stof(nodo->attribute("x").value()), stof(nodo->attribute("y").value()), stof(nodo->attribute("z").value()));
+			float radio = stof(nodo->attribute("radio").value());
+			mundo.shapes.push_back(new Esfera(centro,radio));
+		}
+		else if (nombre == "Cilindro") {
 
 		}
-		else if (nodo->name() == "Cilindro") {
+		else if (nombre == "Poligono") {
 
 		}
-		else if (nodo->name() == "Poligono") {
+		else if (nombre == "Luz") {
 
 		}
-		else if (nodo->name() == "Luz") {
+		else if (nombre == "Background") {
 
 		}
-		else if (nodo->name() == "Background") {
-
+		else if (nombre == "PuntosVentana") {
+			profundidadVentana = stof(nodo->attribute("prof").value());
+			infIzq = Punto(stof(nodo->attribute("xI").value()), stof(nodo->attribute("yI").value()),profundidadVentana);
+			supDer = Punto(stof(nodo->attribute("xD").value()), stof(nodo->attribute("yD").value()), profundidadVentana);
 		}
-		else if (nodo->name() == "PuntosVentana") {
-
-		}
-		else if (nodo->name() == "Width") {
-
-		}
-		else if (nodo->name() == "Height") {
-
-		}
-		else if (nodo->name() == "ProfundidadVentana") {
-
+		else if (nombre == "Resolucion") {
+			height = stoi(nodo->attribute("height").value());
+			width = stoi(nodo->attribute("width").value());
+		}				
+		else if (nombre == "PosicionCamara") {
+			posicionCamara = Punto(stof(nodo->attribute("x").value()), stof(nodo->attribute("y").value()), stof(nodo->attribute("z").value()));
 		}
 	}
+	// Control de heigh y width, si son menores a 2, abortar
+	if ((height < 2) || (width < 2)) {
+		cout << "Error: la resolución no es suficiente " << endl;
+		return 1;
+	}
+	// Matriz de colores
+	Color* matriz = new Color[height*width];
 
 	Punto pixel;
+	Shape* shapeElegido = NULL;
+	// Variables precalculables
+	Punto direccion = (infIzq - posicionCamara); // El producto interno de este vector con cualquier punto no debería dar negativo.
 	// Loop de píxeles
 	for (int i = 0; i < height; i++) {
-		for (int j = 0; i < width; j++) {
+		for (int j = 0; j < width; j++) {
 			// Establecer pixel actual
 			pixel = Punto(infIzq.x + (supDer.x - infIzq.x)*j/(width-1),infIzq.y + (supDer.y - infIzq.y)*i/(height -1) ,profundidadVentana);
 			// Para cada objeto, obtener sus puntos de contacto con el rayo camara-pixel
-
+			Punto puntoMasCercano = Punto();			
+			Punto* puntoResultado = NULL;
+			int cantPuntos = 0;
+			float modulo = 0.0;
+			bool primerPunto = true;
+			for (vector<Shape*>::iterator it = mundo.shapes.begin(); it != mundo.shapes.end(); it++) {
+				cantPuntos = (*it)->colisionaCon(posicionCamara, pixel, puntoResultado);
+				for (int cant = 0; cant < cantPuntos; cant++) {
+					// Por cada colisión, quedarse con el punto más cercano descubierto hasta ahora
+					// Ver si el punto está del lado adecuado
+					Punto segmento = puntoResultado[cant] - posicionCamara;
+					if (segmento.productoInterno(direccion) >= 0) {
+						// Si lo está, ver si su módulo es menor al del anterior punto más cercano
+						if ((primerPunto)||(segmento.modulo() < modulo)) {
+							puntoMasCercano = puntoResultado[cant];
+							modulo = segmento.modulo();
+							primerPunto = false;
+							shapeElegido = (*it);
+						}						
+					}
+				}
+				if (primerPunto)
+					matriz[i*width + j] = backgroundColor;
+				else
+					// Color del Shape elegido
+					matriz[i*width + j] = shapeElegido->calcularColor(puntoMasCercano,posicionCamara,pixel);
+				delete[] puntoResultado;
+			}
 		}
 	}
 
 	//generar imagen
-	int width, height;
-	width = height = 100;
+	//width = height = 100; // Comentado para utilizar resolución
 
 	byte * red_value = new byte[width*height];
 	byte * green_value = new byte[width*height];
@@ -122,6 +164,6 @@ int main() {
 	}
 
 	//imprimir imagen
-	guardarImagen(width, height, red_value, green_value, blue_value);
+	//guardarImagen(width, height, red_value, green_value, blue_value);
 
 }

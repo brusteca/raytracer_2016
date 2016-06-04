@@ -15,10 +15,10 @@ class Esfera : public Shape {
 		float radio;
 		Punto centro;
 	public:
-		Esfera() { radio = 0; centro = Punto(0, 0, 0); };
-		Esfera(float x, float y, float z, float r) {
+		Esfera() : Shape() { radio = 0; centro = Punto(0, 0, 0); };
+		Esfera(Punto c, float r) : Shape() {
 			radio = r;
-			centro = Punto(x,y,z);
+			centro = c;
 		};
 		int colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 			float bhaA = pow(p1.getX() - p2.getX(),2) + pow(p1.getY() - p2.getY(),2)  + pow(p1.getZ() - p2.getZ(),2);

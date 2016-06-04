@@ -29,6 +29,10 @@ class Punto{
 			return Punto(x*a,y*a,z*a);
 		};
 
+		float modulo() {
+			return sqrt(x*x + y*y + z*z);
+		}
+
 		// Getters
 		float getX() { return x; };
 		float getY() { return y; };

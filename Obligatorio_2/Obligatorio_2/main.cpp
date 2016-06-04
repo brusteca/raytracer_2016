@@ -32,7 +32,7 @@ void guardarImagen(int width, int height, byte* red_value, byte* green_value, by
 	auto t = time(nullptr);
 	tm tm;
 	localtime_s(&tm, &t);
-	ss << std::put_time(&tm, "%d-%m-%Y_%H-%M-%S");
+	ss << std::put_time(&tm, "%Y-%m-%d_%H-%M-%S");
 	string filename = "historial/output" + ss.str() + ".png";
 
 	if (FreeImage_Save(FIF_PNG, bitmap, filename.c_str()))

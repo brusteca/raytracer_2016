@@ -1,4 +1,3 @@
-#define byte unsigned char
 #define BPP 24			//3 8bit rgb values
 
 #include <iostream>
@@ -15,6 +14,8 @@
 #include "clases\Esfera.h"
 #include "clases\Poligono.h"
 #include "clases\Utils.h"
+#include "clases\Color.h"
+#include "clases\Punto.h"
 #include "clases\Shape.h"
 
 using namespace std;
@@ -54,15 +55,49 @@ int main() {
 	pugi::xml_document doc;
 	pugi::xml_parse_result result = doc.load_file(directorio.c_str());
 
+	Punto posicionCamara = Punto();
+	Punto infIzq, supDer; // Atributos de Ventana
+	int width, height;
+	width = height = 0;
+	float profundidadVentana = 0.0;
 	for (pugi::xml_node_iterator nodo = doc.begin(); nodo != doc.end(); nodo++) {
 		if (nodo->name() == "Esfera") {
-		
+
 		}
 		else if (nodo->name() == "Cilindro") {
-		
+
 		}
 		else if (nodo->name() == "Poligono") {
-		
+
+		}
+		else if (nodo->name() == "Luz") {
+
+		}
+		else if (nodo->name() == "Background") {
+
+		}
+		else if (nodo->name() == "PuntosVentana") {
+
+		}
+		else if (nodo->name() == "Width") {
+
+		}
+		else if (nodo->name() == "Height") {
+
+		}
+		else if (nodo->name() == "ProfundidadVentana") {
+
+		}
+	}
+
+	Punto pixel;
+	// Loop de píxeles
+	for (int i = 0; i < height; i++) {
+		for (int j = 0; i < width; j++) {
+			// Establecer pixel actual
+			pixel = Punto(infIzq.x + (supDer.x - infIzq.x)*j/(width-1),infIzq.y + (supDer.y - infIzq.y)*i/(height -1) ,profundidadVentana);
+			// Para cada objeto, obtener sus puntos de contacto con el rayo camara-pixel
+
 		}
 	}
 

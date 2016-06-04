@@ -3,7 +3,7 @@
 #define PUNTO_H
 
 using namespace std;
-
+//los puntos son vectores, lamentablemente la clase quedo con nombre Punto
 class Punto{
 	public:
 		float x;

@@ -7,6 +7,7 @@
 #include "Shape.h"
 #include "Punto.h"
 #include "Utils.h"
+#include "Mundo.h"
 
 using namespace std;
 
@@ -49,6 +50,19 @@ class Esfera : public Shape {
 					break;
 			}
 		};
+		Color calcularColor(Punto colision, Punto p1, Punto p2) {
+			//calculo si la superficie tiene luz o sombra
+			for (int i = 0; i < mundo.luces.size(); ++i) {
+
+			}
+			return this->color;
+		}
+		Punto calcularNormal(Punto p) {
+			return Punto(	(p.x - centro.x) / radio,
+							(p.y - centro.y) / radio,
+							(p.z - centro.z) / radio
+						);
+		}
 		~Esfera() {};
 };
 

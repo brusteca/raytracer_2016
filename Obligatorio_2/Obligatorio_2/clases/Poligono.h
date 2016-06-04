@@ -126,6 +126,10 @@ class Poligono : public Shape {
 			}						
 		};
 
+		Punto calcularNormal(Punto p) {
+			//NO IMPLEMENTADO
+			return Punto();
+		}
 		~Poligono() {
 			if (puntos)
 				delete [] puntos; 

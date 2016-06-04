@@ -9,7 +9,7 @@
 using namespace std;
 
 class Shape{
-	private:
+	protected:
 		float reflexion;
 		float refraccion;
 		Color color;
@@ -18,10 +18,13 @@ class Shape{
 		Shape(float refle, float refra) {
 			reflexion = refle;
 			refraccion = refra;
-		};
-		// Retorna NULL si no hay intersección, si la hay retorna el punto con menor z positivo.
+		}
+		//	Retorna NULL si no hay intersección, si la hay retorna el punto con menor z positivo.
 		virtual int colisionaCon(Punto p1, Punto p2, Punto* &resultado) = 0;
+		//	Determina el color en el punto 'colision' para el rayo ->p1p2
 		virtual Color calcularColor(Punto colision, Punto p1, Punto p2) { return color; };
+		//	Determina la normal en el punto p
+		virtual Punto calcularNormal(Punto p) = 0;
 		~Shape() {};
 };
 

@@ -66,7 +66,10 @@ int main(int argc, char** argv) {
 	for (pugi::xml_node_iterator nodo = doc.begin(); nodo != doc.end(); nodo++) {
 		string nombre = string(nodo->name());
 		if (nombre == "Esfera") {
-			Punto centro(stof(nodo->attribute("x").value()), stof(nodo->attribute("y").value()), stof(nodo->attribute("z").value()));
+			Punto centro(	stof(nodo->attribute("x").value()), 
+							stof(nodo->attribute("y").value()), 
+							stof(nodo->attribute("z").value())
+						);
 			float radio = stof(nodo->attribute("radio").value());
 			mundo.shapes.push_back(new Esfera(centro,radio));
 		}
@@ -77,11 +80,10 @@ int main(int argc, char** argv) {
 
 		}
 		else if (nombre == "Luz") {
-			Luz luz(Punto(
-						stof(nodo->attribute("x").value()), 
-						stof(nodo->attribute("y").value()), 
-						stof(nodo->attribute("z").value())
-					), 
+			Luz luz(Punto(	stof(nodo->attribute("x").value()), 
+							stof(nodo->attribute("y").value()), 
+							stof(nodo->attribute("z").value())
+							), 
 					stof(nodo->attribute("int").value())
 					);
 			mundo.luces.push_back(luz);
@@ -91,15 +93,24 @@ int main(int argc, char** argv) {
 		}
 		else if (nombre == "PuntosVentana") {
 			profundidadVentana = stof(nodo->attribute("prof").value());
-			infIzq = Punto(stof(nodo->attribute("xI").value()), stof(nodo->attribute("yI").value()),profundidadVentana);
-			supDer = Punto(stof(nodo->attribute("xD").value()), stof(nodo->attribute("yD").value()), profundidadVentana);
+			infIzq = Punto(	stof(nodo->attribute("xI").value()), 
+							stof(nodo->attribute("yI").value()),
+							profundidadVentana
+							);
+			supDer = Punto(	stof(nodo->attribute("xD").value()), 
+							stof(nodo->attribute("yD").value()), 
+							profundidadVentana
+							);
 		}
 		else if (nombre == "Resolucion") {
 			height = stoi(nodo->attribute("height").value());
 			width = stoi(nodo->attribute("width").value());
 		}				
 		else if (nombre == "PosicionCamara") {
-			posicionCamara = Punto(stof(nodo->attribute("x").value()), stof(nodo->attribute("y").value()), stof(nodo->attribute("z").value()));
+			posicionCamara = Punto(	stof(nodo->attribute("x").value()), 
+									stof(nodo->attribute("y").value()), 
+									stof(nodo->attribute("z").value())
+									);
 		}
 	}
 	// Control de height y width, si son menores a 2, abortar
@@ -118,7 +129,10 @@ int main(int argc, char** argv) {
 	for (int i = 0; i < height; i++) {
 		for (int j = 0; j < width; j++) {
 			// Establecer pixel actual
-			pixel = Punto(infIzq.x + (supDer.x - infIzq.x)*j/(width-1),infIzq.y + (supDer.y - infIzq.y)*i/(height -1) ,profundidadVentana);
+			pixel = Punto(	infIzq.x + (supDer.x - infIzq.x)*j/(width-1),
+							infIzq.y + (supDer.y - infIzq.y)*i/(height -1),
+							profundidadVentana
+							);
 			// Para cada objeto, obtener sus puntos de contacto con el rayo camara-pixel
 			Punto puntoMasCercano = Punto();			
 			Punto* puntoResultado = NULL;

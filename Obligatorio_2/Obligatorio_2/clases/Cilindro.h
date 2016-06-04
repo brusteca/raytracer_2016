@@ -23,6 +23,11 @@ class Cilindro : public Shape {
 		int colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 			
 		};
+
+		Punto calcularNormal(Punto p) {
+			//NO IMPLEMENTADO
+			return Punto();
+		}
 		~Cilindro() {};
 };
 

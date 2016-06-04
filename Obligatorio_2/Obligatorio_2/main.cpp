@@ -2,14 +2,44 @@
 #define BPP 24			//3 8bit rgb values
 
 #include <iostream>
+
+#define OUTPUT_FOLDER "historial"
+#include <sstream>
 #include <iomanip>
-#include <ctime>
+#include <time.h>
 
 #include "pugixml-1.7/src/pugixml.hpp"
 #include "FreeImage.h"
 
 using namespace std;
 
+void guardarImagen(int width, int height, byte* red_value, byte* green_value, byte* blue_value) {
+	FreeImage_Initialise();
+	FIBITMAP * bitmap = FreeImage_Allocate(width, height, BPP);
+	RGBQUAD color;
+	if (!bitmap)
+		perror("No se genero el bitmap");
+	for (int y = 0; y < height; ++y)
+		for (int x = 0; x < width; ++x)
+		{
+			color.rgbRed = red_value[y*width + x];
+			color.rgbGreen = green_value[y*width + x];
+			color.rgbBlue = blue_value[y*width + x];
+			FreeImage_SetPixelColor(bitmap, x, y, &color);
+
+		}
+	stringstream ss;
+	auto t = time(nullptr);
+	tm tm;
+	localtime_s(&tm, &t);
+	ss << std::put_time(&tm, "%d-%m-%Y_%H-%M-%S");
+	string filename = "historial/output" + ss.str() + ".png";
+
+	if (FreeImage_Save(FIF_PNG, bitmap, filename.c_str()))
+		cout << "Imagen guardada exitosamente!" << endl;
+
+	FreeImage_DeInitialise();
+}
 
 
 int main() {
@@ -43,29 +73,6 @@ int main() {
 	}
 
 	//imprimir imagen
-	FreeImage_Initialise();
-	FIBITMAP * bitmap = FreeImage_Allocate(width, height, BPP);
-	RGBQUAD color;
-	if (!bitmap)
-		perror("No se genero el bitmap");
-	for (int y = 0; y < height; ++y)
-		for (int x = 0; x < width; ++x)
-		{
-			color.rgbRed = red_value[y*width + x];
-			color.rgbGreen = green_value[y*width + x];
-			color.rgbBlue = blue_value[y*width + x];
-			FreeImage_SetPixelColor(bitmap, x,y, &color);
+	guardarImagen(width, height, red_value, green_value, blue_value);
 
-		}
-
-	auto t = std::time(nullptr);
-	auto tm = *std::localtime(&t);
-	std::cout << std::put_time(&tm, "%d-%m-%Y %H-%M-%S") << std::endl;
-
-	if (FreeImage_Save(FIF_PNG, bitmap, "test.png"))
-		cout << "Imagen guardada exitosamente!" << endl;
-	FreeImage_DeInitialise();
-
-	int i;
-	cin >> i;
 }

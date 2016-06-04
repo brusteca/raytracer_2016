@@ -139,7 +139,8 @@ int main(int argc, char** argv) {
 				else
 					// Color del Shape elegido
 					matriz[i*width + j] = shapeElegido->calcularColor(puntoMasCercano,posicionCamara,pixel);
-				delete[] puntoResultado;
+				if (cantPuntos > 0)
+					delete[] puntoResultado;
 			}
 		}
 	}

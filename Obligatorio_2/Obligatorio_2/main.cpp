@@ -54,7 +54,7 @@ void guardarImagen(int width, int height, Color* colores) {
 int main(int argc, char** argv) {
 	Mundo::crearInstance();
 	// Leer archivo xml y construir shapes
-	string directorio = "mundo/mundo_poligono.xml";
+	string directorio = "mundo/mundo.xml";
 	pugi::xml_document doc;
 	pugi::xml_parse_result result = doc.load_file(directorio.c_str());
 
@@ -64,7 +64,7 @@ int main(int argc, char** argv) {
 	width = height = 0;
 	float profundidadVentana = 0.0;
 	Color backgroundColor;
-	backgroundColor.blue = backgroundColor.green = backgroundColor.red = 0;
+	backgroundColor.blue = backgroundColor.green = backgroundColor.red = 0
 	for (pugi::xml_node_iterator nodo = doc.begin(); nodo != doc.end(); nodo++) {
 		string nombre = string(nodo->name());
 		if (nombre == "Esfera") {

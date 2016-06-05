@@ -28,3 +28,7 @@ float absFloat(float a) {
 	else
 		return a;
 }
+
+float min(float a, float b) {
+	return (a < b) ? a : b;
+}

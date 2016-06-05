@@ -20,6 +20,7 @@ raices bhaskara(float a, float b, float c);
 
 float absFloat(float a);
 
+float min(float a, float b);
 
 #endif
 

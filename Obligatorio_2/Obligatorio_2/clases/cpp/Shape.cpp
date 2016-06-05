@@ -32,12 +32,16 @@ Color Shape::calcularColor(Punto colision, Punto p1, Punto p2) {
 			Punto normal = calcularNormal(colision);
 			if ((direccionLuz * normal > 0) &&
 				luz.determinarIluminacion(colision, this)) {
-				
+				//factor de atenuacion
+				float factorAtt = min((1 / (constAtt + linearAtt * direccionLuz.modulo + quadAtt * direccionLuz.modulo * direccionLuz.modulo)), 1);
+				//factor del angulo
 				direccionLuz = direccionLuz.normalizar();
 				float factorDif = direccionLuz * normal;
-				color.red += luz.getDif().r * colorAmbiente.red * factorDif;
-				color.green += luz.getDif().g * colorAmbiente.green * factorDif;
-				color.blue += luz.getDif().b * colorAmbiente.blue * factorDif;
+				//precomputo
+				float factor = factorAtt * factorDif;
+				color.red += luz.getDif().r * colorAmbiente.red * factor;
+				color.green += luz.getDif().g * colorAmbiente.green * factor;
+				color.blue += luz.getDif().b * colorAmbiente.blue * factor;
 			}
 			color.red += colorAmbiente.red * luz.getAmb().r;
 			color.green += colorAmbiente.green * luz.getAmb().g;

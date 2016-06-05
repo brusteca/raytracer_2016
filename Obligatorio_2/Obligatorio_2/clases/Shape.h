@@ -2,6 +2,10 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 
+#define constAtt 0.03f
+#define linearAtt 0.2f
+#define quadAtt 0.012f
+
 #include "Color.h"
 #include "Mundo.h"
 class Punto;

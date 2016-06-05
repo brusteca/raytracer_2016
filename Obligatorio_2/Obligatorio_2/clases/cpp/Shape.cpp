@@ -33,7 +33,7 @@ Color Shape::calcularColor(Punto colision, Punto p1, Punto p2) {
 			if ((direccionLuz * normal > 0) &&
 				luz.determinarIluminacion(colision, this)) {
 				
-				direccionLuz.normalizar();
+				direccionLuz = direccionLuz.normalizar();
 				float factorDif = direccionLuz * normal;
 				color.red += luz.getDif().r * colorAmbiente.red * factorDif;
 				color.green += luz.getDif().g * colorAmbiente.green * factorDif;

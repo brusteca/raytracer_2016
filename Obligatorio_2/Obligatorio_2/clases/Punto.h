@@ -38,8 +38,6 @@ class Punto{
 			return Punto(x/modulo,y/modulo,z/modulo);
 		}
 
-		}
-
 		// Getters
 		float getX() { return x; };
 		float getY() { return y; };

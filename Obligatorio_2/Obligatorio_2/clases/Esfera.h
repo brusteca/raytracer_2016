@@ -8,6 +8,7 @@
 #include "Punto.h"
 #include "Utils.h"
 #include "Mundo.h"
+#include "Luz.h"
 
 using namespace std;
 
@@ -51,11 +52,22 @@ class Esfera : public Shape {
 			}
 		};
 		Color calcularColor(Punto colision, Punto p1, Punto p2) {
+			Color color;
+			color.red = color.green = color.blue = 0;
 			//calculo si la superficie tiene luz o sombra
 			for (int i = 0; i < mundo.luces.size(); ++i) {
+				Luz luz = mundo.luces[i];
+				Punto direccionLuz = luz.calcularDireccion(colision);
+				Punto normal = calcularNormal(colision);
+				if ((direccionLuz * normal  > 0) &&
+					luz.determinarIluminacion(colision)){
 
+					color.red += colorAmbiente.red;
+					color.green += colorAmbiente.green;
+					color.blue += colorAmbiente.blue;
+				}
 			}
-			return this->color;
+			return color;
 		}
 		Punto calcularNormal(Punto p) {
 			return Punto(	(p.x - centro.x) / radio,

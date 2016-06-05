@@ -74,7 +74,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..;..\..\FreeImage\Dist\x32</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..;clases;..\..\FreeImage\Dist\x32</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>FreeImage.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -86,7 +86,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..;..\..\FreeImage\Dist\x64</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..;clases;clases;..\..\FreeImage\Dist\x64</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>FreeImage.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -100,7 +100,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..;..\..\FreeImage\Dist\x32</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..;clases;..\..\FreeImage\Dist\x32</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -116,7 +116,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..;..\..\FreeImage\Dist\x64</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..;clases;..\..\FreeImage\Dist\x64</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -126,6 +126,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="clases\cpp\Luz.cpp" />
+    <ClCompile Include="clases\cpp\Mundo.cpp" />
+    <ClCompile Include="clases\cpp\Shape.cpp" />
+    <ClCompile Include="clases\cpp\Utils.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>

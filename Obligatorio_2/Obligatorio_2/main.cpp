@@ -52,6 +52,7 @@ void guardarImagen(int width, int height, Color* colores) {
 
 
 int main(int argc, char** argv) {
+	Mundo::crearInstance();
 	// Leer archivo xml y construir shapes
 	string directorio = "mundo/mundo.xml";
 	pugi::xml_document doc;
@@ -72,7 +73,7 @@ int main(int argc, char** argv) {
 							stof(nodo->attribute("z").value())
 						);
 			float radio = stof(nodo->attribute("radio").value());
-			mundo.shapes.push_back(new Esfera(centro,radio));
+			Mundo::inst()->shapes.push_back(new Esfera(centro,radio));
 		}
 		else if (nombre == "Cilindro") {
 
@@ -87,7 +88,7 @@ int main(int argc, char** argv) {
 							), 
 					stof(nodo->attribute("int").value())
 					);
-			mundo.luces.push_back(luz);
+			Mundo::inst()->luces.push_back(luz);
 		}
 		else if (nombre == "Background") {
 
@@ -140,7 +141,7 @@ int main(int argc, char** argv) {
 			int cantPuntos = 0;
 			float modulo = 0.0;
 			bool primerPunto = true;
-			for (vector<Shape*>::iterator it = mundo.shapes.begin(); it != mundo.shapes.end(); it++) {
+			for (vector<Shape*>::iterator it = Mundo::inst()->shapes.begin(); it != Mundo::inst()->shapes.end(); it++) {
 				cantPuntos = (*it)->colisionaCon(posicionCamara, pixel, puntoResultado);
 				for (int cant = 0; cant < cantPuntos; cant++) {
 					// Por cada colisión, quedarse con el punto más cercano descubierto hasta ahora

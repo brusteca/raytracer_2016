@@ -36,7 +36,8 @@ class Esfera : public Shape {
 			float yB = p1.getY() + rcs.b * (p1.getY() - p2.getY());
 			float zB = p1.getZ() + rcs.b * (p1.getZ() - p2.getZ());*/
 			switch (rcs.cantidad) {
-				case Cero: return 0;
+				case Cero: 
+					return 0;
 					break;
 				case Una: 
 					resultado = new Punto[1];
@@ -51,24 +52,24 @@ class Esfera : public Shape {
 					break;
 			}
 		};
-		Color calcularColor(Punto colision, Punto p1, Punto p2) {
-			Color color;
-			color.red = color.green = color.blue = 0;
-			//calculo si la superficie tiene luz o sombra
-			for (int i = 0; i < mundo.luces.size(); ++i) {
-				Luz luz = mundo.luces[i];
-				Punto direccionLuz = luz.calcularDireccion(colision);
-				Punto normal = calcularNormal(colision);
-				if ((direccionLuz * normal  > 0) &&
-					luz.determinarIluminacion(colision, this)){
+		//Color calcularColor(Punto colision, Punto p1, Punto p2) {
+		//	Color color;
+		//	color.red = color.green = color.blue = 0;
+		//	//calculo si la superficie tiene luz o sombra
+		//	for (int i = 0; i < mundo.luces.size(); ++i) {
+		//		Luz luz = mundo.luces[i];
+		//		Punto direccionLuz = luz.calcularDireccion(colision);
+		//		Punto normal = calcularNormal(colision);
+		//		if ((direccionLuz * normal  > 0) &&
+		//			luz.determinarIluminacion(colision, this)){
 
-					color.red += colorAmbiente.red;
-					color.green += colorAmbiente.green;
-					color.blue += colorAmbiente.blue;
-				}
-			}
-			return color;
-		}
+		//			color.red += colorAmbiente.red;
+		//			color.green += colorAmbiente.green;
+		//			color.blue += colorAmbiente.blue;
+		//		}
+		//	}
+		//	return color;
+		//}
 		Punto calcularNormal(Punto p) {
 			return Punto(	(p.x - centro.x) / radio,
 							(p.y - centro.y) / radio,

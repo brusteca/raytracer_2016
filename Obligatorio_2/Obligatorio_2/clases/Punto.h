@@ -1,7 +1,7 @@
 #pragma once
 #ifndef PUNTO_H
 #define PUNTO_H
-
+#include <math.h>
 using namespace std;
 //los puntos son vectores, lamentablemente la clase quedo con nombre Punto
 class Punto{

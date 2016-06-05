@@ -54,7 +54,7 @@ void guardarImagen(int width, int height, Color* colores) {
 int main(int argc, char** argv) {
 	Mundo::crearInstance();
 	// Leer archivo xml y construir shapes
-	string directorio = "mundo/mundo.xml";
+	string directorio = "mundo/mundo_poligono.xml";
 	pugi::xml_document doc;
 	pugi::xml_parse_result result = doc.load_file(directorio.c_str());
 
@@ -79,7 +79,19 @@ int main(int argc, char** argv) {
 
 		}
 		else if (nombre == "Poligono") {
-
+			vector<Punto> puntosPoligono;
+			for (pugi::xml_node_iterator puntos = nodo->begin(); puntos != nodo->end(); puntos++) {
+				if (string(puntos->name()) == "Vertice") {
+					// Crear cada punto e ingresarlo en el vector
+					Punto ingreso = Punto(  stof(puntos->attribute("x").value()),
+											stof(puntos->attribute("y").value()),
+											stof(puntos->attribute("z").value())
+										  );
+					puntosPoligono.push_back(ingreso);
+				}
+			}
+			Shape* poligono = new Poligono(puntosPoligono);
+			Mundo::inst()->shapes.push_back(poligono);
 		}
 		else if (nombre == "Luz") {
 			Luz luz(Punto(	stof(nodo->attribute("x").value()), 
@@ -156,15 +168,15 @@ int main(int argc, char** argv) {
 							shapeElegido = (*it);
 						}						
 					}
-				}
-				if (primerPunto)
-					matriz[i*width + j] = backgroundColor;
-				else
-					// Color del Shape elegido
-					matriz[i*width + j] = shapeElegido->calcularColor(puntoMasCercano,posicionCamara,pixel);
+				}				
 				if (cantPuntos > 0)
 					delete[] puntoResultado;
 			}
+			if (primerPunto)
+				matriz[i*width + j] = backgroundColor;
+			else
+				// Color del Shape elegido
+				matriz[i*width + j] = shapeElegido->calcularColor(puntoMasCercano, posicionCamara, pixel);
 		}
 	}
 

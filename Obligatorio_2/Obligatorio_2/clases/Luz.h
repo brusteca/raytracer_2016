@@ -24,14 +24,17 @@ class Luz {
 							posicion.z - p.z
 						);
 		}
-		//	retorna false si ese punto esta en sombra para esta luz
+		//	retorna false si ese punto (perteneciente a ese shape) esta en sombra para esta luz
 		//	despues cuando la hagamos mejor retorna el valor de la luz despues de pasar por los
 		//	objetos transparentes
-		bool determinarIluminacion(Punto p) {
+		bool determinarIluminacion(Punto p, Shape *s) {
 			Punto direccion = p - posicion;
 			bool hayIluminacion = true;
 			float modulo = direccion.modulo();
 			for (int i = 0; i < mundo.shapes.size(); ++i) {
+				//colisiono con todos excepto con el shape que me pasaron
+				if (mundo.shapes[i] == s)
+					continue;
 				Punto* puntoResultado = NULL;
 				int cantPuntos = mundo.shapes[i]->colisionaCon(posicion, p, puntoResultado);
 				for (int cant = 0; cant < cantPuntos; cant++) {

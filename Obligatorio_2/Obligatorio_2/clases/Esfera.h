@@ -60,7 +60,7 @@ class Esfera : public Shape {
 				Punto direccionLuz = luz.calcularDireccion(colision);
 				Punto normal = calcularNormal(colision);
 				if ((direccionLuz * normal  > 0) &&
-					luz.determinarIluminacion(colision)){
+					luz.determinarIluminacion(colision, this)){
 
 					color.red += colorAmbiente.red;
 					color.green += colorAmbiente.green;

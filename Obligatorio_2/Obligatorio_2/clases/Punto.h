@@ -6,12 +6,17 @@ using namespace std;
 //los puntos son vectores, lamentablemente la clase quedo con nombre Punto
 class Punto{
 	public:
+		// Atributos
 		float x;
 		float y;
 		float z;
-		Punto() { x = y = z = 0; };
+		float modulo;
+
+		// Funciones
+		Punto() { x = y = z = 0; modulo = 0; };
 		Punto(float a, float b, float c) {
 			x = a; y = b; z = c;
+			modulo = sqrt(x*x + y*y + z*z);
 		};
 		float productoInterno(Punto p) {
 			return x*p.x + y*p.y + z*p.z;
@@ -29,15 +34,10 @@ class Punto{
 			return Punto(x*a,y*a,z*a);
 		};
 
-		//normaliza el vector
-		void normalizar() {
-			x /= modulo();
-			y /= modulo();
-			z /= modulo();
+		Punto normalizar() {
+			return Punto(x/modulo,y/modulo,z/modulo);
 		}
 
-		float modulo() {
-			return sqrt(x*x + y*y + z*z);
 		}
 
 		// Getters

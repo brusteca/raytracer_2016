@@ -9,7 +9,7 @@ using namespace std;
 
 Shape::Shape() {
 	reflexion = refraccion = 0.0;
-	colorAmbiente.red = 255;
+	colorAmbiente.red = 100;
 	colorAmbiente.green = 0;
 	colorAmbiente.blue = 0;
 }
@@ -32,11 +32,16 @@ Color Shape::calcularColor(Punto colision, Punto p1, Punto p2) {
 			Punto normal = calcularNormal(colision);
 			if ((direccionLuz * normal > 0) &&
 				luz.determinarIluminacion(colision, this)) {
-
-				color.red += colorAmbiente.red;
-				color.green += colorAmbiente.green;
-				color.blue += colorAmbiente.blue;
+				
+				direccionLuz.normalizar();
+				float factorDif = direccionLuz * normal;
+				color.red += luz.getDif().r * colorAmbiente.red * factorDif;
+				color.green += luz.getDif().g * colorAmbiente.green * factorDif;
+				color.blue += luz.getDif().b * colorAmbiente.blue * factorDif;
 			}
+			color.red += colorAmbiente.red * luz.getAmb().r;
+			color.green += colorAmbiente.green * luz.getAmb().g;
+			color.blue += colorAmbiente.blue * luz.getAmb().b;
 		}
 		return color;
 	}

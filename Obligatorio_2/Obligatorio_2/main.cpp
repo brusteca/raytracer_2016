@@ -86,7 +86,18 @@ int main(int argc, char** argv) {
 							stof(nodo->attribute("y").value()), 
 							stof(nodo->attribute("z").value())
 							), 
-					stof(nodo->attribute("int").value())
+					Intensidad(	stof(nodo->attribute("Ramb").value()),
+							stof(nodo->attribute("Gamb").value()),
+							stof(nodo->attribute("Bamb").value())
+							),
+					Intensidad(	stof(nodo->attribute("Rdif").value()),
+							stof(nodo->attribute("Gdif").value()),
+							stof(nodo->attribute("Bdif").value())
+							),
+					Intensidad(	stof(nodo->attribute("Resp").value()),
+							stof(nodo->attribute("Gesp").value()),
+							stof(nodo->attribute("Besp").value())
+							)
 					);
 			Mundo::inst()->luces.push_back(luz);
 		}

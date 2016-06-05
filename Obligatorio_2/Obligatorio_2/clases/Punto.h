@@ -29,6 +29,13 @@ class Punto{
 			return Punto(x*a,y*a,z*a);
 		};
 
+		//normaliza el vector
+		void normalizar() {
+			x /= modulo();
+			y /= modulo();
+			z /= modulo();
+		}
+
 		float modulo() {
 			return sqrt(x*x + y*y + z*z);
 		}

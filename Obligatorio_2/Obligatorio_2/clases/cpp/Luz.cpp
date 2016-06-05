@@ -4,10 +4,12 @@
 
 using namespace std;
 
-Luz::Luz() { posicion = Punto(); intensidad = 0.0; };
-Luz::Luz(Punto p, float i) {
+Luz::Luz(Punto p, Intensidad amb, Intensidad dif, Intensidad esp) {
 	posicion = p;
-	intensidad = i;
+
+	ambiente = amb;
+	difuso = dif;
+	especular = esp;
 };
 //	Calcula la direccion en la que se ubica la luz segun el punto p
 Punto Luz::calcularDireccion(Punto p) {
@@ -45,4 +47,15 @@ bool Luz::determinarIluminacion(Punto p, Shape *s) {
 	}
 finLoop:
 	return hayIluminacion;
+}
+
+
+Intensidad Luz::getAmb() {
+	return ambiente;
+}
+Intensidad Luz::getDif() {
+	return difuso;
+}
+Intensidad Luz::getEsp() {
+	return especular;
 }

@@ -64,7 +64,7 @@ int main(int argc, char** argv) {
 	width = height = 0;
 	float profundidadVentana = 0.0;
 	Color backgroundColor;
-	backgroundColor.blue = backgroundColor.green = backgroundColor.red = 0
+	backgroundColor.blue = backgroundColor.green = backgroundColor.red = 0;
 	for (pugi::xml_node_iterator nodo = doc.begin(); nodo != doc.end(); nodo++) {
 		string nombre = string(nodo->name());
 		if (nombre == "Esfera") {
@@ -114,7 +114,10 @@ int main(int argc, char** argv) {
 			Mundo::inst()->luces.push_back(luz);
 		}
 		else if (nombre == "Background") {
-
+			// Obtener colores de fondo
+			backgroundColor.red = stoi(nodo->attribute("red").value());
+			backgroundColor.green = stoi(nodo->attribute("green").value());
+			backgroundColor.blue = stoi(nodo->attribute("blue").value());
 		}
 		else if (nombre == "PuntosVentana") {
 			profundidadVentana = stof(nodo->attribute("prof").value());

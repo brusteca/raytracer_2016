@@ -128,6 +128,7 @@
   <ItemGroup>
     <ClCompile Include="clases\cpp\Luz.cpp" />
     <ClCompile Include="clases\cpp\Mundo.cpp" />
+    <ClCompile Include="clases\cpp\Poligono.cpp" />
     <ClCompile Include="clases\cpp\Shape.cpp" />
     <ClCompile Include="clases\cpp\Utils.cpp" />
     <ClCompile Include="main.cpp" />

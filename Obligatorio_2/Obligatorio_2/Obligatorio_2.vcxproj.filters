@@ -30,6 +30,9 @@
     <ClCompile Include="clases\cpp\Mundo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="clases\cpp\Poligono.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clases\Shape.h">

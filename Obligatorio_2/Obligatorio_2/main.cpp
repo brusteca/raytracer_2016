@@ -149,9 +149,9 @@ int main(int argc, char** argv) {
 					Punto segmento = puntoResultado[cant] - posicionCamara;
 					if (segmento.productoInterno(direccion) >= 0) {
 						// Si lo está, ver si su módulo es menor al del anterior punto más cercano
-						if ((primerPunto)||(segmento.modulo() < modulo)) {
+						if ((primerPunto)||(segmento.modulo < modulo)) {
 							puntoMasCercano = puntoResultado[cant];
-							modulo = segmento.modulo();
+							modulo = segmento.modulo;
 							primerPunto = false;
 							shapeElegido = (*it);
 						}						

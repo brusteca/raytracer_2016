@@ -22,7 +22,7 @@ Punto Luz::calcularDireccion(Punto p) {
 bool Luz::determinarIluminacion(Punto p, Shape *s) {
 	Punto direccion = p - posicion;
 	bool hayIluminacion = true;
-	float modulo = direccion.modulo();
+	float modulo = direccion.modulo;
 	for (int i = 0; i < Mundo::inst()->shapes.size(); ++i) {
 		//colisiono con todos excepto con el shape que me pasaron
 		if (Mundo::inst()->shapes[i] == s)
@@ -35,7 +35,7 @@ bool Luz::determinarIluminacion(Punto p, Shape *s) {
 			Punto segmento = puntoResultado[cant] - posicion;
 			if (segmento.productoInterno(direccion) >= 0) {
 				// Si lo está, ver si su módulo es menor al del anterior punto más cercano
-				if (segmento.modulo() < modulo) {
+				if (segmento.modulo < modulo) {
 					hayIluminacion = false;
 					//tengo que hacer esto porque con un break normal no alcanza
 					goto finLoop;

@@ -54,7 +54,7 @@ void guardarImagen(int width, int height, Color* colores) {
 int main(int argc, char** argv) {
 	Mundo::crearInstance();
 	// Leer archivo xml y construir shapes
-	string directorio = "mundo/mundo_cilindro.xml";
+	string directorio = "mundo/mundo_poligono.xml";
 	pugi::xml_document doc;
 	pugi::xml_parse_result result = doc.load_file(directorio.c_str());
 

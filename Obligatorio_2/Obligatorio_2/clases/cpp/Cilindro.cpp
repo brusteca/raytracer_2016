@@ -1,4 +1,5 @@
 #include "Cilindro.h"
+#include "Punto.h"
 #include "Utils.h"
 
 using namespace std;

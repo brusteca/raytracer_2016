@@ -17,6 +17,7 @@
 #include "clases\Color.h"
 #include "clases\Punto.h"
 #include "clases\Shape.h"
+#include "clases\Prisma.h"
 
 #include "clases\Mundo.h"
 
@@ -54,7 +55,7 @@ void guardarImagen(int width, int height, Color* colores) {
 int main(int argc, char** argv) {
 	Mundo::crearInstance();
 	// Leer archivo xml y construir shapes
-	string directorio = "mundo/mundo_cilindro.xml";
+	string directorio = "mundo/mundo_prisma.xml";
 	pugi::xml_document doc;
 	pugi::xml_parse_result result = doc.load_file(directorio.c_str());
 
@@ -99,6 +100,21 @@ int main(int argc, char** argv) {
 			}
 			Shape* poligono = new Poligono(puntosPoligono);
 			Mundo::inst()->shapes.push_back(poligono);
+		}
+		else if (nombre == "Prisma") {
+			vector<Punto> vertices;
+			for (pugi::xml_node_iterator puntos = nodo->begin(); puntos != nodo->end(); puntos++) {
+				if (string(puntos->name()) == "Vertice") {
+					// Crear cada punto e ingresarlo en el vector
+					Punto ingreso = Punto(	stof(puntos->attribute("x").value()),
+											stof(puntos->attribute("y").value()),
+											stof(puntos->attribute("z").value())
+										 );
+					vertices.push_back(ingreso);
+				}
+			}
+			float alt = stof(nodo->attribute("altura").value());
+			Mundo::inst()->shapes.push_back(new Prisma(vertices,alt));
 		}
 		else if (nombre == "Luz") {
 			Luz luz(Punto(	stof(nodo->attribute("x").value()), 

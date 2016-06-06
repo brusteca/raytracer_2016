@@ -1,0 +1,19 @@
+<!-- Información de cámara e imágen -->
+<Resolucion height="500" width="500"/>
+<PosicionCamara x="0.0" y="0.0" z="-3.0" /> 
+<PuntosVentana xI="-2.0" yI="-2.0" xD="2.0" yD="2.0" prof="0.0"/>
+<!-- Información de Color -->
+<Background red="0" green="100" blue="150" />
+<!-- Objetos -->
+<Prisma altura="3">
+	<Vertice x="0" y="0" z="3" />
+	<Vertice x="-2" y="0" z="4" />
+	<Vertice x="0" y="0" z="5" />
+	<Vertice x="2" y="0" z="4" />
+</Prisma>
+<!-- Luces -->
+<Luz 	x="-2" y="3" z = "1" 
+		Ramb="0.2" Gamb="0.2" Bamb="0.2"
+		Rdif="1.0" Gdif="1.0" Bdif="1.0"
+		Resp="1.0" Gesp="1.0" Besp="1.0"
+		/>

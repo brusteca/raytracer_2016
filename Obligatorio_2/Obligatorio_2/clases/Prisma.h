@@ -12,6 +12,7 @@ class Prisma : public Shape {
 	private:
 		vector<Poligono> poligonos;
 		Shape* boundingShape;
+		vector<pair<Punto, Punto>> normalesDeColision;
 	public:
 		Prisma();
 		Prisma(vector<Punto> ps, float altura);

@@ -18,6 +18,12 @@ class Punto{
 			x = a; y = b; z = c;
 			modulo = sqrt(x*x + y*y + z*z);
 		};
+		Punto(const Punto &p) {
+			x = p.x;
+			y = p.y;
+			z = p.z;
+			modulo = p.modulo;
+		}
 		float productoInterno(Punto p) {
 			return x*p.x + y*p.y + z*p.z;
 		};

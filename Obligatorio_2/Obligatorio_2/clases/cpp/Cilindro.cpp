@@ -21,8 +21,8 @@ int Cilindro::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 	// Se debe calcular la solucion a intersectar la ecuación del tronco con la recta
 	Punto u = p2 - p1;
 	float bhaA = pow(u.x,2) + pow(u.z,2);
-	float bhaB = 2*(u.x * p1.x + u.z * p1.z);
-	float bhaC = pow(p1.x,2) + pow(p1.z,2) - pow(radio,2);
+	float bhaB = 2*(u.x * p1.x + u.z * p1.z) - 2 * centroBase.x * u.x - 2*centroBase.z * u.z;
+	float bhaC = pow(p1.x,2) + pow(p1.z,2) - pow(radio,2) - 2* centroBase.x*p1.x - 2*centroBase.z*p1.z + pow(centroBase.x,2) + pow(centroBase.z,2);
 	raices rcs = bhaskara(bhaA, bhaB, bhaC);
 	// Cálculo pensado para cámaras que no pueden rotar su dirección
 	switch (rcs.cantidad) {

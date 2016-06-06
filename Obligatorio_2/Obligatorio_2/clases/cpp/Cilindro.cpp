@@ -28,7 +28,7 @@ int Cilindro::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 		case Cero:
 			return 0;
 			break;
-		case Una:
+		case Una: {
 			Punto res = p1 + u.productoEscalar(rcs.a);
 			if ((res.y >= centroBase.y) && (res.y <= centroBase.y + altura)) {
 				resultado = new Punto[1];
@@ -37,12 +37,13 @@ int Cilindro::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 			}
 			else {
 				return 0;
-			}
+			}		
 			break;
-		case Dos:
+		}
+		case Dos: {
 			Punto res1 = p1 + u.productoEscalar(rcs.a);
 			Punto res2 = p1 + u.productoEscalar(rcs.b);
-			if ((res1.y >= centroBase.y)&&(res1.y <= centroBase.y + altura)){
+			if ((res1.y >= centroBase.y) && (res1.y <= centroBase.y + altura)) {
 				if ((res2.y >= centroBase.y) && (res2.y <= centroBase.y + altura)) {
 					resultado = new Punto[2];
 					resultado[0] = res1;
@@ -64,8 +65,9 @@ int Cilindro::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 				else {
 					return 0;
 				}
-			}			
+			}
 			break;
+		}
 	}
 	// Ver choque con tapas
 	if (u.y == 0)
@@ -89,8 +91,27 @@ int Cilindro::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 }
 
 Punto Cilindro::calcularNormal(Punto p) {
-	//NO IMPLEMENTADO
-	return Punto();
+	// Precondición: el punto pertenece al cilindro
+	// Calcular según posición del punto
+	float coefDePertenencia = pow(p.x, 2) + pow(p.z, 2) - pow(radio, 2);
+	if (p.y == centroBase.y){
+		if (coefDePertenencia < 0) {
+			return Punto(0, -1, 0);
+		}
+		else
+			return (Punto(0,-1,0) + (p - centroBase).normalizar()).normalizar();
+	}
+	else if (p.y == centroBase.y + altura) {
+		if (coefDePertenencia < 0) {
+			return Punto(0, 1, 0);
+		}
+		else
+			return (Punto(0, 1, 0) + (p - Punto(centroBase.x,centroBase.y + altura,centroBase.z)).normalizar()).normalizar();
+	}
+	else {
+		return (p - Punto(centroBase.x, p.y, centroBase.z)).normalizar();
+	}
+
 }
 
 Cilindro::~Cilindro() {}

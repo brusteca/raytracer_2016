@@ -54,7 +54,7 @@ void guardarImagen(int width, int height, Color* colores) {
 int main(int argc, char** argv) {
 	Mundo::crearInstance();
 	// Leer archivo xml y construir shapes
-	string directorio = "mundo/mundo.xml";
+	string directorio = "mundo/mundo_cilindro.xml";
 	pugi::xml_document doc;
 	pugi::xml_parse_result result = doc.load_file(directorio.c_str());
 
@@ -77,6 +77,13 @@ int main(int argc, char** argv) {
 		}
 		else if (nombre == "Cilindro") {
 			// Crear cilindro
+			Punto centro(	stof(nodo->attribute("x").value()),
+							stof(nodo->attribute("y").value()),
+							stof(nodo->attribute("z").value())
+						);
+			float altura = stof(nodo->attribute("altura").value());
+			float radio = stof(nodo->attribute("radio").value());
+			Mundo::inst()->shapes.push_back(new Cilindro(radio, centro, altura));
 		}
 		else if (nombre == "Poligono") {
 			vector<Punto> puntosPoligono;
@@ -153,7 +160,7 @@ int main(int argc, char** argv) {
 	Shape* shapeElegido = NULL;
 	// Variables precalculables
 	Punto direccion = (infIzq - posicionCamara); // El producto interno de este vector con cualquier punto no debería dar negativo.
-	// Loop de píxeles
+	// Loop de píxeles (raytracing)
 	for (int i = 0; i < height; i++) {
 		for (int j = 0; j < width; j++) {
 			// Establecer pixel actual

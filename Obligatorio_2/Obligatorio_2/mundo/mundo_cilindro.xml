@@ -3,14 +3,9 @@
 <PosicionCamara x="0.0" y="0.0" z="-3.0" /> 
 <PuntosVentana xI="-2.0" yI="-2.0" xD="2.0" yD="2.0" prof="0.0"/>
 <!-- Información de Color -->
-<Background red="0" green="0" blue="0" />
+<Background red="0" green="100" blue="150" />
 <!-- Objetos -->
-<Poligono>
-	<Vertice x="1" y="0" z="4" />
-	<Vertice x="3" y="0" z="4" />
-	<Vertice x="3" y="2" z="3" />
-	<Vertice x="1" y="2" z="3" />
-</Poligono>
+<Cilindro x="0" y="0" z="44" altura="4" radio="2" />
 <!-- Luces -->
 <Luz 	x="-2" y="3" z = "1" 
 		Ramb="0.2" Gamb="0.2" Bamb="0.2"

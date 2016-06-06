@@ -5,6 +5,7 @@
 #define constAtt 0.03f
 #define linearAtt 0.2f
 #define quadAtt 0.012f
+#define nPhong 5
 
 #include "Color.h"
 #include "Mundo.h"
@@ -19,6 +20,7 @@ class Shape{
 		Color colorAmbiente;
 		Color colorDifuso;
 		Color colorEspecular;
+		float constanteEspecular;
 	public:
 		Shape();
 		Shape(float refle, float refra);

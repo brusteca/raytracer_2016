@@ -7,11 +7,17 @@
 
 using namespace std;
 
+
+#include <iostream>
+
+
 Shape::Shape() {
+	//TODO cargar esto a la hora de construir el objeto
 	reflexion = refraccion = 0.0;
-	colorAmbiente.red = 100;
-	colorAmbiente.green = 0;
-	colorAmbiente.blue = 0;
+	colorAmbiente = Color(100, 0, 0);
+	colorDifuso = Color(100, 0, 0);
+	colorEspecular = Color(100, 0, 0);
+	constanteEspecular = 2.0;
 }
 
 Shape::Shape(float refle, float refra) : Shape() {
@@ -23,8 +29,9 @@ Shape::Shape(float refle, float refra) : Shape() {
 //	Determina el color en el punto 'colision' para el rayo ->p1p2
 Color Shape::calcularColor(Punto colision, Punto p1, Punto p2) {
 	{
-		Color color;
-		color.red = color.green = color.blue = 0;
+		//trabajo con int y despues los trunco
+		int colorRed, colorGreen, colorBlue;
+		colorRed = colorGreen = colorBlue = 0;
 		//calculo si la superficie tiene luz o sombra
 		for (int i = 0; i < Mundo::inst()->luces.size(); ++i) {
 			Luz luz = Mundo::inst()->luces[i];
@@ -37,16 +44,18 @@ Color Shape::calcularColor(Punto colision, Punto p1, Punto p2) {
 				//factor del angulo
 				direccionLuz = direccionLuz.normalizar();
 				float factorDif = direccionLuz * normal;
-				//precomputo
-				float factor = factorAtt * factorDif;
-				color.red += luz.getDif().r * colorAmbiente.red * factor;
-				color.green += luz.getDif().g * colorAmbiente.green * factor;
-				color.blue += luz.getDif().b * colorAmbiente.blue * factor;
+				//el vector R y su producto por V como aparece en las diapositivas
+				Punto vectV = (p1 - colision).normalizar(); //las diapositivas no dicen pero me imagino que hay que normalizarlo
+				Punto vectR = normal.productoEscalar(2 * (normal * direccionLuz)) - direccionLuz;
+				float factorSpecRVnK = constanteEspecular * pow(vectR * vectV, nPhong);
+				colorRed += truncar( luz.getDif().r * factorAtt * (factorDif * colorDifuso.red + factorSpecRVnK * colorEspecular.red) );
+				colorGreen += truncar( luz.getDif().g * factorAtt * (factorDif * colorDifuso.green + factorSpecRVnK * colorEspecular.green) );
+				colorBlue += truncar( luz.getDif().b * factorAtt * (factorDif * colorDifuso.blue + factorSpecRVnK * colorEspecular.blue) );
 			}
-			color.red += colorAmbiente.red * luz.getAmb().r;
-			color.green += colorAmbiente.green * luz.getAmb().g;
-			color.blue += colorAmbiente.blue * luz.getAmb().b;
+			colorRed += colorAmbiente.red * luz.getAmb().r;
+			colorGreen += colorAmbiente.green * luz.getAmb().g;
+			colorBlue += colorAmbiente.blue * luz.getAmb().b;
 		}
-		return color;
+		return Color(truncar(colorRed), truncar(colorGreen), truncar(colorBlue) );
 	}
 }

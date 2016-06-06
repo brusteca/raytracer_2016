@@ -28,6 +28,7 @@ class Luz {
 		Punto posicion;
 		Intensidad ambiente;
 		Intensidad difuso;
+		//creo que la luz no tiene intensidad especular
 		Intensidad especular;
 	public:
 		Luz(Punto p, Intensidad amb, Intensidad dif, Intensidad esp);

@@ -32,3 +32,12 @@ float absFloat(float a) {
 float min(float a, float b) {
 	return (a < b) ? a : b;
 }
+
+int truncar(int trunc) {
+	if (trunc < 0)
+		return 0;
+	else if (trunc > 255)
+		return 255;
+	else
+		return trunc;
+}

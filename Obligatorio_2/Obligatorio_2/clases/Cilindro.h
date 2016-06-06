@@ -8,27 +8,20 @@
 
 using namespace std;
 
+/* Cilindro con eje paralelo al eje y */
+
 class Cilindro : public Shape {
 	private:
 		float radio;
 		Punto centroBase;
 		float altura;
 	public:
-		Cilindro() : Shape() { radio = altura = 0.0; centroBase = Punto(0, 0, 0); };
-		Cilindro(float r, Punto cB, float a) : Shape() {
-			radio = r;
-			altura = a;
-			centroBase = cB;
-		};
-		int colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
-			
-		};
+		Cilindro();
+		Cilindro(float r, Punto cB, float a);
+		int colisionaCon(Punto p1, Punto p2, Punto* &resultado);
 
-		Punto calcularNormal(Punto p) {
-			//NO IMPLEMENTADO
-			return Punto();
-		}
-		~Cilindro() {};
+		Punto calcularNormal(Punto p);
+		~Cilindro();
 };
 
 #endif

@@ -76,7 +76,7 @@ int main(int argc, char** argv) {
 			Mundo::inst()->shapes.push_back(new Esfera(centro,radio));
 		}
 		else if (nombre == "Cilindro") {
-
+			// Crear cilindro
 		}
 		else if (nombre == "Poligono") {
 			vector<Punto> puntosPoligono;

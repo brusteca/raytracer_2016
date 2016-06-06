@@ -33,6 +33,9 @@
     <ClCompile Include="clases\cpp\Poligono.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="clases\cpp\Cilindro.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clases\Shape.h">

@@ -30,7 +30,7 @@ Prisma::Prisma(vector<Punto> ps, float altura, float refle, float refra, float t
 	superior_1.push_back(ps[0] + directriz.productoEscalar(altura));
 	superior_1.push_back(ps[1] + directriz.productoEscalar(altura));
 	superior_1.push_back(ps[2] + directriz.productoEscalar(altura));
-	poligonos.push_back(Poligono(inferior_1, refle, refra, transp, amb, dif, esp, constEsp));
+	poligonos.push_back(Poligono(superior_1, refle, refra, transp, amb, dif, esp, constEsp));
 	vector<Punto> superior_2;
 	superior_2.push_back(ps[2] + directriz.productoEscalar(altura));
 	superior_2.push_back(ps[3] + directriz.productoEscalar(altura));
@@ -51,17 +51,17 @@ Prisma::Prisma(vector<Punto> ps, float altura, float refle, float refra, float t
 	vector<Punto> trasera_1;
 	trasera_1.push_back(ps[2]);
 	trasera_1.push_back(ps[3]);
-	trasera_1.push_back(ps[2] + directriz.productoEscalar(altura));
+	trasera_1.push_back(ps[3] + directriz.productoEscalar(altura));
 	poligonos.push_back(Poligono(trasera_1, refle, refra, transp, amb, dif, esp, constEsp));
 	vector<Punto> trasera_2;
-	trasera_2.push_back(ps[2] + directriz.productoEscalar(altura));
 	trasera_2.push_back(ps[3] + directriz.productoEscalar(altura));
-	trasera_2.push_back(ps[3]);
+	trasera_2.push_back(ps[2] + directriz.productoEscalar(altura));
+	trasera_2.push_back(ps[2]);
 	poligonos.push_back(Poligono(trasera_2, refle, refra, transp, amb, dif, esp, constEsp));
 	// Cara lateral derecha (vertices 1 y 2)
 	vector<Punto> derecha_1;
-	derecha_1.push_back(ps[2]);
 	derecha_1.push_back(ps[1]);
+	derecha_1.push_back(ps[2]);
 	derecha_1.push_back(ps[2] + directriz.productoEscalar(altura));
 	poligonos.push_back(Poligono(derecha_1, refle, refra, transp, amb, dif, esp, constEsp));
 	vector<Punto> derecha_2;
@@ -73,12 +73,12 @@ Prisma::Prisma(vector<Punto> ps, float altura, float refle, float refra, float t
 	vector<Punto> izquierda_1;
 	izquierda_1.push_back(ps[0]);
 	izquierda_1.push_back(ps[3]);
-	izquierda_1.push_back(ps[0] + directriz.productoEscalar(altura));
+	izquierda_1.push_back(ps[3] + directriz.productoEscalar(altura));
 	poligonos.push_back(Poligono(izquierda_1, refle, refra, transp, amb, dif, esp, constEsp));
 	vector<Punto> izquierda_2;
-	izquierda_2.push_back(ps[0] + directriz.productoEscalar(altura));
 	izquierda_2.push_back(ps[3] + directriz.productoEscalar(altura));
-	izquierda_2.push_back(ps[3]);
+	izquierda_2.push_back(ps[0] + directriz.productoEscalar(altura));
+	izquierda_2.push_back(ps[0]);
 	poligonos.push_back(Poligono(izquierda_2, refle, refra, transp, amb, dif, esp, constEsp));
 
 	// Crear un cilindro como bounding shape

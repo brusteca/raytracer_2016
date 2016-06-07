@@ -3,9 +3,7 @@
 
 using namespace std;
 
-Poligono::Poligono() { 
-	/*puntos = NULL;
-	cantidad = 0;*/
+Poligono::Poligono() : Shape() { 
 	normal = Punto();
 	d = 0.0;
 }
@@ -13,14 +11,11 @@ Poligono::Poligono() {
 Poligono::Poligono(/*Punto* ps, int c*/ vector<Punto> ps, float refle, float refra, float transp, Color amb, Color dif, Color esp, float constEsp) :
 	Shape(refle, refra, transp, amb, dif, esp, constEsp) {
 	if (ps.size() < 3) {
-		/*puntos = NULL;
-		cantidad = 0;*/
 		normal = Punto();
 		d = 0.0;
 		return;
 	}
 	puntos = ps;
-	//cantidad = c;
 	// Hallar datos del plano con los primeros 3 puntos
 	// Si A, B y C son los puntos, entonces normal = (B-A) x (C-A)
 	normal = (ps[1] + ps[0].negado()).productoVectorial((ps[2] + ps[0].negado()));
@@ -36,8 +31,9 @@ int Poligono::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 	if (puntos.size() < 3)
 		return 0;
 	// METODO EFICIENTE PARA TRIANGULOS
-	/*if (puntos.size() == 3)
-		return 0;*/
+	if (puntos.size() == 3){
+		// NO IMPLEMENTADO
+	}
 	// METODO INEFICIENTE PARA POLIGONOS GENERICOS
 	/*
 	* Colisionar rayo con el plano
@@ -46,14 +42,14 @@ int Poligono::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 	*/
 	// Calculo N . (p2 - p1) para ver si hay intersección
 	float denominador = normal * (p2 - p1);
-	if (denominador == 0.0)
+	if ((denominador == 0.0) || (denominador != -d))
 		return 0;
 	// Denominador no es cero, puedo continuar
 	float t = (-(normal * p1 + d)) / denominador;
 	Punto interseccion = Punto(p1 + (p2 - p1).productoEscalar(t));
 	// Hallada la intersección con el plano, debemos ver si ese punto pertenece al polígono en sí.
 	// Proyectar ortogonalmente todo el plano sobre la dirección con mayor módulo en su normal.
-	vector<Punto> puntosProyectados/* = new Punto[cantidad]*/;
+	vector<Punto> puntosProyectados;
 	if ((absFloat(normal.getX()) >= absFloat(normal.getY())) && (absFloat(normal.getX()) >= absFloat(normal.getZ())))
 		for (int i = 0; i < puntos.size()/*cantidad*/; i++) {
 			puntosProyectados.push_back(Punto(puntos[i].getY(), puntos[i].getZ(), 0.0));
@@ -93,7 +89,7 @@ int Poligono::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 	if (paralelismo != 0.0) {
 		t2 = (puntosProyectados[puntos.size() - 1].getY() - interseccion.getY()) / paralelismo;
 		if ((t2 >= 0.0) && (t2 < 1.0)) {
-			t1 = puntosProyectados[puntos.size() - 1].getX() - interseccion.getX() + (puntosProyectados[0].getX() - puntosProyectados[0].getX()) * t2;
+			t1 = puntosProyectados[puntos.size() - 1].getX() - interseccion.getX() + (puntosProyectados[0].getX() - puntosProyectados[puntos.size() - 1].getX()) * t2;
 			if (t1 >= 0)
 				cantIntersecciones++;
 		}

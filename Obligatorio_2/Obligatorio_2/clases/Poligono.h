@@ -7,6 +7,7 @@
 #include "Shape.h"
 #include "Utils.h"
 #include "Punto.h"
+#include "Matriz.h"
 
 using namespace std;
 /*
@@ -17,12 +18,12 @@ using namespace std;
 
 class Poligono : public Shape {
 	private:
-		/*Punto* puntos;
-		int cantidad;*/
 		vector<Punto> puntos;
 		// Atributos para cálculo de intersecciones
 		Punto normal;
 		float d; // Coeficiente de traslación de plano.
+		// Matriz para reducción de Jacobi
+		Matriz matriz;
 	public:
 		Poligono();
 		Poligono( vector<Punto> p, float refle, float refra, float transp, Color amb, Color dif, Color esp, float constEsp);

@@ -124,8 +124,8 @@ int Prisma::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 			// Si choqué contra par,entonces no chequeo la impar
 			if (i % 2 == 0)
 				i++;
+			delete[]res;
 		}
-		delete[]res;
 		i++;
 	}
 	return cant;

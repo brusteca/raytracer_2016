@@ -128,6 +128,7 @@
   <ItemGroup>
     <ClCompile Include="clases\cpp\Cilindro.cpp" />
     <ClCompile Include="clases\cpp\Luz.cpp" />
+    <ClCompile Include="clases\cpp\Matriz.cpp" />
     <ClCompile Include="clases\cpp\Mundo.cpp" />
     <ClCompile Include="clases\cpp\Poligono.cpp" />
     <ClCompile Include="clases\cpp\Prisma.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="clases\Cilindro.h" />
     <ClInclude Include="clases\Color.h" />
     <ClInclude Include="clases\Luz.h" />
+    <ClInclude Include="clases\Matriz.h" />
     <ClInclude Include="clases\Mundo.h" />
     <ClInclude Include="clases\Poligono.h" />
     <ClInclude Include="clases\Prisma.h" />

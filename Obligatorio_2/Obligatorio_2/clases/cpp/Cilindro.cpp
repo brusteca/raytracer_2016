@@ -95,7 +95,7 @@ int Cilindro::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 Punto Cilindro::calcularNormal(Punto p) {
 	// Precondición: el punto pertenece al cilindro
 	// Calcular según posición del punto
-	float coefDePertenencia = pow(p.x, 2) + pow(p.z, 2) - pow(radio, 2);
+	float coefDePertenencia = pow(p.x - centroBase.x, 2) + pow(p.z - centroBase.z, 2) - pow(radio, 2);
 	if (p.y == centroBase.y){
 		if (coefDePertenencia < 0) {
 			return Punto(0, -1, 0);

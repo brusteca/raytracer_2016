@@ -77,14 +77,15 @@ int Cilindro::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 	float t = (centroBase.y - p1.y) / u.y;
 	Punto auxiliar = p1 + u.productoEscalar(t);
 	// Ver si está dentro del circulo
-	if (pow(auxiliar.x, 2) + pow(auxiliar.z, 2) - pow(radio, 2) < 0) {
+	if (pow(auxiliar.x - centroBase.x, 2) + pow(auxiliar.z - centroBase.z, 2) - pow(radio, 2) < 0) {
 		resultado[1] = auxiliar;
 		return 2;
 	}
 	// Ver base superior
 	t = (centroBase.y + altura - p1.y) / u.y;
 	auxiliar = p1 + u.productoEscalar(t);
-	if (pow(auxiliar.x, 2) + pow(auxiliar.z, 2) - pow(radio, 2) < 0) {
+	//if (pow(auxiliar.x, 2) + pow(auxiliar.z, 2) - 2 * centroBase.x * auxiliar.x - 2 * centroBase.z * auxiliar.z + pow(centroBase.x, 2) + pow(centroBase.z, 2) - pow(radio, 2) < 0) {
+	if (pow(auxiliar.x - centroBase.x,2) + pow(auxiliar.z - centroBase.z, 2) - pow(radio,2) < 0){
 		resultado[1] = auxiliar;
 		return 2;
 	}

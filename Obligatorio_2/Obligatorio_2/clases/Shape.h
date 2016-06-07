@@ -32,7 +32,14 @@ class Shape{
 		//	Determina la normal en el punto p
 		virtual Punto calcularNormal(Punto p) = 0;
 
+		//recorre todos los shapes y retorna el tamano del array resultado. si esto es mayor a 0:
+		//en resultado retorna los puntos
+		//en indiceMasCercano retorna el indice(en el array) del punto mas cercano
+		//en shapeResultado retorna la forma a la que corresponden los puntos retornados
+		static int trace(Punto p1, Punto p2, Punto direccion, Punto* &resultado, int &indiceMasCercano, Shape* &shapeResultado);
+
 		float getTransparencia();
+
 		~Shape() {};
 };
 

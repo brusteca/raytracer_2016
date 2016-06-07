@@ -65,6 +65,56 @@ Color Shape::calcularColor(Punto colision, Punto p1, Punto p2) {
 	}
 
 }
+//quedo bastante complicado
+int Shape::trace(Punto p1, Punto p2, Punto direccion, Punto* &resultado, int &indiceMasCercano, Shape* &shapeResultado) {
+	shapeResultado = NULL;
+	indiceMasCercano = -1;
+	//borro lo que me viene
+	delete[] resultado;
+	resultado = new Punto[2];
+	int cantPuntosResultado = 0;
+
+	Punto* resultadoActual = NULL;
+	int cantPuntos = 0;
+	float modulo = 0.0;
+	bool primerPunto = true;
+	for (vector<Shape*>::iterator it = Mundo::inst()->shapes.begin(); it != Mundo::inst()->shapes.end(); it++) {
+		cantPuntos = (*it)->colisionaCon(p1, p2, resultadoActual);
+		for (int cant = 0; cant < cantPuntos; cant++) {
+			// Por cada colisión, quedarse con el punto más cercano descubierto hasta ahora
+			// Ver si el punto está del lado adecuado
+			Punto segmento = resultadoActual[cant] - p1;
+			if (segmento.productoInterno(direccion) >= 0) {
+				// Si lo está, ver si su módulo es menor al del anterior punto más cercano
+				if ((primerPunto) || (segmento.modulo < modulo)) {
+					modulo = segmento.modulo;
+					primerPunto = false;
+					//asigno las salidas
+					shapeResultado = (*it);
+					indiceMasCercano = cant;
+					cantPuntosResultado = cantPuntos;
+					for (int i = 0; i < cantPuntosResultado; ++i)
+						resultado[i] = resultadoActual[i];
+
+				}
+			}
+		}
+		if (cantPuntos > 0)
+			delete[] resultadoActual;
+	}
+	//cambio el tamano del array
+	if (cantPuntosResultado == 1) {
+		Punto aux = resultado[0];
+		delete[] resultado;
+		resultado = new Punto[1];
+		resultado[0] = aux;
+	}
+	else if (cantPuntosResultado == 0) {
+		delete[] resultado;
+		resultado = NULL;
+	}
+	return cantPuntosResultado;
+}
 
 float Shape::getTransparencia() {
 	return transparencia;

@@ -68,54 +68,75 @@ int main(int argc, char** argv) {
 	backgroundColor.blue = backgroundColor.green = backgroundColor.red = 0;
 	for (pugi::xml_node_iterator nodo = doc.begin(); nodo != doc.end(); nodo++) {
 		string nombre = string(nodo->name());
-		if (nombre == "Esfera") {
-			Punto centro(	stof(nodo->attribute("x").value()), 
-							stof(nodo->attribute("y").value()), 
-							stof(nodo->attribute("z").value())
-						);
-			float radio = stof(nodo->attribute("radio").value());
-			Mundo::inst()->shapes.push_back(new Esfera(centro,radio));
-		}
-		else if (nombre == "Cilindro") {
-			// Crear cilindro
-			Punto centro(	stof(nodo->attribute("x").value()),
-							stof(nodo->attribute("y").value()),
-							stof(nodo->attribute("z").value())
-						);
-			float altura = stof(nodo->attribute("altura").value());
-			float radio = stof(nodo->attribute("radio").value());
-			Mundo::inst()->shapes.push_back(new Cilindro(radio, centro, altura));
-		}
-		else if (nombre == "Poligono") {
-			vector<Punto> puntosPoligono;
-			for (pugi::xml_node_iterator puntos = nodo->begin(); puntos != nodo->end(); puntos++) {
-				if (string(puntos->name()) == "Vertice") {
-					// Crear cada punto e ingresarlo en el vector
-					Punto ingreso = Punto(  stof(puntos->attribute("x").value()),
-											stof(puntos->attribute("y").value()),
-											stof(puntos->attribute("z").value())
-										  );
-					puntosPoligono.push_back(ingreso);
-				}
+		if (nombre == "Shape") {
+			//cargo los datos del shape
+			float refle = stof(nodo->attribute("refle").value());
+			float refra = stof(nodo->attribute("refra").value());
+			float transp = stof(nodo->attribute("transp").value());
+			Color amb = Color(	stoi(nodo->attribute("Ramb").value()),
+								stoi(nodo->attribute("Gamb").value()),
+								stoi(nodo->attribute("Bamb").value())
+								);
+			Color dif = Color(	stoi(nodo->attribute("Rdif").value()),
+								stoi(nodo->attribute("Gdif").value()),
+								stoi(nodo->attribute("Bdif").value())
+								);
+			Color esp = Color(	stoi(nodo->attribute("Resp").value()),
+								stoi(nodo->attribute("Gesp").value()),
+								stoi(nodo->attribute("Besp").value())
+								);
+			float constEsp = stof(nodo->attribute("constEsp").value());;
+			//cargo los datos del tipo especifico
+			string tipo = string(nodo->attribute("tipo").value());
+			if (tipo == "Esfera") {
+				Punto centro(stof(nodo->attribute("x").value()),
+					stof(nodo->attribute("y").value()),
+					stof(nodo->attribute("z").value())
+					);
+				float radio = stof(nodo->attribute("radio").value());
+				Mundo::inst()->shapes.push_back(new Esfera(centro, radio, refle, refra, transp, amb, dif, esp, constEsp));
 			}
-			Shape* poligono = new Poligono(puntosPoligono);
-			Mundo::inst()->shapes.push_back(poligono);
-		}
-		else if (nombre == "Prisma") {
-			vector<Punto> vertices;
-			for (pugi::xml_node_iterator puntos = nodo->begin(); puntos != nodo->end(); puntos++) {
-				if (string(puntos->name()) == "Vertice") {
-					// Crear cada punto e ingresarlo en el vector
-					Punto ingreso = Punto(	stof(puntos->attribute("x").value()),
-											stof(puntos->attribute("y").value()),
-											stof(puntos->attribute("z").value())
-										 );
-					vertices.push_back(ingreso);
-				}
+			else if (tipo == "Cilindro") {
+				// Crear cilindro
+				Punto centro(stof(nodo->attribute("x").value()),
+					stof(nodo->attribute("y").value()),
+					stof(nodo->attribute("z").value())
+					);
+				float altura = stof(nodo->attribute("altura").value());
+				float radio = stof(nodo->attribute("radio").value());
+				Mundo::inst()->shapes.push_back(new Cilindro(radio, centro, altura, refle, refra, transp, amb, dif, esp, constEsp));
 			}
-			float alt = stof(nodo->attribute("altura").value());
-			Mundo::inst()->shapes.push_back(new Prisma(vertices,alt));
-		}
+			else if (tipo == "Poligono") {
+				vector<Punto> puntosPoligono;
+				for (pugi::xml_node_iterator puntos = nodo->begin(); puntos != nodo->end(); puntos++) {
+					if (string(puntos->name()) == "Vertice") {
+						// Crear cada punto e ingresarlo en el vector
+						Punto ingreso = Punto(stof(puntos->attribute("x").value()),
+							stof(puntos->attribute("y").value()),
+							stof(puntos->attribute("z").value())
+							);
+						puntosPoligono.push_back(ingreso);
+					}
+				}
+				Shape* poligono = new Poligono(puntosPoligono, refle, refra, transp, amb, dif, esp, constEsp);
+				Mundo::inst()->shapes.push_back(poligono);
+			}
+			else if (tipo == "Prisma") {
+				vector<Punto> vertices;
+				for (pugi::xml_node_iterator puntos = nodo->begin(); puntos != nodo->end(); puntos++) {
+					if (string(puntos->name()) == "Vertice") {
+						// Crear cada punto e ingresarlo en el vector
+						Punto ingreso = Punto(stof(puntos->attribute("x").value()),
+							stof(puntos->attribute("y").value()),
+							stof(puntos->attribute("z").value())
+							);
+						vertices.push_back(ingreso);
+					}
+				}
+				float alt = stof(nodo->attribute("altura").value());
+				Mundo::inst()->shapes.push_back(new Prisma(vertices, alt, refle, refra, transp, amb, dif, esp, constEsp));
+			}
+		} 
 		else if (nombre == "Luz") {
 			Luz luz(Punto(	stof(nodo->attribute("x").value()), 
 							stof(nodo->attribute("y").value()), 

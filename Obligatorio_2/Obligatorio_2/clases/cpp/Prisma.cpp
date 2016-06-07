@@ -88,7 +88,7 @@ Prisma::Prisma(vector<Punto> ps, float altura, float refle, float refra, float t
 	Punto centro = ps[0] + diagonal;
 	// Calcular radio
 	float radio = diagonal.modulo;
-	boundingShape = new Cilindro(radio, centro, altura);
+	boundingShape = new Cilindro(radio, centro, altura, refle, refra, transp, amb, dif, esp, constEsp);
 }
 
 int Prisma::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {

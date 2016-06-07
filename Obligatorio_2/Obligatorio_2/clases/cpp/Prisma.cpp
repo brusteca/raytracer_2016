@@ -108,7 +108,7 @@ int Prisma::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 	int i = 0;
 	while ((cant < 6)&&(i < poligonos.size())) {
 		cantCol = poligonos[i].colisionaCon(p1,p2,res);
-		if (cantCol == 1) {
+		if ((cantCol == 1)&&((i == 4)||(i == 5) || (i == 2) || (i == 3))) {
 			// Agregar al array
 			resultado[cant] = *res;
 			bool yaExiste = false;

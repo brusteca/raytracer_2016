@@ -10,13 +10,13 @@ using namespace std;
 
 class Matriz {
 	private:
-		Punto* filas;
+		float** filas;
 	public:
 		Matriz();
 		Matriz(Punto* f);
 		Matriz(const Matriz &m);
 
-		void reduccionJacobi();
+		Punto* resolverSistema();
 
 		~Matriz();
 };

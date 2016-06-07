@@ -4,27 +4,49 @@ using namespace std;
 
 Matriz::Matriz() {
 	// Crea la matriz identidad
-	filas = new Punto[3];
-	filas[0] = Punto(1,0,0);
-	filas[1] = Punto(0, 1, 0);
-	filas[2] = Punto(0, 0, 1);
+	filas = new float*[3];
+	for (int i = 0; i < 3; i++) {
+		filas[i] = new float[3];
+		for (int j = 0; j < 3; j++) {
+			if (j == i)
+				filas[i][j] = 1;
+			else
+				filas[i][j] = 0;
+		}
+	}
 }
 
 Matriz::Matriz(Punto* f) {
-	filas = f;
+	filas = new float*[3];
+	for (int i = 0; i < 3; i++) {
+		filas[i] = new float[3];
+		filas[i][0] = f[i].x;
+		filas[i][1] = f[i].y;
+		filas[i][2] = f[i].z;
+	}
 }
 
 Matriz::Matriz(const Matriz &m) {
-	filas = new Punto[3];
-	filas[0] = m.filas[0];
-	filas[1] = m.filas[1];
-	filas[2] = m.filas[2];
+	filas = new float*[3];
+	for (int i = 0; i < 3; i++) {
+		filas[i] = new float[3];
+		for (int j = 0; j < 3; j++) {
+			filas[i][j] = m.filas[i][j];
+		}
+	}
 }
 
-void Matriz::reduccionJacobi() {
-	// IMPLEMENTAR
+Punto* Matriz::resolverSistema() {
+	// Escalerizar la matriz 
+	// Recorrer columnas y ejecutar escalerización
+	for (int j = 0; j < 3; j++){
+	
+	}
+
 }
 
 Matriz::~Matriz() {
+	for (int i = 0; i < 3; i++)
+		delete[] filas[i];
 	delete[] filas;
 }

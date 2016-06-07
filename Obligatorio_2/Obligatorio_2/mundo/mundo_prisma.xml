@@ -9,17 +9,17 @@
 		transp = "0.0"
 		refle = "0.0"
 		refra = "0.0"
-		Ramb="100" Gamb="110" Bamb="0"
-		Rdif="100" Gdif="110" Bdif="0"
-		Resp="100" Gesp="110" Besp="0"
+		Ramb="50" Gamb="110" Bamb="0"
+		Rdif="50" Gdif="110" Bdif="0"
+		Resp="50" Gesp="110" Besp="0"
 		constEsp="1.0"
 		altura="3"
 		x="0.0" y="2" z="3.0"
 		>
-		<Vertice x="0" y="-2" z="3" />
-		<Vertice x="-2" y="-2" z="3" />
-		<Vertice x="-2" y="-2" z="4" />
-		<Vertice x="0" y="-2" z="4" />
+		<Vertice x="0" y="0.5" z="3" />
+		<Vertice x="-2" y="0.5" z="4" />
+		<Vertice x="0" y="0.5" z="5" />
+		<Vertice x="2" y="0.5" z="4" />
 </Shape>
 <Vertice x="0" y="0" z="3" />
 		<Vertice x="-2" y="0" z="4" />

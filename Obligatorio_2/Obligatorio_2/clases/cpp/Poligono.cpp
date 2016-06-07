@@ -18,7 +18,7 @@ Poligono::Poligono(/*Punto* ps, int c*/ vector<Punto> ps, float refle, float ref
 	puntos = ps;
 	// Hallar datos del plano con los primeros 3 puntos
 	// Si A, B y C son los puntos, entonces normal = (B-A) x (C-A)
-	normal = (ps[1] + ps[0].negado()).productoVectorial((ps[2] + ps[0].negado()));
+	normal = (ps[1] - ps[0]).productoVectorial((ps[2] - ps[0]));
 	// 'd' se haya mediante N . P = -d, siendo P un punto del plano (se utiliza el primero).
 	d = -(normal * ps[0]);
 
@@ -42,26 +42,33 @@ int Poligono::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 	*/
 	// Calculo N . (p2 - p1) para ver si hay intersección
 	float denominador = normal * (p2 - p1);
-	if ((denominador == 0.0) || (denominador != -d))
+	if (denominador == 0.0)
 		return 0;
 	// Denominador no es cero, puedo continuar
 	float t = (-(normal * p1 + d)) / denominador;
 	Punto interseccion = Punto(p1 + (p2 - p1).productoEscalar(t));
+	Punto interProyectada;
 	// Hallada la intersección con el plano, debemos ver si ese punto pertenece al polígono en sí.
 	// Proyectar ortogonalmente todo el plano sobre la dirección con mayor módulo en su normal.
 	vector<Punto> puntosProyectados;
-	if ((absFloat(normal.getX()) >= absFloat(normal.getY())) && (absFloat(normal.getX()) >= absFloat(normal.getZ())))
+	if ((absFloat(normal.getX()) >= absFloat(normal.getY())) && (absFloat(normal.getX()) >= absFloat(normal.getZ()))) {
 		for (int i = 0; i < puntos.size()/*cantidad*/; i++) {
 			puntosProyectados.push_back(Punto(puntos[i].getY(), puntos[i].getZ(), 0.0));
 		}
-	else if ((absFloat(normal.getY()) >= absFloat(normal.getX())) && (absFloat(normal.getY()) >= absFloat(normal.getZ())))
+		interProyectada = Punto(interseccion.y,interseccion.z,0);
+	}
+	else if ((absFloat(normal.getY()) >= absFloat(normal.getX())) && (absFloat(normal.getY()) >= absFloat(normal.getZ()))) {
 		for (int i = 0; i < puntos.size()/*cantidad*/; i++) {
 			puntosProyectados.push_back(Punto(puntos[i].getX(), puntos[i].getZ(), 0.0));
 		}
-	else if ((absFloat(normal.getZ()) >= absFloat(normal.getX())) && (absFloat(normal.getZ()) >= absFloat(normal.getY())))
+		interProyectada = Punto(interseccion.x, interseccion.z, 0);
+	}
+	else if ((absFloat(normal.getZ()) >= absFloat(normal.getX())) && (absFloat(normal.getZ()) >= absFloat(normal.getY()))) {
 		for (int i = 0; i < puntos.size()/*cantidad*/; i++) {
 			puntosProyectados.push_back(Punto(puntos[i].getX(), puntos[i].getY(), 0.0));
 		}
+		interProyectada = Punto(interseccion.x, interseccion.y, 0);
+	}
 	// Ahora podemos trabajar en dos dimensiones, lo que simplifica ampliamente los cálculos					
 	// Lanzar un rayo desde el punto de contacto en cualquier dirección, en este caso dirección (1,0)	
 	// Contar intersecciones con fronteras del polígono, si hay impar entonces está dentro.
@@ -76,9 +83,9 @@ int Poligono::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 		// Los resultados fueron calculados previamente
 		paralelismo = -(puntosProyectados[i + 1].getY() - puntosProyectados[i].getY());
 		if (paralelismo != 0.0) {
-			t2 = (puntosProyectados[i].getY() - interseccion.getY()) / paralelismo;
+			t2 = (puntosProyectados[i].getY() - interProyectada.getY()) / paralelismo;
 			if ((t2 >= 0.0) && (t2 < 1.0)) {
-				t1 = puntosProyectados[i].getX() - interseccion.getX() + (puntosProyectados[i + 1].getX() - puntosProyectados[i].getX()) * t2;
+				t1 = puntosProyectados[i].getX() - interProyectada.getX() + (puntosProyectados[i + 1].getX() - puntosProyectados[i].getX()) * t2;
 				if (t1 >= 0)
 					cantIntersecciones++;
 			}
@@ -87,9 +94,9 @@ int Poligono::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 	// Caso especial de último vértice con primero
 	paralelismo = -(puntosProyectados[0].getY() - puntosProyectados[puntos.size() - 1].getY());
 	if (paralelismo != 0.0) {
-		t2 = (puntosProyectados[puntos.size() - 1].getY() - interseccion.getY()) / paralelismo;
+		t2 = (puntosProyectados[puntos.size() - 1].getY() - interProyectada.getY()) / paralelismo;
 		if ((t2 >= 0.0) && (t2 < 1.0)) {
-			t1 = puntosProyectados[puntos.size() - 1].getX() - interseccion.getX() + (puntosProyectados[0].getX() - puntosProyectados[puntos.size() - 1].getX()) * t2;
+			t1 = puntosProyectados[puntos.size() - 1].getX() - interProyectada.getX() + (puntosProyectados[0].getX() - puntosProyectados[puntos.size() - 1].getX()) * t2;
 			if (t1 >= 0)
 				cantIntersecciones++;
 		}

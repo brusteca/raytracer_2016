@@ -41,3 +41,10 @@ int truncar(int trunc) {
 	else
 		return trunc;
 }
+
+Color truncar(ColorInt col) {
+	return Color(	truncar(col.red),
+					truncar(col.green),
+					truncar(col.blue)
+					);
+}

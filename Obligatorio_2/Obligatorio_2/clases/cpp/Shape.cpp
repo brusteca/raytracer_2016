@@ -27,44 +27,52 @@ Shape::Shape(float refle, float refra, float transp, Color amb, Color dif, Color
 	constanteEspecular = constEsp;
 }
 
+ColorInt Shape::calcularColorLuz(Punto colision, Punto p1, Punto p2) {
+	ColorInt colorInt = ColorInt();
+	//calculo si la superficie tiene luz o sombra
+	for (int i = 0; i < Mundo::inst()->luces.size(); ++i) {
+		Luz luz = Mundo::inst()->luces[i];
+		Punto direccionLuz = luz.calcularDireccion(colision);
+		Punto normal = calcularNormal(colision);
+		if (direccionLuz * normal > 0) {
+			Intensidad luzIntens = luz.determinarIluminacion(colision, this);
+			if ((luzIntens.r > 0) || (luzIntens.g > 0) || (luzIntens.b > 0)) {
+				//factor de atenuacion
+				float factorAtt = min((1 / (constAtt + linearAtt * direccionLuz.modulo + quadAtt * direccionLuz.modulo * direccionLuz.modulo)), 1);
+				//factor del angulo
+				direccionLuz = direccionLuz.normalizar();
+				float factorDif = direccionLuz * normal;
+				//el vector R y su producto por V como aparece en las diapositivas
+				Punto vectV = (p1 - colision).normalizar(); //las diapositivas no dicen pero me imagino que hay que normalizarlo
+				Punto vectR = normal.productoEscalar(2 * (normal * direccionLuz)) - direccionLuz;
+				float factorSpecRVnK = constanteEspecular * pow(vectR * vectV, nPhong);
+
+				colorInt.red += truncar(luzIntens.r * factorAtt * (factorDif * colorDifuso.red + factorSpecRVnK * colorEspecular.red));
+				colorInt.green += truncar(luzIntens.g * factorAtt * (factorDif * colorDifuso.green + factorSpecRVnK * colorEspecular.green));
+				colorInt.blue += truncar(luzIntens.b * factorAtt * (factorDif * colorDifuso.blue + factorSpecRVnK * colorEspecular.blue));
+			}
+		}
+		colorInt.red += colorAmbiente.red * luz.getAmb().r;
+		colorInt.green += colorAmbiente.green * luz.getAmb().g;
+		colorInt.blue += colorAmbiente.blue * luz.getAmb().b;
+	}
+	return colorInt;
+}
+
 //	Retorna NULL si no hay intersección, si la hay retorna el punto con menor z positivo.
 //	Determina el color en el punto 'colision' para el rayo ->p1p2
-Color Shape::calcularColor(Punto colision, Punto p1, Punto p2) {
-	{
+Color Shape::calcularColor(Punto colision, Punto p1, Punto p2, int recursion) {
 		//trabajo con int y despues los trunco
-		int colorRed, colorGreen, colorBlue;
-		colorRed = colorGreen = colorBlue = 0;
 		//calculo si la superficie tiene luz o sombra
-		for (int i = 0; i < Mundo::inst()->luces.size(); ++i) {
-			Luz luz = Mundo::inst()->luces[i];
-			Punto direccionLuz = luz.calcularDireccion(colision);
-			Punto normal = calcularNormal(colision);
-			if (direccionLuz * normal > 0) {
-				Intensidad luzIntens = luz.determinarIluminacion(colision, this);
-				if ((luzIntens.r > 0) || (luzIntens.g > 0) || (luzIntens.b > 0)) {
-					//factor de atenuacion
-					float factorAtt = min((1 / (constAtt + linearAtt * direccionLuz.modulo + quadAtt * direccionLuz.modulo * direccionLuz.modulo)), 1);
-					//factor del angulo
-					direccionLuz = direccionLuz.normalizar();
-					float factorDif = direccionLuz * normal;
-					//el vector R y su producto por V como aparece en las diapositivas
-					Punto vectV = (p1 - colision).normalizar(); //las diapositivas no dicen pero me imagino que hay que normalizarlo
-					Punto vectR = normal.productoEscalar(2 * (normal * direccionLuz)) - direccionLuz;
-					float factorSpecRVnK = constanteEspecular * pow(vectR * vectV, nPhong);
-
-					colorRed += truncar(luzIntens.r * factorAtt * (factorDif * colorDifuso.red + factorSpecRVnK * colorEspecular.red));
-					colorGreen += truncar(luzIntens.g * factorAtt * (factorDif * colorDifuso.green + factorSpecRVnK * colorEspecular.green));
-					colorBlue += truncar(luzIntens.b * factorAtt * (factorDif * colorDifuso.blue + factorSpecRVnK * colorEspecular.blue));
-				}
-			}
-			colorRed += colorAmbiente.red * luz.getAmb().r;
-			colorGreen += colorAmbiente.green * luz.getAmb().g;
-			colorBlue += colorAmbiente.blue * luz.getAmb().b;
+		ColorInt lightComponent = calcularColorLuz(colision, p1, p2);
+		if (recursion > 0) {
+			//poner las llamadas recursivas aca
 		}
-		return Color(truncar(colorRed), truncar(colorGreen), truncar(colorBlue) );
-	}
+
+		return truncar(lightComponent);
 
 }
+
 //quedo bastante complicado
 int Shape::trace(Punto p1, Punto p2, Punto direccion, Punto* &resultado, int &indiceMasCercano, Shape* &shapeResultado) {
 	shapeResultado = NULL;

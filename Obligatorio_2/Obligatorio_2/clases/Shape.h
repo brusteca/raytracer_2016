@@ -22,13 +22,16 @@ class Shape{
 		Color colorDifuso;
 		Color colorEspecular;
 		float constanteEspecular;
+		//calcula el color en el punto segun las luces
+		ColorInt calcularColorLuz(Punto colision, Punto p1, Punto p2);
 	public:
 		Shape();
 		Shape(float refle, float refra, float transp, Color amb, Color dif, Color esp, float constEsp);
 		//	Retorna NULL si no hay intersección, si la hay retorna el punto con menor z positivo.
 		virtual int colisionaCon(Punto p1, Punto p2, Punto* &resultado) = 0;
 		//	Determina el color en el punto 'colision' para el rayo ->p1p2
-		virtual Color calcularColor(Punto colision, Punto p1, Punto p2);
+		//	profundidad determina cuantos pasos recursivos realizara. Si es 0 no hara ninguna llamada recursiva
+		virtual Color calcularColor(Punto colision, Punto p1, Punto p2, int profundidad);
 		//	Determina la normal en el punto p
 		virtual Punto calcularNormal(Punto p) = 0;
 

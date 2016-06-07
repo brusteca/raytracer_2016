@@ -9,7 +9,8 @@ Cilindro::Cilindro() : Shape() {
 	centroBase = Punto(0, 0, 0);
 }
 
-Cilindro::Cilindro(float r, Punto cB, float a) : Shape() {
+Cilindro::Cilindro(float r, Punto cB, float a, float refle, float refra, float transp, Color amb, Color dif, Color esp, float constEsp) :
+	Shape(refle, refra, transp, amb, dif, esp, constEsp) {
 	radio = r;
 	altura = a;
 	centroBase = cB;

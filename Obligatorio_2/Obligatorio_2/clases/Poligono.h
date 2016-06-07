@@ -25,7 +25,7 @@ class Poligono : public Shape {
 		float d; // Coeficiente de traslación de plano.
 	public:
 		Poligono();
-		Poligono( vector<Punto> p);
+		Poligono( vector<Punto> p, float refle, float refra, float transp, Color amb, Color dif, Color esp, float constEsp);
 
 		/* La colisión entre un rayo y un polígono se analiza en dos pasos:
 				1) Colisionar rayo con plano en el que se encuentra el polígono.

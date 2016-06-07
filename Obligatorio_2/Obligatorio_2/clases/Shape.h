@@ -17,13 +17,14 @@ class Shape{
 	protected:
 		float reflexion;
 		float refraccion;
+		float transparencia;
 		Color colorAmbiente;
 		Color colorDifuso;
 		Color colorEspecular;
 		float constanteEspecular;
 	public:
 		Shape();
-		Shape(float refle, float refra);
+		Shape(float refle, float refra, float transp, Color amb, Color dif, Color esp, float constEsp);
 		//	Retorna NULL si no hay intersección, si la hay retorna el punto con menor z positivo.
 		virtual int colisionaCon(Punto p1, Punto p2, Punto* &resultado) = 0;
 		//	Determina el color en el punto 'colision' para el rayo ->p1p2

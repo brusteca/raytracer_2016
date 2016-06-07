@@ -17,7 +17,7 @@ class Cilindro : public Shape {
 		float altura;
 	public:
 		Cilindro();
-		Cilindro(float r, Punto cB, float a);
+		Cilindro(float r, Punto cB, float a, float refle, float refra, float transp, Color amb, Color dif, Color esp, float constEsp);
 		int colisionaCon(Punto p1, Punto p2, Punto* &resultado);
 
 		Punto calcularNormal(Punto p);

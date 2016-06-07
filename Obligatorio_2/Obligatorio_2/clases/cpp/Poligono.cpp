@@ -36,8 +36,8 @@ int Poligono::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 	if (puntos.size() < 3)
 		return 0;
 	// METODO EFICIENTE PARA TRIANGULOS
-	if (puntos.size() == 3)
-		return 0;
+	/*if (puntos.size() == 3)
+		return 0;*/
 	// METODO INEFICIENTE PARA POLIGONOS GENERICOS
 	/*
 	* Colisionar rayo con el plano

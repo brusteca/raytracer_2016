@@ -55,7 +55,7 @@ void guardarImagen(int width, int height, Color* colores) {
 int main(int argc, char** argv) {
 	Mundo::crearInstance();
 	// Leer archivo xml y construir shapes
-	string directorio = "mundo/mundo_cilindro.xml";
+	string directorio = "mundo/mundo.xml";
 	pugi::xml_document doc;
 	pugi::xml_parse_result result = doc.load_file(directorio.c_str());
 
@@ -85,7 +85,7 @@ int main(int argc, char** argv) {
 								stoi(nodo->attribute("Gesp").value()),
 								stoi(nodo->attribute("Besp").value())
 								);
-			float constEsp = stof(nodo->attribute("constEsp").value());;
+			float constEsp = stof(nodo->attribute("constEsp").value());
 			//cargo los datos del tipo especifico
 			string tipo = string(nodo->attribute("tipo").value());
 			if (tipo == "Esfera") {

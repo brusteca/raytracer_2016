@@ -10,7 +10,8 @@ Poligono::Poligono() {
 	d = 0.0;
 }
 
-Poligono::Poligono(/*Punto* ps, int c*/ vector<Punto> ps) {
+Poligono::Poligono(/*Punto* ps, int c*/ vector<Punto> ps, float refle, float refra, float transp, Color amb, Color dif, Color esp, float constEsp) :
+	Shape(refle, refra, transp, amb, dif, esp, constEsp) {
 	if (ps.size() < 3) {
 		/*puntos = NULL;
 		cantidad = 0;*/

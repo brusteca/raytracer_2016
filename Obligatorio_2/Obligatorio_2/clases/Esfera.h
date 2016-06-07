@@ -18,7 +18,8 @@ class Esfera : public Shape {
 		Punto centro;
 	public:
 		Esfera() : Shape() { radio = 0; centro = Punto(0, 0, 0); };
-		Esfera(Punto c, float r) : Shape() {
+		Esfera(Punto c, float r, float refle, float refra, float transp, Color amb, Color dif, Color esp, float constEsp) : 
+			Shape(refle, refra, transp, amb, dif, esp, constEsp) {
 			radio = r;
 			centro = c;
 		};

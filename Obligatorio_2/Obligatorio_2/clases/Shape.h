@@ -31,6 +31,8 @@ class Shape{
 		virtual Color calcularColor(Punto colision, Punto p1, Punto p2);
 		//	Determina la normal en el punto p
 		virtual Punto calcularNormal(Punto p) = 0;
+
+		float getTransparencia();
 		~Shape() {};
 };
 

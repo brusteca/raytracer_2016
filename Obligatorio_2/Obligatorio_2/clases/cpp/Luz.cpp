@@ -4,6 +4,7 @@
 
 using namespace std;
 
+
 Luz::Luz(Punto p, Intensidad amb, Intensidad dif, Intensidad esp) {
 	posicion = p;
 
@@ -18,12 +19,12 @@ Punto Luz::calcularDireccion(Punto p) {
 		posicion.z - p.z
 		);
 }
-//	retorna false si ese punto (perteneciente a ese shape) esta en sombra para esta luz
-//	despues cuando la hagamos mejor retorna el valor de la luz despues de pasar por los
-//	objetos transparentes
-bool Luz::determinarIluminacion(Punto p, Shape *s) {
+//	retorna la intensidad de la luz para el punto p en el shape s
+//	si es 0 entonces el punto esta en sombra, duh
+Intensidad Luz::determinarIluminacion(Punto p, Shape *s) {
 	Punto direccion = p - posicion;
-	bool hayIluminacion = true;
+	//la intensidad arranca siendo la intensidad de la luz
+	Intensidad iluminacion = difuso;
 	float modulo = direccion.modulo;
 	for (int i = 0; i < Mundo::inst()->shapes.size(); ++i) {
 		//colisiono con todos excepto con el shape que me pasaron
@@ -38,15 +39,23 @@ bool Luz::determinarIluminacion(Punto p, Shape *s) {
 			if (segmento.productoInterno(direccion) >= 0) {
 				// Si lo está, ver si su módulo es menor al del anterior punto más cercano
 				if (segmento.modulo < modulo) {
-					hayIluminacion = false;
-					//tengo que hacer esto porque con un break normal no alcanza
-					goto finLoop;
+					float transpActual = Mundo::inst()->shapes[i]->getTransparencia();
+					//si el shape es opaco pongo la intensidad en 0 y termino
+					if (transpActual == 0) {
+						iluminacion = Intensidad();
+						//tengo que hacer esto porque con un break normal no alcanza
+						//podria usar return pero capaz quiero seguir haciendo cosas al final
+						goto finLoop;
+					}
+					iluminacion.r *= transpActual;
+					iluminacion.g *= transpActual;
+					iluminacion.b *= transpActual;
 				}
 			}
 		}
 	}
 finLoop:
-	return hayIluminacion;
+	return iluminacion;
 }
 
 

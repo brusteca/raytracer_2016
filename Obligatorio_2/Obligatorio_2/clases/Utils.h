@@ -27,6 +27,9 @@ float min(float a, float b);
 //si es mayor a 255 devuelve 255
 int truncar(int trunc);
 
+//Dado un int si es menor a 0 retorna 0
+int truncar_0(int trunc);
+
 //dado un colorInt lo trunca a Color
 Color truncar(ColorInt trunc);
 

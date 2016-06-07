@@ -24,6 +24,8 @@ class Shape{
 		float constanteEspecular;
 		//calcula el color en el punto segun las luces
 		ColorInt calcularColorLuz(Punto colision, Punto p1, Punto p2);
+		//calcula el color en el punto segun la reflexion
+		ColorInt calcularColorReflexion(Punto colision, Punto p1, Punto p2, int profundidad);
 	public:
 		Shape();
 		Shape(float refle, float refra, float transp, Color amb, Color dif, Color esp, float constEsp);
@@ -31,7 +33,7 @@ class Shape{
 		virtual int colisionaCon(Punto p1, Punto p2, Punto* &resultado) = 0;
 		//	Determina el color en el punto 'colision' para el rayo ->p1p2
 		//	profundidad determina cuantos pasos recursivos realizara. Si es 0 no hara ninguna llamada recursiva
-		virtual Color calcularColor(Punto colision, Punto p1, Punto p2, int profundidad);
+		virtual ColorInt calcularColor(Punto colision, Punto p1, Punto p2, int profundidad);
 		//	Determina la normal en el punto p
 		virtual Punto calcularNormal(Punto p) = 0;
 
@@ -39,7 +41,8 @@ class Shape{
 		//en resultado retorna los puntos
 		//en indiceMasCercano retorna el indice(en el array) del punto mas cercano
 		//en shapeResultado retorna la forma a la que corresponden los puntos retornados
-		static int trace(Punto p1, Punto p2, Punto direccion, Punto* &resultado, int &indiceMasCercano, Shape* &shapeResultado);
+		//en caso de estar presente, el shape ignorar es ignorado a la hora de realizar las colisiones
+		static int trace(Punto p1, Punto p2, Punto direccion, Punto* &resultado, int &indiceMasCercano, Shape* &shapeResultado, Shape* ignorar = NULL);
 
 		float getTransparencia();
 

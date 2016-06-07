@@ -42,6 +42,10 @@ int truncar(int trunc) {
 		return trunc;
 }
 
+int truncar_0(int trunc) {
+	return (trunc < 0) ? 0 : trunc;
+}
+
 Color truncar(ColorInt col) {
 	return Color(	truncar(col.red),
 					truncar(col.green),

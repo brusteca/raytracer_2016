@@ -214,7 +214,7 @@ int main(int argc, char** argv) {
 				matriz[i*width + j] = Mundo::inst()->background;
 			else
 				// Color del Shape elegido
-				matriz[i*width + j] = shapeElegido->calcularColor(puntoResultado[indiceResultado], posicionCamara, pixel, 10);
+				matriz[i*width + j] = truncar(shapeElegido->calcularColor(puntoResultado[indiceResultado], posicionCamara, pixel, 10));
 		}
 	}
 

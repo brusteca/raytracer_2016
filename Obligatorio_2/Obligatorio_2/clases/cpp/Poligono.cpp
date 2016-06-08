@@ -51,11 +51,10 @@ int Poligono::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 		float* res = NULL;
 		bool err;
 		err = matriz.resolverSistema(coeficientes, res);
-		if (!err)
-			cout << "TUHERMANA" << endl;
-		if ((!err)||(res[0] < 0) || (res[1] < 0) || (res[0] + res[1] >= 1))
+		if ((!err) || (res[0] < 0) || (res[1] < 0) || (res[0] + res[1] >= 1)) 
 			return 0;
-		resultado = new Punto(p1 + (p2 - p1).productoEscalar(res[2]));
+		resultado = new Punto[1];
+		resultado[0] = p1 + (p2 - p1).productoEscalar(res[2]);
 		return 1;
 	}
 	// METODO INEFICIENTE PARA POLIGONOS GENERICOS

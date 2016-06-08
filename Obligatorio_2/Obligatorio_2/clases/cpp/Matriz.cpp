@@ -48,12 +48,12 @@ bool Matriz::resolverSistema(float* coeficientes, float* &retorno) {
 			while ((k < 3)&&(filas[k][j] != 0))
 				k++;
 			// Si todas por debajo son cero, estamos en problemas.
-			if (k == 3)
+			if (k == 3) 
 				return false;
 			// Sino, hacemos swap de filas
 			float* aux = filas[j];
 			filas[j] = filas[k];
-			filas[k] = filas[j];
+			filas[k] = aux;
 		}
 		// Recorrer filas inferiores a la altura de la diagonal para escalerizar
 		for (int i = j + 1; i < 3; i++) {

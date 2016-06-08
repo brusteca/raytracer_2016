@@ -1,4 +1,5 @@
 #include "Matriz.h"
+#include <iostream>
 
 using namespace std;
 
@@ -36,7 +37,7 @@ Matriz::Matriz(const Matriz &m) {
 	}
 }
 
-Punto* Matriz::resolverSistema() {
+bool Matriz::resolverSistema(float* coeficientes, float* &retorno) {
 	// Escalerizar la matriz 
 	// Recorrer columnas y ejecutar escalerización
 	for (int j = 0; j < 3; j++){
@@ -48,7 +49,7 @@ Punto* Matriz::resolverSistema() {
 				k++;
 			// Si todas por debajo son cero, estamos en problemas.
 			if (k == 3)
-				return NULL;
+				return false;
 			// Sino, hacemos swap de filas
 			float* aux = filas[j];
 			filas[j] = filas[k];
@@ -58,11 +59,35 @@ Punto* Matriz::resolverSistema() {
 		for (int i = j + 1; i < 3; i++) {
 			// Para toda fila cuyo elemento de esta columna no sea cero, modificar para que sea cero
 			if (filas[i][j] != 0) {
-				float* aux = new float[3];
+				for (int k = 3 - 1; k >= j; k--) {
+					filas[i][k] = (filas[i][k] * filas[j][j]) - (filas[j][k] * filas[i][j]);
+				}
 			}
 		}
 	}
+	// Matriz escalerizada, resta retornar el vector solución
+	// Debe calcularse el retorno en base a los coeficientes
+	retorno = new float[3];
+	for (int i = 3 -1 ; i >= 0; i--) {
+		retorno[i] = coeficientes[i];
+		for (int j = 3 - 1; j > i; j--) {
+			retorno[i] -= retorno[j] * filas[i][j];
+		}
+		retorno[i] = retorno[i] / filas[i][i];
+	}
+	return true;
+}
 
+string Matriz::show() {
+	string retorno = "";
+	for (int i = 0; i < 3; i++) {
+		retorno = retorno + "| ";
+		for (int j = 0; j < 3; j++) {
+			retorno = retorno + to_string(filas[i][j]) + " ";
+		}
+		retorno = retorno + " |\n";
+	}
+	return retorno;
 }
 
 Matriz::~Matriz() {

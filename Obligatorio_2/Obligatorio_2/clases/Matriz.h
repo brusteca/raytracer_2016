@@ -3,6 +3,8 @@
 #define MATRIZ_H
 
 #include "Punto.h"
+#include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -16,8 +18,9 @@ class Matriz {
 		Matriz(Punto* f);
 		Matriz(const Matriz &m);
 
-		Punto* resolverSistema();
+		bool resolverSistema(float* coeficientes, float* &retorno);
 
+		string show();
 		~Matriz();
 };
 

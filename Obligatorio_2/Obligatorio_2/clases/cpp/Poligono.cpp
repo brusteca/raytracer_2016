@@ -1,5 +1,7 @@
 #include "Poligono.h"
+#include "Matriz.h"
 #include "Punto.h"
+#include <iostream>
 
 using namespace std;
 
@@ -32,7 +34,29 @@ int Poligono::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 		return 0;
 	// METODO EFICIENTE PARA TRIANGULOS
 	if (puntos.size() == 3){
-		// NO IMPLEMENTADO
+		// Crear la matriz de cálculo
+		Punto* filas = new Punto[3];
+		filas[0] = Punto(puntos[1].x - puntos[0].x, puntos[2].x - puntos[0].x, - (p2 - p1).x);
+		filas[1] = Punto(puntos[1].y - puntos[0].y, puntos[2].y - puntos[0].y, -(p2 - p1).y);
+		filas[2] = Punto(puntos[1].z - puntos[0].z, puntos[2].z - puntos[0].z, -(p2 - p1).z);
+		Matriz matriz (filas);
+
+		// Calcular coeficientes
+		float* coeficientes = new float[3];
+		coeficientes[0] = p1.x - puntos[0].x;
+		coeficientes[1] = p1.y - puntos[0].y;
+		coeficientes[2] = p1.z - puntos[0].z;
+
+		// Resolver sistema
+		float* res = NULL;
+		bool err;
+		err = matriz.resolverSistema(coeficientes, res);
+		if (!err)
+			cout << "TUHERMANA" << endl;
+		if ((!err)||(res[0] < 0) || (res[1] < 0) || (res[0] + res[1] >= 1))
+			return 0;
+		resultado = new Punto(p1 + (p2 - p1).productoEscalar(res[2]));
+		return 1;
 	}
 	// METODO INEFICIENTE PARA POLIGONOS GENERICOS
 	/*

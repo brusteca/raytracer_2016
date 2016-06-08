@@ -3,9 +3,9 @@
 <PosicionCamara x="0.0" y="0.0" z="-3.0" /> 
 <PuntosVentana xI="-2.0" yI="-2.0" xD="2.0" yD="2.0" prof="0.0"/>
 <!-- Información de Color -->
-<Background red="0" green="100" blue="150" />
+<Background red="100" green="0" blue="150" />
 <!-- Objetos -->
-<!--
+
 <Shape 	tipo = "Poligono"
 		transp = "0.0"
 		refle = "0.0"
@@ -21,6 +21,7 @@
 			<Vertice x="2" y="0" z="3" />
 			<Vertice x="2" y="2" z="3" />		
 </Shape>
+
 <Shape 	tipo = "Poligono"
 		transp = "0.0"
 		refle = "0.0"
@@ -36,6 +37,7 @@
 			<Vertice x="-2" y="2" z="3" />		
 			<Vertice x="-2" y="0" z="3" />
 </Shape> 
+
 <Shape 	tipo = "Poligono"
 		transp = "0.0"
 		refle = "0.0"
@@ -50,7 +52,8 @@
 			<Vertice x="2" y="2" z="3" />
 			<Vertice x="2" y="2" z="4" />		
 			<Vertice x="2" y="0" z="4" />
-</Shape> -->
+</Shape> 
+<!--
 <Shape 	tipo = "Poligono"
 		transp = "0.0"
 		refle = "0.0"
@@ -65,7 +68,7 @@
 			<Vertice x="0" y="0" z="5" />
 			<Vertice x="-2" y="2" z="3" />
 			<Vertice x="2" y="2" z="3" />
-</Shape>
+</Shape> -->
 
 <!-- Luces -->
 <Luz 	x="-2" y="3" z = "1" 

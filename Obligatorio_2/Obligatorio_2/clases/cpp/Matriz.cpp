@@ -54,6 +54,10 @@ bool Matriz::resolverSistema(float* coeficientes, float* &retorno) {
 			float* aux = filas[j];
 			filas[j] = filas[k];
 			filas[k] = aux;
+			// Hay que swappear en coeficientes también
+			float auxFloat = coeficientes[j];
+			coeficientes[j] = coeficientes[k];
+			coeficientes[k] = auxFloat;
 		}
 		// Recorrer filas inferiores a la altura de la diagonal para escalerizar
 		for (int i = j + 1; i < 3; i++) {
@@ -62,6 +66,8 @@ bool Matriz::resolverSistema(float* coeficientes, float* &retorno) {
 				for (int k = 3 - 1; k >= j; k--) {
 					filas[i][k] = (filas[i][k] * filas[j][j]) - (filas[j][k] * filas[i][j]);
 				}
+				// Actualizar Coeficientes
+				coeficientes[i] = (coeficientes[i] * filas[j][j]) - (coeficientes[j] * filas[i][j]);
 			}
 		}
 	}

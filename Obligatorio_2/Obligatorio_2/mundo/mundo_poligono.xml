@@ -1,11 +1,10 @@
 <!-- Información de cámara e imágen -->
-<Resolucion height="100" width="100"/>
-<PosicionCamara x="0.0" y="0.0" z="-1" /> 
+<Resolucion height="500" width="500"/>
+<PosicionCamara x="0.0" y="0.0" z="-3" /> 
 <PuntosVentana xI="-2.0" yI="-2.0" xD="2.0" yD="2.0" prof="0.0"/>
 <!-- Información de Color -->
 <Background red="100" green="0" blue="150" />
 <!-- Objetos -->
-<!--
 <Shape 	tipo = "Poligono"
 		transp = "0.0"
 		refle = "0.0"
@@ -17,11 +16,10 @@
 		radio="1.0" 
 		x="0.0" y="2" z="3.0"
 		>
-			<Vertice x="-2" y="0" z="3" />
-			<Vertice x="2" y="0" z="3" />
-			<Vertice x="2" y="2" z="3" />		
-</Shape>
-
+		<Vertice x="0" y="0" z="3" />
+		<Vertice x="-1" y="0.5" z="4" />
+		<Vertice x="0" y="3" z="3" />		
+</Shape> 
 <Shape 	tipo = "Poligono"
 		transp = "0.0"
 		refle = "0.0"
@@ -33,9 +31,9 @@
 		radio="1.0" 
 		x="0.0" y="2" z="3.0"
 		>
-			<Vertice x="2" y="2" z="3" />
-			<Vertice x="-2" y="2" z="3" />		
-			<Vertice x="-2" y="0" z="3" />
+		<Vertice x="-1" y="0.5" z="4" />
+		<Vertice x="0" y="3" z="3" />		
+		<Vertice x="-1" y="3" z="4" />
 </Shape> 
 
 <Shape 	tipo = "Poligono"
@@ -49,25 +47,9 @@
 		radio="1.0" 
 		x="0.0" y="2" z="3.0"
 		>
-			<Vertice x="2" y="2" z="3" />
-			<Vertice x="2" y="2" z="4" />		
-			<Vertice x="2" y="0" z="4" />
-</Shape> 
--->
-<Shape 	tipo = "Poligono"
-		transp = "0.0"
-		refle = "0.0"
-		refra = "0.0"
-		Ramb="100" Gamb="150" Bamb="0"
-		Rdif="100" Gdif="150" Bdif="0"
-		Resp="100" Gesp="100" Besp="100"
-		constEsp="1.0"
-		radio="1.0" 
-		x="0.0" y="2" z="3.0"
-		>
-		<Vertice x="-2" y="2" z="3" />
-		<Vertice x="2" y="2" z="3" />
-		<Vertice x="2" y="0" z="3" />		
+		<Vertice x="0" y="0" z="3" />
+		<Vertice x="1" y="0.5" z="4" />
+		<Vertice x="0" y="3" z="3" />		
 </Shape> 
 <Shape 	tipo = "Poligono"
 		transp = "0.0"
@@ -80,12 +62,10 @@
 		radio="1.0" 
 		x="0.0" y="2" z="3.0"
 		>
-			<Vertice x="0" y="0.5" z="3" />
-		<Vertice x="-2" y="0.5" z="4" />
-		<Vertice x="0" y="0.5" z="5" />
+		<Vertice x="0" y="3" z="3" />
+		<Vertice x="1" y="3" z="4" />		
+		<Vertice x="1" y="0.5" z="4" />
 </Shape> 
-
-<Vertice x="2" y="0.5" z="4" />
 
 <!-- Luces -->
 <Luz 	x="-2" y="3" z = "1" 

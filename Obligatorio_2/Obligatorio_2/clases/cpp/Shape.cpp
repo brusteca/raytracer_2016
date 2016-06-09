@@ -42,7 +42,7 @@ Color Shape::calcularColor(Punto colision, Punto p1, Punto p2) {
 			if ((direccionLuz * normal > 0) &&
 				luz.determinarIluminacion(colision, this)) {
 				//factor de atenuacion
-				float factorAtt = min((1 / (constAtt + linearAtt * direccionLuz.modulo + quadAtt * direccionLuz.modulo * direccionLuz.modulo)), 1);
+				float factorAtt = min((1 / (constAtt + linearAtt * direccionLuz.modulo() + quadAtt * direccionLuz.modulo() * direccionLuz.modulo())), 1);
 				//factor del angulo
 				direccionLuz = direccionLuz.normalizar();
 				float factorDif = direccionLuz * normal;

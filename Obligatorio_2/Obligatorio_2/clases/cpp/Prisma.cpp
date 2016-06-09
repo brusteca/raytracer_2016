@@ -87,7 +87,7 @@ Prisma::Prisma(vector<Punto> ps, float altura, float refle, float refra, float t
 	Punto diagonal = (ps[2] - ps[0]).productoEscalar(0.5);
 	Punto centro = ps[0] + diagonal;
 	// Calcular radio
-	float radio = diagonal.modulo;
+	float radio = diagonal.modulo();
 	boundingShape = new Cilindro(radio, centro, altura, refle, refra, transp, amb, dif, esp, constEsp);
 }
 
@@ -108,23 +108,23 @@ int Prisma::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 	int i = 0;
 	while ((cant < 6)&&(i < poligonos.size())) {
 		cantCol = poligonos[i].colisionaCon(p1,p2,res);
-		if ((cantCol == 1)&&((i == 4)||(i == 5) || (i == 2) || (i == 3))) {
+		if (cantCol == 1){
 			// Agregar al array
-			resultado[cant] = *res;
+			resultado[cant] = res[0];
+			delete[]res;
 			bool yaExiste = false;
 			for (vector<pair<Punto, Punto>>::iterator it = normalesDeColision.begin(); it != normalesDeColision.end(); it++) {
-				if (it->first == *res) {
+				if (it->first == resultado[cant]) {
 					// Recalcular normal
-					it->second = (it->second + poligonos[i].calcularNormal(*res)).normalizar();
+					it->second = (it->second + poligonos[i].calcularNormal(resultado[cant])).normalizar();
 				}
 			}
 			if (!yaExiste)
-				normalesDeColision.push_back(pair<Punto,Punto>(*res,poligonos[i].calcularNormal(*res)));
+				normalesDeColision.push_back(pair<Punto,Punto>(resultado[cant],poligonos[i].calcularNormal(resultado[cant])));
 			cant++;
 			// Si choqué contra par,entonces no chequeo la impar
 			if (i % 2 == 0)
 				i++;
-			delete[]res;
 		}
 		i++;
 	}
@@ -136,7 +136,7 @@ Punto Prisma::calcularNormal(Punto p) {
 			return it->second;
 		}
 	}
-	return Punto();
+	//return Punto();
 }
 
 Prisma::~Prisma() { poligonos.clear(); normalesDeColision.clear(); }

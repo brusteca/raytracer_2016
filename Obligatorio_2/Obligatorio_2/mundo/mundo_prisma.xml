@@ -1,5 +1,5 @@
 <!-- Información de cámara e imágen -->
-<Resolucion height="500" width="500"/>
+<Resolucion height="1500" width="1500"/>
 <PosicionCamara x="0.0" y="0.0" z="-3.0" /> 
 <PuntosVentana xI="-2.0" yI="-2.0" xD="2.0" yD="2.0" prof="0.0"/>
 <!-- Información de Color -->
@@ -14,19 +14,19 @@
 		Resp="50" Gesp="110" Besp="0"
 		constEsp="1.0"
 		altura="3"
-		x="0.0" y="2" z="3.0"
+		x="0.0" y="0" z="3.0"
 		>
-		<Vertice x="0" y="0.5" z="3" />
-		<Vertice x="-2" y="0.5" z="4" />
+		<Vertice x="0" y="1" z="3" />
+		<Vertice x="-2" y="1" z="4" />
 		<Vertice x="0" y="0.5" z="5" />
-		<Vertice x="2" y="0.5" z="4" />
+		<Vertice x="2" y="2" z="4" />
 </Shape>
 <Vertice x="0" y="0" z="3" />
 		<Vertice x="-2" y="0" z="4" />
 		<Vertice x="0" y="0" z="5" />
 		<Vertice x="2" y="0" z="4" />
 <!-- Luces -->
-<Luz 	x="-2" y="3" z = "1" 
+<Luz 	x="0" y="0" z = "0" 
 		Ramb="0.2" Gamb="0.2" Bamb="0.2"
 		Rdif="1.0" Gdif="1.0" Bdif="1.0"
 		Resp="1.0" Gesp="1.0" Besp="1.0"

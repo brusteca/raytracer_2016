@@ -212,9 +212,11 @@ int main(int argc, char** argv) {
 			int cantPuntos = Shape::trace(posicionCamara, pixel, direccion, puntoResultado, indiceResultado, shapeElegido);
 			if (cantPuntos == 0)
 				matriz[i*width + j] = Mundo::inst()->background;
-			else
+			else {
 				// Color del Shape elegido
 				matriz[i*width + j] = truncar(shapeElegido->calcularColor(puntoResultado[indiceResultado], posicionCamara, pixel, 10));
+				delete[] puntoResultado;
+			}
 		}
 	}
 

@@ -65,8 +65,7 @@ int main(int argc, char** argv) {
 	int width, height;
 	width = height = 0;
 	float profundidadVentana = 0.0;
-	Color backgroundColor;
-	backgroundColor.blue = backgroundColor.green = backgroundColor.red = 0;
+	Mundo::inst()->background = Color(0,0,0);
 	for (pugi::xml_node_iterator nodo = doc.begin(); nodo != doc.end(); nodo++) {
 		string nombre = string(nodo->name());
 		if (nombre == "Shape") {
@@ -160,9 +159,10 @@ int main(int argc, char** argv) {
 		}
 		else if (nombre == "Background") {
 			// Obtener colores de fondo
-			backgroundColor.red = stoi(nodo->attribute("red").value());
-			backgroundColor.green = stoi(nodo->attribute("green").value());
-			backgroundColor.blue = stoi(nodo->attribute("blue").value());
+			Mundo::inst()->background = Color(	stoi(nodo->attribute("red").value()),
+												stoi(nodo->attribute("green").value()),
+												stoi(nodo->attribute("blue").value())
+												);
 		}
 		else if (nombre == "PuntosVentana") {
 			profundidadVentana = stof(nodo->attribute("prof").value());
@@ -206,36 +206,15 @@ int main(int argc, char** argv) {
 							infIzq.y + (supDer.y - infIzq.y)*i/(height -1),
 							profundidadVentana
 							);
-			// Para cada objeto, obtener sus puntos de contacto con el rayo camara-pixel
-			Punto puntoMasCercano = Punto();			
+			// Para cada objeto, obtener sus puntos de contacto con el rayo camara-pixel		
 			Punto* puntoResultado = NULL;
-			int cantPuntos = 0;
-			float modulo = 0.0;
-			bool primerPunto = true;
-			for (vector<Shape*>::iterator it = Mundo::inst()->shapes.begin(); it != Mundo::inst()->shapes.end(); it++) {
-				cantPuntos = (*it)->colisionaCon(posicionCamara, pixel, puntoResultado);
-				for (int cant = 0; cant < cantPuntos; cant++) {
-					// Por cada colisión, quedarse con el punto más cercano descubierto hasta ahora
-					// Ver si el punto está del lado adecuado
-					Punto segmento = puntoResultado[cant] - posicionCamara;
-					if (segmento.productoInterno(direccion) >= 0) {
-						// Si lo está, ver si su módulo es menor al del anterior punto más cercano
-						if ((primerPunto)||(segmento.modulo() < modulo)) {
-							puntoMasCercano = puntoResultado[cant];
-							modulo = segmento.modulo();
-							primerPunto = false;
-							shapeElegido = (*it);
-						}						
-					}
-				}				
-				if (cantPuntos > 0)
-					delete[] puntoResultado;
-			}
-			if (primerPunto)
-				matriz[i*width + j] = backgroundColor;
+			int indiceResultado = -1;
+			int cantPuntos = Shape::trace(posicionCamara, pixel, direccion, puntoResultado, indiceResultado, shapeElegido);
+			if (cantPuntos == 0)
+				matriz[i*width + j] = Mundo::inst()->background;
 			else
 				// Color del Shape elegido
-				matriz[i*width + j] = shapeElegido->calcularColor(puntoMasCercano, posicionCamara, pixel);
+				matriz[i*width + j] = truncar(shapeElegido->calcularColor(puntoResultado[indiceResultado], posicionCamara, pixel, 10));
 		}
 	}
 

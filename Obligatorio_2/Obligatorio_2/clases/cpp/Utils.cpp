@@ -1,5 +1,6 @@
 #include "Utils.h"
 #include <math.h>
+#include <cstdlib>
 
 using namespace std;
 
@@ -51,4 +52,12 @@ Color truncar(ColorInt col) {
 					truncar(col.green),
 					truncar(col.blue)
 					);
+}
+
+ColorInt colorToInt(Color c) {
+	return ColorInt(c.red, c.green, c.blue);
+}
+
+float randFloat(float min, float max) {
+	return min + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (max - min)));
 }

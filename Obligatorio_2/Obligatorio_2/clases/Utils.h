@@ -33,5 +33,12 @@ int truncar_0(int trunc);
 //dado un colorInt lo trunca a Color
 Color truncar(ColorInt trunc);
 
+//dado un color lo transforma en ColorInt
+ColorInt colorToInt(Color c);
+
+//retorna un float entre [min,max]
+//no garantizado que max y min esten incluidos
+float randFloat(float min, float max);
+
 #endif
 

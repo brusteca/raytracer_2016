@@ -7,6 +7,8 @@
 #include <iomanip>
 #include <time.h>
 
+#include <cstdlib>
+
 #include "pugixml-1.7/src/pugixml.hpp"
 #include "FreeImage.h"
 
@@ -199,22 +201,53 @@ int main(int argc, char** argv) {
 	// Variables precalculables
 	Punto direccion = (infIzq - posicionCamara); // El producto interno de este vector con cualquier punto no debería dar negativo.
 	// Loop de píxeles (raytracing)
+	// Antialiasing
+	srand(static_cast <unsigned> (time(0)));
+	float ladoXpixel = (supDer.x - infIzq.x) / (width - 1);
+	float ladoYpixel = (supDer.y - infIzq.y) / (height - 1);
 	for (int i = 0; i < height; i++) {
 		for (int j = 0; j < width; j++) {
 			// Establecer pixel actual
-			pixel = Punto(	infIzq.x + (supDer.x - infIzq.x)*j/(width-1),
-							infIzq.y + (supDer.y - infIzq.y)*i/(height -1),
+			pixel = Punto(	infIzq.x + ladoXpixel * j,
+							infIzq.y + ladoYpixel * i,
 							profundidadVentana
 							);
-			// Para cada objeto, obtener sus puntos de contacto con el rayo camara-pixel		
-			Punto* puntoResultado = NULL;
-			int indiceResultado = -1;
-			int cantPuntos = Shape::trace(posicionCamara, pixel, direccion, puntoResultado, indiceResultado, shapeElegido);
-			if (cantPuntos == 0)
-				matriz[i*width + j] = Mundo::inst()->background;
-			else
-				// Color del Shape elegido
-				matriz[i*width + j] = truncar(shapeElegido->calcularColor(puntoResultado[indiceResultado], posicionCamara, pixel, 10));
+			//defino los 4 puntos que voy a usar en AA
+			Punto puntosAA[4];
+			puntosAA[0] = Punto(pixel.x + randFloat(0.0f, ladoXpixel / 2.0f),
+								pixel.y + randFloat(0.0f, ladoYpixel / 2.0f),
+								pixel.z
+								);
+			puntosAA[1] = Punto(pixel.x + randFloat(0.0f, ladoXpixel / 2.0f),
+								pixel.y - randFloat(0.0f, ladoYpixel / 2.0f),
+								pixel.z
+								);
+			puntosAA[2] = Punto(pixel.x - randFloat(0.0f, ladoXpixel / 2.0f),
+								pixel.y - randFloat(0.0f, ladoYpixel / 2.0f),
+								pixel.z
+								);
+			puntosAA[3] = Punto(pixel.x - randFloat(0.0f, ladoXpixel / 2.0f),
+								pixel.y + randFloat(0.0f, ladoYpixel / 2.0f),
+								pixel.z
+								);
+			ColorInt coloresAA[4];
+			for (int pix = 0; pix < 4; ++pix) {
+				// Para cada objeto, obtener sus puntos de contacto con el rayo camara-pixel		
+				Punto* puntoResultado = NULL;
+				int indiceResultado = -1;
+				int cantPuntos = Shape::trace(posicionCamara, puntosAA[i], direccion, puntoResultado, indiceResultado, shapeElegido);
+				if (cantPuntos == 0)
+					coloresAA[pix] = colorToInt(Mundo::inst()->background);
+				else
+					// Color del Shape elegido
+					coloresAA[pix] = shapeElegido->calcularColor(puntoResultado[indiceResultado], posicionCamara, puntosAA[i], 10);
+
+			}
+			matriz[i*width + j] = truncar(ColorInt(	((coloresAA[0].red + coloresAA[1].red + coloresAA[2].red + coloresAA[3].red )/4.0f),
+													((coloresAA[0].green + coloresAA[1].green + coloresAA[2].green + coloresAA[3].green ) / 4.0f),
+													((coloresAA[0].blue + coloresAA[1].blue + coloresAA[2].blue + coloresAA[3].blue ) / 4.0f)
+													)
+											);
 		}
 	}
 

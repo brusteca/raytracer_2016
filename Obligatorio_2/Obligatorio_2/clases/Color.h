@@ -19,5 +19,19 @@ struct Color {
 		blue = b;
 	}
 };
+//uso esta para calculos intermedios asi no pierdo informacion
+struct ColorInt {
+	int red;
+	int green;
+	int blue;
+	ColorInt() {
+		red = green = blue = 0;
+	}
+	ColorInt(int r, int g, int b) {
+		red = r;
+		green = g;
+		blue = b;
+	}
+};
 
 #endif

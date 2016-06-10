@@ -37,7 +37,7 @@ class Luz {
 		//	retorna false si ese punto (perteneciente a ese shape) esta en sombra para esta luz
 		//	despues cuando la hagamos mejor retorna el valor de la luz despues de pasar por los
 		//	objetos transparentes
-		bool determinarIluminacion(Punto p, Shape *s);
+		Intensidad determinarIluminacion(Punto p, Shape *s);
 
 		Intensidad getAmb();
 		Intensidad getDif();

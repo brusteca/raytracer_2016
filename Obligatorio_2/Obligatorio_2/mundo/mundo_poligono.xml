@@ -5,6 +5,7 @@
 <!-- Información de Color -->
 <Background red="100" green="0" blue="150" />
 <!-- Objetos -->
+<!--
 <Shape 	tipo = "Poligono"
 		transp = "0.0"
 		refle = "0.0"
@@ -20,6 +21,7 @@
 		<Vertice x="-1" y="0.5" z="4" />
 		<Vertice x="0" y="3" z="3" />		
 </Shape> 
+-->
 <Shape 	tipo = "Poligono"
 		transp = "0.0"
 		refle = "0.0"
@@ -31,11 +33,55 @@
 		radio="1.0" 
 		x="0.0" y="2" z="3.0"
 		>
-		<Vertice x="-1" y="0.5" z="4" />
-		<Vertice x="0" y="3" z="3" />		
 		<Vertice x="-1" y="3" z="4" />
+		<Vertice x="-1" y="0.5" z="4" />
+		<Vertice x="0" y="3" z="3" />
 </Shape> 
-
+<Shape tipo = "Esfera"
+		transp = "0.0"
+		refle = "0.0"
+		refra = "0.0"
+		Ramb="100" Gamb="0" Bamb="0"
+		Rdif="100" Gdif="0" Bdif="0"
+		Resp="100" Gesp="0" Besp="0"
+		constEsp="1.0"
+		radio="0.1" 
+		x="0" y="3.0" z="3.0"
+		/>
+<Shape tipo = "Esfera"
+		transp = "0.0"
+		refle = "0.0"
+		refra = "0.0"
+		Ramb="100" Gamb="0" Bamb="0"
+		Rdif="100" Gdif="0" Bdif="0"
+		Resp="100" Gesp="0" Besp="0"
+		constEsp="1.0"
+		radio="0.1" 
+		x="-1" y="3.0" z="4.0"
+		/>
+<Shape tipo = "Esfera"
+		transp = "0.0"
+		refle = "0.0"
+		refra = "0.0"
+		Ramb="100" Gamb="0" Bamb="0"
+		Rdif="100" Gdif="0" Bdif="0"
+		Resp="100" Gesp="0" Besp="0"
+		constEsp="1.0"
+		radio="0.1" 
+		x="-1" y="0.5" z="4.0"
+		/>
+<Shape tipo = "Esfera"
+		transp = "0.0"
+		refle = "0.0"
+		refra = "0.0"
+		Ramb="100" Gamb="0" Bamb="0"
+		Rdif="100" Gdif="0" Bdif="0"
+		Resp="100" Gesp="0" Besp="0"
+		constEsp="1.0"
+		radio="0.1" 
+		x="0" y="0.0" z="3.0"
+		/>
+<!--
 <Shape 	tipo = "Poligono"
 		transp = "0.0"
 		refle = "0.0"
@@ -51,6 +97,7 @@
 		<Vertice x="1" y="0.5" z="4" />
 		<Vertice x="0" y="3" z="3" />		
 </Shape> 
+
 <Shape 	tipo = "Poligono"
 		transp = "0.0"
 		refle = "0.0"

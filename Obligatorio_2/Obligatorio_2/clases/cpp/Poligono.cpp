@@ -33,7 +33,7 @@ int Poligono::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 	if (puntos.size() < 3)
 		return 0;
 	// METODO EFICIENTE PARA TRIANGULOS
-	if (puntos.size() == -3){
+	if (puntos.size() == 3){
 		
 		// Crear la matriz de cálculo
 		Punto* filas = new Punto[3];

@@ -230,22 +230,24 @@ int main(int argc, char** argv) {
 								pixel.y + randFloat(0.0f, ladoYpixel / 2.0f),
 								pixel.z
 								);
+			//cout << puntosAA[0].x << " " << puntosAA[0].y << " " << puntosAA[0].z << endl;
+			//cout << puntosAA[1].x << " " << puntosAA[1].y << " " << puntosAA[2].z << endl;
 			ColorInt coloresAA[4];
 			for (int pix = 0; pix < 4; ++pix) {
 				// Para cada objeto, obtener sus puntos de contacto con el rayo camara-pixel		
 				Punto* puntoResultado = NULL;
 				int indiceResultado = -1;
-				int cantPuntos = Shape::trace(posicionCamara, puntosAA[i], direccion, puntoResultado, indiceResultado, shapeElegido);
+				int cantPuntos = Shape::trace(posicionCamara, puntosAA[pix], direccion, puntoResultado, indiceResultado, shapeElegido);
 				if (cantPuntos == 0)
 					coloresAA[pix] = colorToInt(Mundo::inst()->background);
 				else
 					// Color del Shape elegido
-					coloresAA[pix] = shapeElegido->calcularColor(puntoResultado[indiceResultado], posicionCamara, puntosAA[i], 10);
+					coloresAA[pix] = shapeElegido->calcularColor(puntoResultado[indiceResultado], posicionCamara, puntosAA[pix], 10);
 
 			}
-			matriz[i*width + j] = truncar(ColorInt(	((coloresAA[0].red + coloresAA[1].red + coloresAA[2].red + coloresAA[3].red )/4.0f),
-													((coloresAA[0].green + coloresAA[1].green + coloresAA[2].green + coloresAA[3].green ) / 4.0f),
-													((coloresAA[0].blue + coloresAA[1].blue + coloresAA[2].blue + coloresAA[3].blue ) / 4.0f)
+			matriz[i*width + j] = truncar(ColorInt(	((coloresAA[0].red + coloresAA[1].red + coloresAA[2].red + coloresAA[3].red )/4),
+													((coloresAA[0].green + coloresAA[1].green + coloresAA[2].green + coloresAA[3].green ) / 4),
+													((coloresAA[0].blue + coloresAA[1].blue + coloresAA[2].blue + coloresAA[3].blue ) / 4)
 													)
 											);
 		}

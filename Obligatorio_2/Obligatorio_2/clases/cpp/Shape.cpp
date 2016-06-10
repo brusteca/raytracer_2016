@@ -130,8 +130,8 @@ int Shape::trace(Punto p1, Punto p2, Punto direccion, Punto* &resultado, int &in
 			Punto segmento = resultadoActual[cant] - p1;
 			if (segmento.productoInterno(direccion) >= 0) {
 				// Si lo está, ver si su módulo es menor al del anterior punto más cercano
-				if ((primerPunto) || (segmento.modulo < modulo)) {
-					modulo = segmento.modulo;
+				if ((primerPunto) || (segmento.modulo() < modulo)) {
+					modulo = segmento.modulo();
 					primerPunto = false;
 					//asigno las salidas
 					shapeResultado = Mundo::inst()->shapes[it];

@@ -18,8 +18,8 @@
 		x="0.0" y="2" z="3.0"
 		>
 		<Vertice x="0" y="0" z="3" />
-		<Vertice x="-1" y="0.5" z="4" />
-		<Vertice x="0" y="3" z="3" />		
+		<Vertice x="0" y="3" z="3" />	
+		<Vertice x="-1" y="0.5" z="4" />	
 </Shape> 
 <Shape 	tipo = "Poligono"
 		transp = "0.0"
@@ -32,9 +32,9 @@
 		radio="1.0" 
 		x="0.0" y="2" z="3.0"
 		>
-		<Vertice x="-1" y="3" z="4" />	
+		<Vertice x="-1" y="3" z="4" />
+		<Vertice x="-1" y="0.5" z="4" />			
 		<Vertice x="0" y="3" z="3" />
-		<Vertice x="-1" y="0.5" z="4" />	
 </Shape> 
 <Shape tipo = "Esfera"
 		transp = "0.0"
@@ -109,8 +109,8 @@
 		x="0.0" y="2" z="3.0"
 		>
 		<Vertice x="0" y="3" z="3" />
-		<Vertice x="1" y="3" z="4" />		
 		<Vertice x="1" y="0.5" z="4" />
+		<Vertice x="1" y="3" z="4" />		
 </Shape> 
 
 <!-- Luces -->

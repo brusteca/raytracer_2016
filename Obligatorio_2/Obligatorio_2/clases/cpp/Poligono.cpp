@@ -20,7 +20,7 @@ Poligono::Poligono(/*Punto* ps, int c*/ vector<Punto> ps, float refle, float ref
 	puntos = ps;
 	// Hallar datos del plano con los primeros 3 puntos
 	// Si A, B y C son los puntos, entonces normal = (B-A) x (C-A)
-	normal = (ps[1] - ps[0]).productoVectorial((ps[2] - ps[0]));
+	normal = (ps[0] - ps[1]).productoVectorial((ps[2] - ps[1]));
 	// 'd' se haya mediante N . P = -d, siendo P un punto del plano (se utiliza el primero).
 	d = -(normal * ps[0]);
 

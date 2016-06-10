@@ -45,7 +45,7 @@ bool Matriz::resolverSistema(float* coeficientes, float* &retorno) {
 		if (filas[j][j] == 0) {
 			// Si lo es, debemos hacer swap de fila con alguna que no sea cero
 			int k = j+1;
-			while ((k < 3)&&(filas[k][j] != 0))
+			while ((k < 3)&&(filas[k][j] == 0))
 				k++;
 			// Si todas por debajo son cero, estamos en problemas.
 			if (k == 3) 
@@ -63,11 +63,11 @@ bool Matriz::resolverSistema(float* coeficientes, float* &retorno) {
 		for (int i = j + 1; i < 3; i++) {
 			// Para toda fila cuyo elemento de esta columna no sea cero, modificar para que sea cero
 			if (filas[i][j] != 0) {
+				// Actualizar Coeficientes
+				coeficientes[i] = (coeficientes[i] * filas[j][j]) - (coeficientes[j] * filas[i][j]);
 				for (int k = 3 - 1; k >= j; k--) {
 					filas[i][k] = (filas[i][k] * filas[j][j]) - (filas[j][k] * filas[i][j]);
 				}
-				// Actualizar Coeficientes
-				coeficientes[i] = (coeficientes[i] * filas[j][j]) - (coeficientes[j] * filas[i][j]);
 			}
 		}
 	}

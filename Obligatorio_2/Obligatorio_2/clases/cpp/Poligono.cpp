@@ -52,8 +52,9 @@ int Poligono::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 		float* res = NULL;
 		bool ok;
 		ok = matriz.resolverSistema(coeficientes, res);
-		if ((!ok ) || (res[0] < 0) || (res[1] < 0) || (res[0] + res[1] >= 1)) 
+		if ((!ok) || (res[0] < 0) || (res[1] < 0) || (res[0] + res[1] >= 1)){
 			return 0;
+		}
 		resultado = new Punto[1];
 		resultado[0] = p1 + (p2 - p1).productoEscalar(res[2]);
 		return 1;

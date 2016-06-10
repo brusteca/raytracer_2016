@@ -5,7 +5,7 @@
 <!-- Información de Color -->
 <Background red="100" green="0" blue="150" />
 <!-- Objetos -->
-<!--
+
 <Shape 	tipo = "Poligono"
 		transp = "0.0"
 		refle = "0.0"
@@ -21,7 +21,6 @@
 		<Vertice x="-1" y="0.5" z="4" />
 		<Vertice x="0" y="3" z="3" />		
 </Shape> 
--->
 <Shape 	tipo = "Poligono"
 		transp = "0.0"
 		refle = "0.0"
@@ -33,9 +32,9 @@
 		radio="1.0" 
 		x="0.0" y="2" z="3.0"
 		>
-		<Vertice x="-1" y="3" z="4" />
-		<Vertice x="-1" y="0.5" z="4" />
+		<Vertice x="-1" y="3" z="4" />	
 		<Vertice x="0" y="3" z="3" />
+		<Vertice x="-1" y="0.5" z="4" />	
 </Shape> 
 <Shape tipo = "Esfera"
 		transp = "0.0"
@@ -81,7 +80,7 @@
 		radio="0.1" 
 		x="0" y="0.0" z="3.0"
 		/>
-<!--
+
 <Shape 	tipo = "Poligono"
 		transp = "0.0"
 		refle = "0.0"
@@ -115,7 +114,7 @@
 </Shape> 
 
 <!-- Luces -->
-<Luz 	x="-2" y="3" z = "1" 
+<Luz 	x="0" y="0" z = "0" 
 		Ramb="0.2" Gamb="0.2" Bamb="0.2"
 		Rdif="1.0" Gdif="1.0" Bdif="1.0"
 		Resp="1.0" Gesp="1.0" Besp="1.0"

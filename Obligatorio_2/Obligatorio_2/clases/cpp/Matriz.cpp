@@ -44,16 +44,27 @@ bool Matriz::resolverSistema(float* coeficientes, float* &retorno) {
 		// Si estamos en i == j entonces ver si es cero
 		if (filas[j][j] == 0) {
 			// Si lo es, debemos hacer swap de fila con alguna que no sea cero
-			int k = j+1;
-			while ((k < 3)&&(filas[k][j] == 0))
+			int k = j + 1;
+			while ((k < 3) && (filas[k][j] == 0))
 				k++;
 			// Si todas por debajo son cero, estamos en problemas.
-			if (k == 3) 
+			if (k == 3)
 				return false;
 			// Sino, hacemos swap de filas
-			float* aux = filas[j];
+			float* aux; //= new float[3];
+			//aux[0] = filas[j][0];
+			//aux[1] = filas[j][1];
+			//aux[2] = filas[j][2];
+			aux = filas[j];
+			//filas[j][0] = filas[k][0];
+			//filas[j][1] = filas[k][1];
+			//filas[j][2] = filas[k][2];
 			filas[j] = filas[k];
+			//filas[k][0] = aux[0];
+			//filas[k][1] = aux[1];
+			//filas[k][2] = aux[2];
 			filas[k] = aux;
+			//delete[] aux;
 			// Hay que swappear en coeficientes también
 			float auxFloat = coeficientes[j];
 			coeficientes[j] = coeficientes[k];

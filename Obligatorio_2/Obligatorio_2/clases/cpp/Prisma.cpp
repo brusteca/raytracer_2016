@@ -1,5 +1,5 @@
 #include "Prisma.h"
-#include "Cilindro.h"
+#include "Esfera.h"
 
 using namespace std;
 
@@ -81,14 +81,13 @@ Prisma::Prisma(vector<Punto> ps, float altura, float refle, float refra, float t
 	izquierda_2.push_back(ps[0]);
 	poligonos.push_back(Poligono(izquierda_2, refle, refra, transp, amb, dif, esp, constEsp));
 
-	// Crear un cilindro como bounding shape
-
-	// Calcular centro de la base del cilindro
+	// Crear una Esfera como bounding shape
+	// Calcular centro de la Esfera
 	Punto diagonal = (ps[2] - ps[0]).productoEscalar(0.5);
-	Punto centro = ps[0] + diagonal;
+	Punto centro = ps[0] + diagonal + directriz.productoEscalar(altura/2);
 	// Calcular radio
-	float radio = diagonal.modulo();
-	boundingShape = new Cilindro(radio, centro, altura, refle, refra, transp, amb, dif, esp, constEsp);
+	float radio = (ps[0] - ps[2] + directriz.productoEscalar(altura)).modulo();
+	boundingShape = new Esfera(centro, radio, refle, refra, transp, amb, dif, esp, constEsp);
 }
 
 int Prisma::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
@@ -97,10 +96,10 @@ int Prisma::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 	// Ver si colisiona con la bounding shape
 	Punto* res;
 	int cant;
-	/*cant = boundingShape->colisionaCon(p1, p2, res);
+	cant = boundingShape->colisionaCon(p1, p2, res);
 	if (cant == 0)
 		return 0;
-	delete[] res;*/
+	delete[] res;
 	// Si colisiona con ella, entonces encontrar dónde
 	resultado = new Punto[6];
 	cant = 0;
@@ -133,6 +132,7 @@ int Prisma::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 	return cant;
 }
 Punto Prisma::calcularNormal(Punto p) {
+	//return boundingShape->calcularNormal(p);
 	for (vector<pair<Punto, Punto>>::iterator it = normalesDeColision.begin(); it != normalesDeColision.end(); it++) {
 		if (it->first == p) {
 			return it->second;

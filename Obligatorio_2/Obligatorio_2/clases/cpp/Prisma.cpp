@@ -128,6 +128,8 @@ int Prisma::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 		}
 		i++;
 	}
+	if (cant == 0)
+		delete[] resultado;
 	return cant;
 }
 Punto Prisma::calcularNormal(Punto p) {

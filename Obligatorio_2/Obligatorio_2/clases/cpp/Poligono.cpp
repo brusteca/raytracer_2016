@@ -20,7 +20,7 @@ Poligono::Poligono(/*Punto* ps, int c*/ vector<Punto> ps, float refle, float ref
 	puntos = ps;
 	// Hallar datos del plano con los primeros 3 puntos
 	// Si A, B y C son los puntos, entonces normal = (B-A) x (C-A)
-	normal = (ps[1] - ps[0]).productoVectorial((ps[2] - ps[0]));
+	normal = (ps[0] - ps[1]).productoVectorial((ps[2] - ps[1]));
 	// 'd' se haya mediante N . P = -d, siendo P un punto del plano (se utiliza el primero).
 	d = -(normal * ps[0]);
 
@@ -33,7 +33,7 @@ int Poligono::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 	if (puntos.size() < 3)
 		return 0;
 	// METODO EFICIENTE PARA TRIANGULOS
-	if (puntos.size() == -3){
+	if (puntos.size() == 3){
 		
 		// Crear la matriz de cálculo
 		Punto* filas = new Punto[3];
@@ -41,6 +41,7 @@ int Poligono::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 		filas[1] = Punto(puntos[1].y - puntos[0].y, puntos[2].y - puntos[0].y, -((p2 - p1).normalizar()).y);
 		filas[2] = Punto(puntos[1].z - puntos[0].z, puntos[2].z - puntos[0].z, -((p2 - p1).normalizar()).z);
 		Matriz matriz (filas);
+		delete[] filas;
 
 		// Calcular coeficientes
 		float* coeficientes = new float[3];
@@ -50,52 +51,21 @@ int Poligono::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 
 		// Resolver sistema
 		float* res = NULL;
-		bool ok;
+		bool ok; //= true;
+		//res = new float[3];
+		//res[0] = res[1] = res[2] = 0;
 		ok = matriz.resolverSistema(coeficientes, res);
-		if ((!ok ) || (res[0] < 0) || (res[1] < 0) || (res[0] + res[1] >= 1)) 
+		delete[] coeficientes;
+		if ((!ok) || (res[0] < 0) || (res[1] < 0) || (res[0] + res[1] >= 1)){
+			if (ok)
+				delete[] res;
 			return 0;
+		}
 		resultado = new Punto[1];
 		resultado[0] = p1 + (p2 - p1).productoEscalar(res[2]);
+		delete[] res;
 		return 1;
-		/* Otro código
-		Punto  h, s, q;
-		float a, f, u, v;
-		Punto e1 = puntos[1] - puntos[0];
-		Punto e2 = puntos[2] - puntos[0];
-
-		h = (p2 - p1).normalizar().productoVectorial(e2); // crossProduct(h,d,e2);
-		a = e1.productoInterno(h);//a = innerProduct(e1, h);
-
-		if (a > -0.00001 && a < 0.00001)
-			return 0;
-
-		f = 1 / a;
-		s = p1 - puntos[0];//vector(s, p, v0);
-		u = f * (s.productoInterno(h));//u = f * (innerProduct(s, h));
-
-		if (u < 0.0 || u > 1.0)
-			return 0;
-
-		q = s.productoVectorial(e1);//crossProduct(q, s, e1);
-		v = f * ((p2 - p1).productoInterno(q));//v = f * innerProduct(d, q);
-
-		if (v < 0.0 || u + v > 1.0)
-			return 0;
-
-		// at this stage we can compute t to find out where
-		// the intersection point is on the line
-		float t = f * e2.productoInterno(q);//t = f * innerProduct(e2, q);
-
-		if (t > 0.00001) { // ray intersection
-			resultado = new Punto[1];
-			resultado[0] = p1 + ((p2 - p1).normalizar()).productoEscalar(t);
-			return 1;
-		}
-
-		else // this means that there is a line intersection
-			 // but not a ray intersection
-			return 0;
-			*/
+		
 	}
 	// METODO INEFICIENTE PARA POLIGONOS GENERICOS
 	/*

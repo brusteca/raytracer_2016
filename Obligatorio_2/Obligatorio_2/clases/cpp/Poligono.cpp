@@ -57,6 +57,8 @@ int Poligono::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 		ok = matriz.resolverSistema(coeficientes, res);
 		delete[] coeficientes;
 		if ((!ok) || (res[0] < 0) || (res[1] < 0) || (res[0] + res[1] >= 1)){
+			if (ok)
+				delete[] res;
 			return 0;
 		}
 		resultado = new Punto[1];

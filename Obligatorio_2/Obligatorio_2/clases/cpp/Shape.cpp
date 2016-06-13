@@ -95,14 +95,14 @@ ColorInt Shape::calcularColor(Punto colision, Punto p1, Punto p2, int profundida
 		ColorInt refraComponent = ColorInt();
 		if (profundidad > 0) {
 			//calculo el reflejo
-			if (reflexion > 0.0f) {
+			if (constanteEspecular > 0.0f) {
 				refleComponent = calcularColorReflexion(colision, p1, p2, profundidad -1);
 			}
 		}
 
-		return ColorInt(	(1 - reflexion) * lightComponent.red + reflexion * refleComponent.red,
-							(1 - reflexion) * lightComponent.green + reflexion * refleComponent.green, 
-							(1 - reflexion) * lightComponent.blue + reflexion * refleComponent.blue
+		return ColorInt(	/*(1 - reflexion) * */lightComponent.red + constanteEspecular * refleComponent.red,
+							/*(1 - reflexion) * */lightComponent.green + constanteEspecular * refleComponent.green, 
+							/*(1 - reflexion) * */lightComponent.blue + constanteEspecular * refleComponent.blue
 							);
 
 }

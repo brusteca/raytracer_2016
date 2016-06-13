@@ -12,7 +12,7 @@
 		Ramb="100" Gamb="150" Bamb="0"
 		Rdif="100" Gdif="150" Bdif="0"
 		Resp="100" Gesp="100" Besp="100"
-		constEsp="1.0"
+		constEsp="0.1"
 		radio="1.0" 
 		x="0.0" y="2" z="3.0"
 		/>
@@ -23,7 +23,7 @@
 		Ramb="100" Gamb="0" Bamb="0"
 		Rdif="100" Gdif="0" Bdif="0"
 		Resp="100" Gesp="0" Besp="0"
-		constEsp="1.0"
+		constEsp="0.1"
 		radio="2.0" 
 		x="1" y="0.0" z="5.0"
 		/>
@@ -34,7 +34,7 @@
 		Ramb="100" Gamb="0" Bamb="0"
 		Rdif="100" Gdif="0" Bdif="0"
 		Resp="100" Gesp="0" Besp="0"
-		constEsp="1.0"
+		constEsp="0.1"
 		radio="0.2" 
 		x="-0.5" y="1" z="2.0"
 		/>

@@ -1,5 +1,6 @@
 #include "Prisma.h"
 #include "Esfera.h"
+#include <iostream>
 
 using namespace std;
 
@@ -87,39 +88,42 @@ Prisma::Prisma(vector<Punto> ps, float altura, float refle, float refra, float t
 	Punto centro = ps[0] + diagonal + directriz.productoEscalar(altura/2);
 	// Calcular radio
 	float radio = (ps[0] - ps[2] + directriz.productoEscalar(altura)).modulo();
-	boundingShape = new Esfera(centro, radio, refle, refra, transp, amb, dif, esp, constEsp);
+	//boundingShape = new Esfera(centro, radio, refle, refra, transp, amb, dif, esp, constEsp);
+	boundingShape = new Esfera(Punto(0,0,0), 2, refle, refra, transp, amb, dif, esp, constEsp);
 }
 
 int Prisma::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 	// Eliminar normalesDeColision
 	normalesDeColision.clear();
 	// Ver si colisiona con la bounding shape
-	Punto* res;
-	int cant;
-	cant = boundingShape->colisionaCon(p1, p2, res);
+	Punto* resBS;
+	int cant;/*
+	cant = boundingShape->colisionaCon(p1, p2, resBS);
 	if (cant == 0)
 		return 0;
-	delete[] res;
+	delete[] resBS;*/
 	// Si colisiona con ella, entonces encontrar dónde
-	resultado = new Punto[6];
+	Punto* resultadoAux = new Punto[6];
+	Punto* res;
 	cant = 0;
 	int cantCol = 0;
 	int i = 0;
 	while ((cant < 6)&&(i < poligonos.size())) {
 		cantCol = poligonos[i].colisionaCon(p1,p2,res);
-		if (cantCol == 1){
+		if (cantCol > 0){
 			// Agregar al array
-			resultado[cant] = res[0];
+			resultadoAux[cant] = res[0];
 			delete[]res;
 			bool yaExiste = false;
 			for (vector<pair<Punto, Punto>>::iterator it = normalesDeColision.begin(); it != normalesDeColision.end(); it++) {
-				if (it->first == resultado[cant]) {
+				if (it->first == resultadoAux[cant]) {
 					// Recalcular normal
-					it->second = (it->second + poligonos[i].calcularNormal(resultado[cant])).normalizar();
+					it->second = (it->second + poligonos[i].calcularNormal(resultadoAux[cant])).normalizar();
+					yaExiste = true;
 				}
 			}
 			if (!yaExiste)
-				normalesDeColision.push_back(pair<Punto,Punto>(resultado[cant],poligonos[i].calcularNormal(resultado[cant])));
+				normalesDeColision.push_back(pair<Punto,Punto>(resultadoAux[cant],poligonos[i].calcularNormal(resultadoAux[cant])));
 			cant++;
 			// Si choqué contra par,entonces no chequeo la impar
 			if (i % 2 == 0)
@@ -128,7 +132,9 @@ int Prisma::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 		i++;
 	}
 	if (cant == 0)
-		delete[] resultado;
+		delete[] resultadoAux;
+	else
+		resultado = resultadoAux;
 	return cant;
 }
 Punto Prisma::calcularNormal(Punto p) {

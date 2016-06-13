@@ -88,8 +88,8 @@ Prisma::Prisma(vector<Punto> ps, float altura, float refle, float refra, float t
 	Punto centro = ps[0] + diagonal + directriz.productoEscalar(altura/2);
 	// Calcular radio
 	float radio = (ps[0] - ps[2] + directriz.productoEscalar(altura)).modulo();
-	//boundingShape = new Esfera(centro, radio, refle, refra, transp, amb, dif, esp, constEsp);
-	boundingShape = new Esfera(Punto(0,0,0), 2, refle, refra, transp, amb, dif, esp, constEsp);
+	boundingShape = new Esfera(centro, radio, refle, refra, transp, amb, dif, esp, constEsp);
+	//boundingShape = new Esfera(Punto(0,0,0), 2, refle, refra, transp, amb, dif, esp, constEsp);
 }
 
 int Prisma::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
@@ -97,15 +97,15 @@ int Prisma::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 	normalesDeColision.clear();
 	// Ver si colisiona con la bounding shape
 	Punto* resBS;
-	int cant;/*
-	cant = boundingShape->colisionaCon(p1, p2, resBS);
-	if (cant == 0)
+	int cantBS;
+	cantBS = boundingShape->colisionaCon(p1, p2, resBS);
+	if (cantBS == 0)
 		return 0;
-	delete[] resBS;*/
+	delete[] resBS;
 	// Si colisiona con ella, entonces encontrar dónde
 	Punto* resultadoAux = new Punto[6];
 	Punto* res;
-	cant = 0;
+	int cant = 0;
 	int cantCol = 0;
 	int i = 0;
 	while ((cant < 6)&&(i < poligonos.size())) {
@@ -144,7 +144,7 @@ Punto Prisma::calcularNormal(Punto p) {
 			return it->second;
 		}
 	}
-	//return Punto();
+	return Punto();
 }
 
 Prisma::~Prisma() { poligonos.clear(); normalesDeColision.clear(); }

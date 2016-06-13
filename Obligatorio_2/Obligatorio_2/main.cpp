@@ -53,6 +53,44 @@ void guardarImagen(int width, int height, Color* colores) {
 	FreeImage_DeInitialise();
 }
 
+//obtiene los puntos con el algoritmo jittered
+void JitteredAA(Punto pixel, float ladoXpixel, float ladoYpixel, Punto * puntosAA) {
+	puntosAA[0] = Punto(pixel.x + randFloat(0.0f, ladoXpixel / 2.0f),
+		pixel.y + randFloat(0.0f, ladoYpixel / 2.0f),
+		pixel.z
+		);
+	puntosAA[1] = Punto(pixel.x + randFloat(0.0f, ladoXpixel / 2.0f),
+		pixel.y - randFloat(0.0f, ladoYpixel / 2.0f),
+		pixel.z
+		);
+	puntosAA[2] = Punto(pixel.x - randFloat(0.0f, ladoXpixel / 2.0f),
+		pixel.y - randFloat(0.0f, ladoYpixel / 2.0f),
+		pixel.z
+		);
+	puntosAA[3] = Punto(pixel.x - randFloat(0.0f, ladoXpixel / 2.0f),
+		pixel.y + randFloat(0.0f, ladoYpixel / 2.0f),
+		pixel.z
+		);
+}
+//obtiene los puntos usando grid
+void GridAA(Punto pixel, float ladoXpixel, float ladoYpixel, Punto * puntosAA) {
+	puntosAA[0] = Punto(pixel.x + ladoXpixel / 4.0f,
+		pixel.y + ladoYpixel / 4.0f,
+		pixel.z
+		);
+	puntosAA[1] = Punto(pixel.x + ladoXpixel / 4.0f,
+		pixel.y - ladoYpixel / 4.0f,
+		pixel.z
+		);
+	puntosAA[2] = Punto(pixel.x - ladoXpixel / 4.0f,
+		pixel.y - ladoYpixel / 4.0f,
+		pixel.z
+		);
+	puntosAA[3] = Punto(pixel.x - ladoXpixel / 4.0f,
+		pixel.y + ladoYpixel / 4.0f,
+		pixel.z
+		);
+}
 
 int main(int argc, char** argv) {
 	Mundo::crearInstance();
@@ -214,24 +252,7 @@ int main(int argc, char** argv) {
 							);
 			//defino los 4 puntos que voy a usar en AA
 			Punto puntosAA[4];
-			puntosAA[0] = Punto(pixel.x + randFloat(0.0f, ladoXpixel / 2.0f),
-								pixel.y + randFloat(0.0f, ladoYpixel / 2.0f),
-								pixel.z
-								);
-			puntosAA[1] = Punto(pixel.x + randFloat(0.0f, ladoXpixel / 2.0f),
-								pixel.y - randFloat(0.0f, ladoYpixel / 2.0f),
-								pixel.z
-								);
-			puntosAA[2] = Punto(pixel.x - randFloat(0.0f, ladoXpixel / 2.0f),
-								pixel.y - randFloat(0.0f, ladoYpixel / 2.0f),
-								pixel.z
-								);
-			puntosAA[3] = Punto(pixel.x - randFloat(0.0f, ladoXpixel / 2.0f),
-								pixel.y + randFloat(0.0f, ladoYpixel / 2.0f),
-								pixel.z
-								);
-			//cout << puntosAA[0].x << " " << puntosAA[0].y << " " << puntosAA[0].z << endl;
-			//cout << puntosAA[1].x << " " << puntosAA[1].y << " " << puntosAA[2].z << endl;
+			JitteredAA(pixel, ladoXpixel, ladoYpixel, puntosAA);
 			ColorInt coloresAA[4];
 			for (int pix = 0; pix < 4; ++pix) {
 				// Para cada objeto, obtener sus puntos de contacto con el rayo camara-pixel		

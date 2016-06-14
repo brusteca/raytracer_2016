@@ -25,7 +25,7 @@
 
 using namespace std;
 
-void guardarImagen(int width, int height, Color* colores) {
+void guardarImagen(int width, int height, Color* colores, string app = "") {
 	FreeImage_Initialise();
 	FIBITMAP * bitmap = FreeImage_Allocate(width, height, BPP);
 	RGBQUAD color;
@@ -45,7 +45,7 @@ void guardarImagen(int width, int height, Color* colores) {
 	tm tm;
 	localtime_s(&tm, &t);
 	ss << std::put_time(&tm, "%Y-%m-%d_%H-%M-%S");
-	string filename = "historial/output" + ss.str() + ".png";
+	string filename = "historial/output" + ss.str() + app + ".png";
 
 	if (FreeImage_Save(FIF_PNG, bitmap, filename.c_str()))
 		cout << "Imagen guardada exitosamente!" << endl;
@@ -231,8 +231,10 @@ int main(int argc, char** argv) {
 		cout << "Error: la resolución no es suficiente " << endl;
 		return 1;
 	}
-	// Matriz de colores
+	// Matrices de colores
 	Color* matriz = new Color[height*width];
+	Color* matrizRefle = new Color[height*width];
+	Color* matrizRefra = new Color[height*width];
 
 	Punto pixel;
 	Shape* shapeElegido = NULL;
@@ -254,16 +256,24 @@ int main(int argc, char** argv) {
 			Punto puntosAA[4];
 			JitteredAA(pixel, ladoXpixel, ladoYpixel, puntosAA);
 			ColorInt coloresAA[4];
+			ColorInt coloresAARefle[4];
+			ColorInt coloresAARefra[4];
 			for (int pix = 0; pix < 4; ++pix) {
 				// Para cada objeto, obtener sus puntos de contacto con el rayo camara-pixel		
 				Punto* puntoResultado = NULL;
 				int indiceResultado = -1;
 				int cantPuntos = Shape::trace(posicionCamara, puntosAA[pix], direccion, puntoResultado, indiceResultado, shapeElegido);
-				if (cantPuntos == 0)
+				if (cantPuntos == 0) {
 					coloresAA[pix] = colorToInt(Mundo::inst()->background);
-				else
+					coloresAARefra[pix] = ColorInt(50, 50, 50);
+					coloresAARefle[pix] = ColorInt(50, 50, 50);
+				}
+				else {
 					// Color del Shape elegido
 					coloresAA[pix] = shapeElegido->calcularColor(puntoResultado[indiceResultado], posicionCamara, puntosAA[pix], 10);
+					coloresAARefra[pix] = shapeElegido->calcularColorRefra(puntoResultado[indiceResultado], posicionCamara, puntosAA[pix], 10);
+					coloresAARefle[pix] = shapeElegido->calcularColorRefle(puntoResultado[indiceResultado], posicionCamara, puntosAA[pix], 10);
+				}
 
 			}
 			matriz[i*width + j] = truncar(ColorInt(	((coloresAA[0].red + coloresAA[1].red + coloresAA[2].red + coloresAA[3].red )/4),
@@ -271,10 +281,22 @@ int main(int argc, char** argv) {
 													((coloresAA[0].blue + coloresAA[1].blue + coloresAA[2].blue + coloresAA[3].blue ) / 4)
 													)
 											);
+			matrizRefra[i*width + j] = truncar(ColorInt(((coloresAARefra[0].red + coloresAARefra[1].red + coloresAARefra[2].red + coloresAARefra[3].red) / 4),
+				((coloresAARefra[0].green + coloresAARefra[1].green + coloresAARefra[2].green + coloresAARefra[3].green) / 4),
+				((coloresAARefra[0].blue + coloresAARefra[1].blue + coloresAARefra[2].blue + coloresAARefra[3].blue) / 4)
+				)
+				);
+			matrizRefle[i*width + j] = truncar(ColorInt(((coloresAARefle[0].red + coloresAARefle[1].red + coloresAARefle[2].red + coloresAARefle[3].red) / 4),
+				((coloresAARefle[0].green + coloresAARefle[1].green + coloresAARefle[2].green + coloresAARefle[3].green) / 4),
+				((coloresAARefle[0].blue + coloresAARefle[1].blue + coloresAARefle[2].blue + coloresAARefle[3].blue) / 4)
+				)
+				);
 		}
 	}
 
 	//imprimir imagen
-	guardarImagen(width, height, matriz);
+	//guardarImagen(width, height, matriz);
+	guardarImagen(width, height, matrizRefle, "_refle");
+	guardarImagen(width, height, matrizRefra, "_refra");
 
 }

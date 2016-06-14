@@ -18,7 +18,7 @@
 		/>
 <Shape tipo = "Esfera"
 		transp = "0.0"
-		refle = "1"
+		refle = "0.0"
 		refra = "0.0"
 		Ramb="100" Gamb="0" Bamb="0"
 		Rdif="100" Gdif="0" Bdif="0"
@@ -29,7 +29,7 @@
 		/>
 <Shape tipo = "Esfera"
 		transp = "0.6"
-		refle = "1"
+		refle = "0.0"
 		refra = "0.0"
 		Ramb="100" Gamb="0" Bamb="0"
 		Rdif="100" Gdif="0" Bdif="0"
@@ -40,7 +40,7 @@
 		/>
 <Shape tipo = "Esfera"
 		transp = "0.0"
-		refle = "1"
+		refle = "0.8"
 		refra = "0.0"
 		Ramb="100" Gamb="100" Bamb="100"
 		Rdif="100" Gdif="100" Bdif="100"

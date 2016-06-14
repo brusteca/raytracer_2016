@@ -34,6 +34,8 @@ class Shape{
 		//	Determina el color en el punto 'colision' para el rayo ->p1p2
 		//	profundidad determina cuantos pasos recursivos realizara. Si es 0 no hara ninguna llamada recursiva
 		virtual ColorInt calcularColor(Punto colision, Punto p1, Punto p2, int profundidad);
+		virtual ColorInt calcularColorRefle(Punto colision, Punto p1, Punto p2, int profundidad);
+		virtual ColorInt calcularColorRefra(Punto colision, Punto p1, Punto p2, int profundidad);
 		//	Determina la normal en el punto p
 		virtual Punto calcularNormal(Punto p) = 0;
 

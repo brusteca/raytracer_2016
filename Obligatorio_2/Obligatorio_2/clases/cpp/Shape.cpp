@@ -107,6 +107,16 @@ ColorInt Shape::calcularColor(Punto colision, Punto p1, Punto p2, int profundida
 
 }
 
+ColorInt Shape::calcularColorRefra(Punto colision, Punto p1, Punto p2, int profundidad) {
+	ColorInt retorno(refraccion*255,refraccion*255,refraccion*255);
+	return retorno;
+}
+
+ColorInt Shape::calcularColorRefle(Punto colision, Punto p1, Punto p2, int profundidad) {
+	ColorInt retorno(reflexion * 255, reflexion * 255, reflexion * 255);
+	return retorno;
+}
+
 //quedo bastante complicado
 int Shape::trace(Punto p1, Punto p2, Punto direccion, Punto* &resultado, int &indiceMasCercano, Shape* &shapeResultado, Shape* ignorar) {
 	shapeResultado = NULL;

@@ -295,7 +295,7 @@ int main(int argc, char** argv) {
 	}
 
 	//imprimir imagen
-	//guardarImagen(width, height, matriz);
+	guardarImagen(width, height, matriz, "");
 	guardarImagen(width, height, matrizRefle, "_refle");
 	guardarImagen(width, height, matrizRefra, "_refra");
 

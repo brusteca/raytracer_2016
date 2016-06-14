@@ -95,7 +95,9 @@ ColorInt Shape::calcularColor(Punto colision, Punto p1, Punto p2, int profundida
 		ColorInt refraComponent = ColorInt();
 		if (profundidad > 0) {
 			//calculo el reflejo
-			if (constanteEspecular > 0.0f) {
+			//reflexion la uso ahora para determinar si una superficie es reflectante o no
+			//con esto puedo hacer superficies espejadas o superficies que son simplemente bruñidas
+			if ((constanteEspecular > 0.0f) && (reflexion > 0.0f)){
 				refleComponent = calcularColorReflexion(colision, p1, p2, profundidad -1);
 			}
 		}

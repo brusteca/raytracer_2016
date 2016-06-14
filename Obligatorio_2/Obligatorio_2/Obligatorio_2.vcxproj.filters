@@ -45,6 +45,9 @@
     <ClCompile Include="clases\cpp\Punto.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="clases\cpp\Esfera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clases\Shape.h">

@@ -15,6 +15,10 @@ Punto::Punto(const Punto &p) {
 float Punto::productoInterno(Punto p) {
 	return x*p.x + y*p.y + z*p.z;
 };
+//DEBERIA funcionar. Esto es, dar el angulo 'chico' y no el 'grande'
+float Punto::angulo(Punto p) {
+	return acos(this->productoInterno(p) / (this->modulo * p.modulo));
+}
 Punto Punto::productoVectorial(Punto p) {
 	return Punto(y*p.z - z*p.y, z*p.x - x*p.z, x*p.y - y*p.x);
 };
@@ -27,6 +31,10 @@ Punto Punto::negado() {
 Punto Punto::productoEscalar(float a) {
 	return Punto(x*a, y*a, z*a);
 };
+
+Punto Punto::rotar(float ang) {
+	
+}
 
 float Punto::modulo() {
 	return sqrt(x*x+y*y+z*z);

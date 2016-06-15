@@ -21,6 +21,7 @@ public:
 	vector<Luz> luces;
 	vector<Shape*> shapes;
 	Color background;
+	float refraccionAire = 1.0f;
 };
 
 #endif

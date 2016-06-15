@@ -25,7 +25,9 @@ class Shape{
 		//calcula el color en el punto segun las luces
 		ColorInt calcularColorLuz(Punto colision, Punto p1, Punto p2);
 		//calcula el color en el punto segun la reflexion
-		ColorInt calcularColorReflexion(Punto colision, Punto p1, Punto p2, int profundidad);
+		ColorInt calcularColorReflexion(Punto colision, Punto p1, Punto p2, int profundidad, float material);
+		//calcula el color en el punto segun la refraccion
+		ColorInt calcularColorRefraccion(Punto colision, Punto p1, Punto p2, int profundidad, float material);
 	public:
 		Shape();
 		Shape(float refle, float refra, float transp, Color amb, Color dif, Color esp, float constEsp);
@@ -33,7 +35,9 @@ class Shape{
 		virtual int colisionaCon(Punto p1, Punto p2, Punto* &resultado) = 0;
 		//	Determina el color en el punto 'colision' para el rayo ->p1p2
 		//	profundidad determina cuantos pasos recursivos realizara. Si es 0 no hara ninguna llamada recursiva
-		virtual ColorInt calcularColor(Punto colision, Punto p1, Punto p2, int profundidad);
+		//	material determina el coeficiente de refraccion del material del que proviene el rayo, si no esta especificado entonces usa el del aire
+		virtual ColorInt calcularColor(Punto colision, Punto p1, Punto p2, int profundidad, float material = Mundo::inst()->refraccionAire);
+		//	Para calcular las imagenes en blanco y negro
 		virtual ColorInt calcularColorRefle(Punto colision, Punto p1, Punto p2, int profundidad);
 		virtual ColorInt calcularColorRefra(Punto colision, Punto p1, Punto p2, int profundidad);
 		//	Determina la normal en el punto p

@@ -115,9 +115,13 @@ ColorInt Shape::calcularColorRefraccion(Punto colision, Punto p1, Punto p2, int 
 	} else {
 		materialOpuesto = Mundo::inst()->refraccionAire;
 	}
-
-	//TODO considerar la reflexion interna total
+	//reflexion interna total
+	float anguloCritico = asin(materialOpuesto / material);
+	if (anguloEntrada >= anguloCritico) {
+		return ColorInt();
+	}
 	float anguloSalida = asin( (sin(anguloEntrada) * (material / materialOpuesto)) );
+
 
 	Punto vectorSalida = normal.negado().rotar(eje, anguloSalida);
 	//esto es para que no colisione con la superficie de salida

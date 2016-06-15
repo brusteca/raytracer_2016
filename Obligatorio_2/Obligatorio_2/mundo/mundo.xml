@@ -30,7 +30,7 @@
 <Shape tipo = "Esfera"
 		transp = "0.9"
 		refle = "0"
-		refra = "1.3333"
+		refra = "2"
 		Ramb="100" Gamb="0" Bamb="0"
 		Rdif="100" Gdif="0" Bdif="0"
 		Resp="100" Gesp="0" Besp="0"

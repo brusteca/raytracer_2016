@@ -114,8 +114,24 @@ ColorInt Shape::calcularColorRefraccion(Punto colision, Punto p1, Punto p2, int 
 	float anguloSalida = asin( (sin(anguloEntrada) * (material / materialOpuesto)) );
 
 	Punto vectorSalida = normal.negado().rotar(eje, anguloSalida);
+	//esto es para que no colisione con la superficie de salida
+	Punto colision_noError = colision + vectorSalida.productoEscalar(0.0001f);
+	Punto p2Refrac = vectorSalida + colision_noError;
 
-	return ColorInt();
+	Punto * resultado = NULL;
+	int indiceMasCercano;
+	Shape * shapeResultado = NULL;
+	// paso null en el shape de origen para que pueda colisionar consigo mismo
+	int cantidadPuntos = Shape::trace(colision_noError, p2Refrac, vectorSalida, resultado, indiceMasCercano, shapeResultado, NULL);
+	if (cantidadPuntos == 0) {
+		return ColorInt(Mundo::inst()->background.red,
+			Mundo::inst()->background.green,
+			Mundo::inst()->background.blue
+			);
+	}
+	else {
+		return shapeResultado->calcularColor(resultado[indiceMasCercano], colision, p2Refrac, profundidad, materialOpuesto);
+	}
 
 
 }
@@ -142,9 +158,9 @@ ColorInt Shape::calcularColor(Punto colision, Punto p1, Punto p2, int profundida
 			}
 		}
 
-		return ColorInt(	/*(1 - reflexion) * */lightComponent.red + constanteEspecular * refleComponent.red,
-							/*(1 - reflexion) * */lightComponent.green + constanteEspecular * refleComponent.green, 
-							/*(1 - reflexion) * */lightComponent.blue + constanteEspecular * refleComponent.blue
+		return ColorInt(	(1 - transparencia) * (lightComponent.red + constanteEspecular * refleComponent.red ) + transparencia * refraComponent.red,
+							(1 - transparencia) * (lightComponent.green + constanteEspecular * refleComponent.green ) + transparencia * refraComponent.green,
+							(1 - transparencia) * (lightComponent.blue + constanteEspecular * refleComponent.blue ) + transparencia * refraComponent.blue
 							);
 
 }

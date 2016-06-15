@@ -28,9 +28,9 @@
 		x="1" y="0.0" z="5.0"
 		/>
 <Shape tipo = "Esfera"
-		transp = "0.6"
+		transp = "1"
 		refle = "0"
-		refra = "0.0"
+		refra = "1.333"
 		Ramb="100" Gamb="0" Bamb="0"
 		Rdif="100" Gdif="0" Bdif="0"
 		Resp="100" Gesp="0" Besp="0"

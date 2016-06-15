@@ -17,7 +17,7 @@ float Punto::productoInterno(Punto p) {
 };
 //DEBERIA funcionar. Esto es, dar el angulo 'chico' y no el 'grande'
 float Punto::angulo(Punto p) {
-	return acos(this->productoInterno(p) / (this->modulo * p.modulo));
+	return acos(this->productoInterno(p) / (this->modulo() * p.modulo()));
 }
 Punto Punto::productoVectorial(Punto p) {
 	return Punto(y*p.z - z*p.y, z*p.x - x*p.z, x*p.y - y*p.x);
@@ -48,9 +48,13 @@ Punto Punto::rotar(Punto eje, float ang) {
 	matrizRot[1][0] = eje.y * eje.x * (1 - cos0) + eje.z * sin0;
 	matrizRot[1][1] = cos0 + sqr(eje.y) * (1 - cos0);
 	matrizRot[1][2] = eje.y * eje.z * (1 - cos0) - eje.x * sin0;
-	matrizRot[2][0] = ;
-	matrizRot[2][1] = ;
-	matrizRot[2][2] = ;
+	matrizRot[2][0] = eje.z * eje.x * (1 - cos0) - eje.y * sin0;
+	matrizRot[2][1] = eje.z * eje.y * (1 - cos0) + eje.x * sin0;
+	matrizRot[2][2] = cos0 + sqr(eje.z) * (1 - cos0);
+	return Punto(	x * matrizRot[0][0] + y * matrizRot[0][1] + z * matrizRot[0][2],
+					x * matrizRot[1][0] + y * matrizRot[1][1] + z * matrizRot[1][2],
+					x * matrizRot[2][0] + y * matrizRot[2][1] + z * matrizRot[2][2]
+					);
 }
 
 float Punto::modulo() {

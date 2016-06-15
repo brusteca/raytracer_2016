@@ -165,9 +165,9 @@ ColorInt Shape::calcularColor(Punto colision, Punto p1, Punto p2, int profundida
 			}
 		}
 
-		return ColorInt(	/*(1 - transparencia) * */(lightComponent.red + constanteEspecular * refleComponent.red ) + transparencia * refraComponent.red,
-							/*(1 - transparencia) * */(lightComponent.green + constanteEspecular * refleComponent.green ) + transparencia * refraComponent.green,
-							/*(1 - transparencia) * */(lightComponent.blue + constanteEspecular * refleComponent.blue ) + transparencia * refraComponent.blue
+		return ColorInt(	(1 - transparencia) * (lightComponent.red + constanteEspecular * refleComponent.red ) + transparencia * refraComponent.red,
+							(1 - transparencia) * (lightComponent.green + constanteEspecular * refleComponent.green ) + transparencia * refraComponent.green,
+							(1 - transparencia) * (lightComponent.blue + constanteEspecular * refleComponent.blue ) + transparencia * refraComponent.blue
 							);
 
 }

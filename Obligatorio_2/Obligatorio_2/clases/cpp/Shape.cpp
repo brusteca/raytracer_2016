@@ -65,6 +65,9 @@ ColorInt Shape::calcularColorReflexion(Punto colision, Punto p1, Punto p2, int p
 	//hay pila de cosas que ya estaban calculadas para la luz que las calculo de nuevo
 	//podria ser una forma de optimizar quizas
 	Punto normal = calcularNormal(colision);
+	if (this->refraccion == material) {
+		normal = normal.negado();
+	}
 	Punto direccionFuente = (p1 - colision).normalizar();
 	//esto deberia simetrizar direccionFuente respecto a normal
 	Punto direccionReflejo = normal.productoEscalar(2 * (normal * direccionFuente)) - direccionFuente;
@@ -96,6 +99,9 @@ ColorInt Shape::calcularColorRefraccion(Punto colision, Punto p1, Punto p2, int 
 	//		-roto usando la matriz de rotacion respecto a ese angulo y el eje es el del cross product
 	//		-si todo sale bien me sale un vector para el lado correcto
 	Punto normal = calcularNormal(colision);
+	if (this->refraccion == material) {
+		normal = normal.negado();
+	}
 	Punto direccionFuente = (p1 - colision).normalizar();
 	//el orden de los operadores lo pense pero podria estar mal
 	Punto eje = normal.productoVectorial(direccionFuente).normalizar();
@@ -130,7 +136,8 @@ ColorInt Shape::calcularColorRefraccion(Punto colision, Punto p1, Punto p2, int 
 			);
 	}
 	else {
-		return shapeResultado->calcularColor(resultado[indiceMasCercano], colision, p2Refrac, profundidad, materialOpuesto);
+		ColorInt output = shapeResultado->calcularColor(resultado[indiceMasCercano], colision, p2Refrac, profundidad, materialOpuesto);
+		return output;
 	}
 
 
@@ -158,9 +165,9 @@ ColorInt Shape::calcularColor(Punto colision, Punto p1, Punto p2, int profundida
 			}
 		}
 
-		return ColorInt(	(1 - transparencia) * (lightComponent.red + constanteEspecular * refleComponent.red ) + transparencia * refraComponent.red,
-							(1 - transparencia) * (lightComponent.green + constanteEspecular * refleComponent.green ) + transparencia * refraComponent.green,
-							(1 - transparencia) * (lightComponent.blue + constanteEspecular * refleComponent.blue ) + transparencia * refraComponent.blue
+		return ColorInt(	/*(1 - transparencia) * */(lightComponent.red + constanteEspecular * refleComponent.red ) + transparencia * refraComponent.red,
+							/*(1 - transparencia) * */(lightComponent.green + constanteEspecular * refleComponent.green ) + transparencia * refraComponent.green,
+							/*(1 - transparencia) * */(lightComponent.blue + constanteEspecular * refleComponent.blue ) + transparencia * refraComponent.blue
 							);
 
 }

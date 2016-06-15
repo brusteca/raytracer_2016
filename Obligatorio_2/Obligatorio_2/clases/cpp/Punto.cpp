@@ -32,8 +32,25 @@ Punto Punto::productoEscalar(float a) {
 	return Punto(x*a, y*a, z*a);
 };
 
-Punto Punto::rotar(float ang) {
-	
+inline float sqr(float x) {
+	return x*x;
+}
+
+Punto Punto::rotar(Punto eje, float ang) {
+	// https://en.wikipedia.org/wiki/Rotation_matrix
+	eje = eje.normalizar();
+	float cos0 = cos(ang);
+	float sin0 = sin(ang);
+	float matrizRot[3][3];
+	matrizRot[0][0] = cos0 + sqr(eje.x) * (1 - cos0);
+	matrizRot[0][1] = eje.x * eje.y * (1 - cos0) - eje.z * sin0;
+	matrizRot[0][2] = eje.x * eje.z * (1 - cos0) + eje.y * sin0;
+	matrizRot[1][0] = eje.y * eje.x * (1 - cos0) + eje.z * sin0;
+	matrizRot[1][1] = cos0 + sqr(eje.y) * (1 - cos0);
+	matrizRot[1][2] = eje.y * eje.z * (1 - cos0) - eje.x * sin0;
+	matrizRot[2][0] = ;
+	matrizRot[2][1] = ;
+	matrizRot[2][2] = ;
 }
 
 float Punto::modulo() {

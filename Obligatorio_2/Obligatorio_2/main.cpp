@@ -273,6 +273,7 @@ int main(int argc, char** argv) {
 					coloresAA[pix] = shapeElegido->calcularColor(puntoResultado[indiceResultado], posicionCamara, puntosAA[pix], 10);
 					coloresAARefra[pix] = shapeElegido->calcularColorRefra(puntoResultado[indiceResultado], posicionCamara, puntosAA[pix], 10);
 					coloresAARefle[pix] = shapeElegido->calcularColorRefle(puntoResultado[indiceResultado], posicionCamara, puntosAA[pix], 10);
+					delete[] puntoResultado;
 				}
 
 			}

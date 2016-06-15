@@ -127,6 +127,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="clases\cpp\Cilindro.cpp" />
+    <ClCompile Include="clases\cpp\Esfera.cpp" />
     <ClCompile Include="clases\cpp\Luz.cpp" />
     <ClCompile Include="clases\cpp\Matriz.cpp" />
     <ClCompile Include="clases\cpp\Mundo.cpp" />

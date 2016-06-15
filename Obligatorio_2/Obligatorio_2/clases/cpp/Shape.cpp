@@ -95,16 +95,28 @@ ColorInt Shape::calcularColor(Punto colision, Punto p1, Punto p2, int profundida
 		ColorInt refraComponent = ColorInt();
 		if (profundidad > 0) {
 			//calculo el reflejo
-			if (reflexion > 0.0f) {
+			//reflexion la uso ahora para determinar si una superficie es reflectante o no
+			//con esto puedo hacer superficies espejadas o superficies que son simplemente bruñidas
+			if ((constanteEspecular > 0.0f) && (reflexion > 0.0f)){
 				refleComponent = calcularColorReflexion(colision, p1, p2, profundidad -1);
 			}
 		}
 
-		return ColorInt(	(1 - reflexion) * lightComponent.red + reflexion * refleComponent.red,
-							(1 - reflexion) * lightComponent.green + reflexion * refleComponent.green, 
-							(1 - reflexion) * lightComponent.blue + reflexion * refleComponent.blue
+		return ColorInt(	/*(1 - reflexion) * */lightComponent.red + constanteEspecular * refleComponent.red,
+							/*(1 - reflexion) * */lightComponent.green + constanteEspecular * refleComponent.green, 
+							/*(1 - reflexion) * */lightComponent.blue + constanteEspecular * refleComponent.blue
 							);
 
+}
+
+ColorInt Shape::calcularColorRefra(Punto colision, Punto p1, Punto p2, int profundidad) {
+	ColorInt retorno(refraccion*255,refraccion*255,refraccion*255);
+	return retorno;
+}
+
+ColorInt Shape::calcularColorRefle(Punto colision, Punto p1, Punto p2, int profundidad) {
+	ColorInt retorno(reflexion * 255, reflexion * 255, reflexion * 255);
+	return retorno;
 }
 
 //quedo bastante complicado

@@ -3,9 +3,11 @@
 #include <iostream>
 
 #define OUTPUT_FOLDER "historial"
+#define THREADING true
 #include <sstream>
 #include <iomanip>
 #include <time.h>
+#include <thread>
 
 #include <cstdlib>
 
@@ -94,7 +96,8 @@ void GridAA(Punto pixel, float ladoXpixel, float ladoYpixel, Punto * puntosAA) {
 
 void calcularImagen(Color* matriz, Color* matrizRefle, Color* matrizRefra,
 					Punto infIzq, Punto supDer, int width, int height, 
-					Punto posicionCamara, float profundidadVentana) {
+					Punto posicionCamara, float profundidadVentana,
+					int iMin, int iMax, int jMin, int jMax) {
 	Punto pixel;
 	Shape* shapeElegido = NULL;
 	// Variables precalculables
@@ -104,8 +107,8 @@ void calcularImagen(Color* matriz, Color* matrizRefle, Color* matrizRefra,
 	srand(static_cast <unsigned> (time(0)));
 	float ladoXpixel = (supDer.x - infIzq.x) / (width - 1);
 	float ladoYpixel = (supDer.y - infIzq.y) / (height - 1);
-	for (int i = 0; i < height; i++) {
-		for (int j = 0; j < width; j++) {
+	for (int i = iMin; i < iMax; i++) {
+		for (int j = jMin; j < jMax; j++) {
 			// Establecer pixel actual
 			pixel = Punto(infIzq.x + ladoXpixel * j,
 				infIzq.y + ladoYpixel * i,
@@ -299,6 +302,25 @@ int main(int argc, char** argv) {
 	Color* matrizRefle = new Color[height*width];
 	Color* matrizRefra = new Color[height*width];
 
+	/*void calcularImagen(Color* matriz, Color* matrizRefle, Color* matrizRefra,
+					Punto infIzq, Punto supDer, int width, int height, 
+					Punto posicionCamara, float profundidadVentana,
+					int iMin, int iMax, int jMin, int jMax) {*/
+
+	//Threading
+	thread first(calcularImagen, matriz, matrizRefle, matrizRefra, infIzq, supDer,
+				 width, height, posicionCamara, profundidadVentana,
+				 0, height/2, 0, width/2);
+	thread second(calcularImagen, matriz, matrizRefle, matrizRefra, infIzq, supDer,
+		width, height, posicionCamara, profundidadVentana,
+		height/2, height, 0, width/2);
+	thread third(calcularImagen, matriz, matrizRefle, matrizRefra, infIzq, supDer,
+		width, height, posicionCamara, profundidadVentana,
+		0, height / 2, width/2, width);
+	thread fourth(calcularImagen, matriz, matrizRefle, matrizRefra, infIzq, supDer,
+		width, height, posicionCamara, profundidadVentana,
+		height / 2, height, width/2, width);
+	/*
 	Punto pixel;
 	Shape* shapeElegido = NULL;
 	// Variables precalculables
@@ -356,8 +378,11 @@ int main(int argc, char** argv) {
 				)
 				);
 		}
-	}
-
+	}*/
+	first.join();
+	second.join();
+	third.join();
+	fourth.join();
 	//imprimir imagen
 	guardarImagen(width, height, matriz, "");
 	guardarImagen(width, height, matrizRefle, "_refle");

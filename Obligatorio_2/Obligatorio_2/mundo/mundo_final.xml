@@ -1,0 +1,260 @@
+<!-- Información de cámara e imágen -->
+<Resolucion height="500" width="500"/>
+<PosicionCamara x="0.0" y="0.0" z="-3.0" /> 
+<PuntosVentana xI="-2.0" yI="-2.0" xD="2.0" yD="2.0" prof="0.0"/>
+<!-- Información de Color -->
+<Background red="0" green="100" blue="150" />
+<!-- Objetos -->
+<!-- Cuarto ----------------------------------------------------------------------------------->
+			<!-- Cara Trasera (visible) -->
+			<Shape 	tipo = "Poligono"
+					transp = "0.0"
+					refle = "0.0"
+					refra = "0.0"
+					Ramb="255" Gamb="255" Bamb="255"
+					Rdif="255" Gdif="255" Bdif="255"
+					Resp="255" Gesp="255" Besp="255"
+					constEsp="1.0"
+					radio="1.0" 
+					x="0.0" y="2" z="3.0"
+					>
+					<Vertice x="5" y="5" z="10" />
+					<Vertice x="5" y="-5" z="10" />
+					<Vertice x="-5" y="-5" z="10" />	
+					<Vertice x="-5" y="5" z="10" />		
+			</Shape> 
+			<!-- Cara Delantera (no visible) -->
+			<Shape 	tipo = "Poligono"
+					transp = "0.0"
+					refle = "0.0"
+					refra = "0.0"
+					Ramb="100" Gamb="150" Bamb="0"
+					Rdif="100" Gdif="150" Bdif="0"
+					Resp="100" Gesp="100" Besp="100"
+					constEsp="1.0"
+					radio="1.0" 
+					x="0.0" y="2" z="3.0"
+					>
+					<Vertice x="5" y="5" z="-10" />
+					<Vertice x="5" y="-5" z="-10" />
+					<Vertice x="-5" y="-5" z="-10" />	
+					<Vertice x="-5" y="5" z="-10" />		
+			</Shape> 
+			<!-- Cara Izquierda -->
+			<Shape 	tipo = "Poligono"
+					transp = "0.0"
+					refle = "0.0"
+					refra = "0.0"
+					Ramb="102" Gamb="0" Bamb="0"
+					Rdif="102" Gdif="0" Bdif="0"
+					Resp="102" Gesp="0" Besp="0"
+					constEsp="1.0"
+					radio="1.0" 
+					x="0.0" y="2" z="3.0"
+					>
+					<Vertice x="-5" y="5" z="10" />
+					<Vertice x="-5" y="-5" z="10" />
+					<Vertice x="-5" y="-5" z="-10" />	
+					<Vertice x="-5" y="5" z="-10" />
+			</Shape> 
+			<!-- Cara Derecha -->
+			<Shape 	tipo = "Poligono"
+					transp = "0.0"
+					refle = "0.0"
+					refra = "0.0"
+					Ramb="0" Gamb="102" Bamb="0"
+					Rdif="0" Gdif="102" Bdif="0"
+					Resp="0" Gesp="102" Besp="0"
+					constEsp="1.0"
+					radio="1.0" 
+					x="0.0" y="2" z="3.0"
+					>
+					<Vertice x="5" y="5" z="10" />
+					<Vertice x="5" y="5" z="-10" />
+					<Vertice x="5" y="-5" z="-10" />	
+					<Vertice x="5" y="-5" z="10" />
+			</Shape> 
+			<!-- Cara Superior -->
+			<Shape 	tipo = "Poligono"
+					transp = "0.0"
+					refle = "0.0"
+					refra = "0.0"
+					Ramb="71" Gamb="69" Bamb="69"
+					Rdif="71" Gdif="69" Bdif="69"
+					Resp="71" Gesp="69" Besp="69"
+					constEsp="1.0"
+					radio="1.0" 
+					x="0.0" y="2" z="3.0"
+					>
+					<Vertice x="-5" y="5" z="-10" />
+					<Vertice x="5" y="5" z="-10" />
+					<Vertice x="5" y="5" z="10" />	
+					<Vertice x="-5" y="5" z="10" />
+			</Shape> 
+			<!-- Cara Inferior -->
+			<Shape 	tipo = "Poligono"
+					transp = "0.0"
+					refle = "0.0"
+					refra = "0.0"
+					Ramb="255" Gamb="255" Bamb="255"
+					Rdif="255" Gdif="255" Bdif="255"
+					Resp="255" Gesp="255" Besp="255"
+					constEsp="1.0"
+					radio="1.0" 
+					x="0.0" y="2" z="3.0"
+					>
+					<Vertice x="5" y="-5" z="-10" />
+					<Vertice x="-5" y="-5" z="-10" />
+					<Vertice x="-5" y="-5" z="10" />	
+					<Vertice x="5" y="-5" z="10" />
+			</Shape> 
+<!-- Mesa ------------------------------------------------------------------------------------->
+			<!-- Cara Trasera -->
+			<Shape 	tipo = "Poligono"
+					transp = "0.0"
+					refle = "0.0"
+					refra = "0.0"
+					Ramb="50" Gamb="50" Bamb="50"
+					Rdif="50" Gdif="50" Bdif="50"
+					Resp="50" Gesp="50" Besp="50"
+					constEsp="1.0"
+					radio="1.0" 
+					x="0.0" y="2" z="3.0"
+					>
+					<Vertice x="3" y="-2" z="8" />
+					<Vertice x="-4" y="-2" z="8" />
+					<Vertice x="-4" y="-5" z="8" />	
+					<Vertice x="3" y="-5" z="8" />		
+			</Shape> 
+			<!-- Cara Delantera -->
+			<Shape 	tipo = "Poligono"
+					transp = "0.0"
+					refle = "0.0"
+					refra = "0.0"
+					Ramb="50" Gamb="50" Bamb="50"
+					Rdif="50" Gdif="50" Bdif="50"
+					Resp="50" Gesp="50" Besp="50"
+					constEsp="1.0"
+					radio="1.0" 
+					x="0.0" y="2" z="3.0"
+					>
+					<Vertice x="3" y="-2" z="6" />
+					<Vertice x="3" y="-5" z="6" />
+					<Vertice x="-4" y="-5" z="6" />	
+					<Vertice x="-4" y="-2" z="6" />		
+			</Shape> 
+			<!-- Cara Izquierda -->
+			<Shape 	tipo = "Poligono"
+					transp = "0.0"
+					refle = "0.0"
+					refra = "0.0"
+					Ramb="50" Gamb="50" Bamb="50"
+					Rdif="50" Gdif="50" Bdif="50"
+					Resp="50" Gesp="50" Besp="50"
+					constEsp="1.0"
+					radio="1.0" 
+					x="0.0" y="2" z="3.0"
+					>
+					<Vertice x="-4" y="-2" z="8" />
+					<Vertice x="-4" y="-2" z="6" />
+					<Vertice x="-4" y="-5" z="6" />	
+					<Vertice x="-4" y="-5" z="8" />
+			</Shape> 
+			<!-- Cara Derecha -->
+			<Shape 	tipo = "Poligono"
+					transp = "0.0"
+					refle = "0.0"
+					refra = "0.0"
+					Ramb="50" Gamb="50" Bamb="50"
+					Rdif="50" Gdif="50" Bdif="50"
+					Resp="50" Gesp="50" Besp="50"
+					constEsp="1.0"
+					radio="1.0" 
+					x="0.0" y="2" z="3.0"
+					>
+					<Vertice x="3" y="-2" z="8" />
+					<Vertice x="3" y="-5" z="8" />
+					<Vertice x="3" y="-5" z="6" />	
+					<Vertice x="3" y="-2" z="6" />
+			</Shape> 
+			<!-- Cara Superior -->
+			<Shape 	tipo = "Poligono"
+					transp = "0.0"
+					refle = "0.0"
+					refra = "0.0"
+					Ramb="50" Gamb="50" Bamb="50"
+					Rdif="50" Gdif="50" Bdif="50"
+					Resp="50" Gesp="50" Besp="50"
+					constEsp="1.0"
+					radio="1.0" 
+					x="0.0" y="2" z="3.0"
+					>
+					<Vertice x="3" y="-2" z="8" />
+					<Vertice x="3" y="-2" z="6" />
+					<Vertice x="-4" y="-2" z="6" />	
+					<Vertice x="-4" y="-2" z="8" />
+			</Shape> 
+			<!-- Cara Inferior -->
+			<Shape 	tipo = "Poligono"
+					transp = "0.0"
+					refle = "0.0"
+					refra = "0.0"
+					Ramb="50" Gamb="50" Bamb="50"
+					Rdif="50" Gdif="50" Bdif="50"
+					Resp="50" Gesp="50" Besp="50"
+					constEsp="1.0"
+					radio="1.0" 
+					x="0.0" y="2" z="3.0"
+					>
+					<Vertice x="3" y="-5" z="8" />
+					<Vertice x="-4" y="-5" z="8" />
+					<Vertice x="-4" y="-5" z="6" />	
+					<Vertice x="3" y="-5" z="6" />
+			</Shape> 
+<!-- Esfera Espejada -->
+	<Shape 	tipo = "Esfera"
+			transp = "0.0"
+			refle = "1"
+			refra = "0.0"
+			Ramb="100" Gamb="150" Bamb="0"
+			Rdif="100" Gdif="150" Bdif="0"
+			Resp="100" Gesp="100" Besp="100"
+			constEsp="1.0"
+			radio="0.7" 
+			x="2.0" y="-1.3" z="7.0"
+			/>
+<!-- Esfera Transparente -->
+	<Shape 	tipo = "Esfera"
+			transp = "1"
+			refle = "0.0"
+			refra = "0.0"
+			Ramb="100" Gamb="150" Bamb="0"
+			Rdif="100" Gdif="150" Bdif="0"
+			Resp="100" Gesp="100" Besp="100"
+			constEsp="1.0"
+			radio="1.2" 
+			x="-1.5" y="-0.8" z="7.0"
+			/>
+<Shape 	tipo = "Cilindro"
+		transp = "0.0"
+		refle = "0.0"
+		refra = "0.0"
+		Ramb="0" Gamb="200" Bamb="0"
+		Rdif="0" Gdif="200" Bdif="0"
+		Resp="0" Gesp="200" Besp="0"
+		constEsp="1.0"
+		altura="1.5"
+		radio="0.8"
+		x="-0.7" y="-2" z="7"
+		/>
+<!-- Luces -->
+<Luz 	x="0" y="3.5" z = "5" 
+		Ramb="0.5" Gamb="0.5" Bamb="0.5"
+		Rdif="1.0" Gdif="1.0" Bdif="1.0"
+		Resp="1.0" Gesp="1.0" Besp="1.0"
+		/>
+<Luz 	x="0" y="3.5" z = "8" 
+		Ramb="0.0" Gamb="0.0" Bamb="0.0"
+		Rdif="1.0" Gdif="1.0" Bdif="1.0"
+		Resp="1.0" Gesp="1.0" Besp="1.0"
+		/>

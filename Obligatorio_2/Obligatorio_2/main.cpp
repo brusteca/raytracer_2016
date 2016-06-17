@@ -317,7 +317,7 @@ int main(int argc, char** argv) {
 					int iMin, int iMax, int jMin, int jMax) {*/
 
 	//Threading
-	thread* first;
+	thread* first = NULL;
 	thread* second = NULL;
 	thread* third = NULL;
 	thread* fourth = NULL;
@@ -404,8 +404,12 @@ int main(int argc, char** argv) {
 		third->join();
 		fourth->join();
 	}
+	delete first;
+	delete second;
+	delete third;
+	delete fourth;
 	//imprimir imagen
-	guardarImagen(width, height, matriz, "");
+	//guardarImagen(width, height, matriz, "");
 	if (AUXILIARES) {
 		guardarImagen(width, height, matrizRefle, "_refle");
 		guardarImagen(width, height, matrizRefra, "_refra");

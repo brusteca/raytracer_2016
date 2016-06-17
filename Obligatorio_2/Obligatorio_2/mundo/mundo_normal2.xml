@@ -1,0 +1,37 @@
+<!-- Información de cámara e imágen -->
+<Resolucion height="500" width="500"/>
+<PosicionCamara x="0.0" y="0.0" z="-3.0" /> 
+<PuntosVentana xI="-2.0" yI="-2.0" xD="2.0" yD="2.0" prof="0.0"/>
+<!-- Información de Color -->
+<Background red="0" green="100" blue="150" />
+<!-- Objetos -->
+<!-- Cuarto ----------------------------------------------------------------------------------->
+			
+			<!-- Cara Izquierda -->
+			<Shape 	tipo = "Poligono"
+					transp = "0.0"
+					refle = "0.0"
+					refra = "0.0"
+					Ramb="102" Gamb="0" Bamb="0"
+					Rdif="102" Gdif="0" Bdif="0"
+					Resp="102" Gesp="0" Besp="0"
+					constEsp="1.0"
+					radio="1.0" 
+					x="0.0" y="2" z="3.0"
+					>
+					<Vertice x="-5" y="5" z="10" />
+					<Vertice x="-5" y="5" z="-10" />
+					<Vertice x="-5" y="-5" z="-10" />
+					<Vertice x="-5" y="-5" z="10" />					
+			</Shape> 
+<!-- Luces -->
+<Luz 	x="0" y="3.5" z = "5" 
+		Ramb="0.5" Gamb="0.5" Bamb="0.5"
+		Rdif="1.0" Gdif="1.0" Bdif="1.0"
+		Resp="1.0" Gesp="1.0" Besp="1.0"
+		/>
+<Luz 	x="0" y="3.5" z = "8" 
+		Ramb="0.0" Gamb="0.0" Bamb="0.0"
+		Rdif="1.0" Gdif="1.0" Bdif="1.0"
+		Resp="1.0" Gesp="1.0" Besp="1.0"
+		/>

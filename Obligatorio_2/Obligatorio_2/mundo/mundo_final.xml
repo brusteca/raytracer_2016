@@ -21,6 +21,20 @@
 					<Vertice x="5" y="5" z="10" />
 					<Vertice x="-5" y="5" z="10" />		
 					<Vertice x="-5" y="-5" z="10" />	
+			</Shape> 
+			<Shape 	tipo = "Poligono"
+					transp = "0.0"
+					refle = "0.0"
+					refra = "0.0"
+					Ramb="255" Gamb="255" Bamb="255"
+					Rdif="255" Gdif="255" Bdif="255"
+					Resp="255" Gesp="255" Besp="255"
+					constEsp="1.0"
+					radio="1.0" 
+					x="0.0" y="2" z="3.0"
+					>
+					<Vertice x="5" y="5" z="10" />		
+					<Vertice x="-5" y="-5" z="10" />	
 					<Vertice x="5" y="-5" z="10" />
 			</Shape> 
 			<!-- Cara Delantera (no visible) -->
@@ -36,9 +50,23 @@
 					x="0.0" y="2" z="3.0"
 					>
 					<Vertice x="5" y="5" z="-10" />
-					<Vertice x="-5" y="5" z="-10" />		
-					<Vertice x="-5" y="-5" z="-10" />	
 					<Vertice x="5" y="-5" z="-10" />
+					<Vertice x="-5" y="-5" z="-10" />		
+			</Shape> 
+			<Shape 	tipo = "Poligono"
+					transp = "0.0"
+					refle = "0.0"
+					refra = "0.0"
+					Ramb="0" Gamb="0" Bamb="0"
+					Rdif="0" Gdif="0" Bdif="0"
+					Resp="0" Gesp="0" Besp="0"
+					constEsp="1.0"
+					radio="1.0" 
+					x="0.0" y="2" z="3.0"
+					>
+					<Vertice x="5" y="5" z="-10" />		
+					<Vertice x="-5" y="-5" z="-10" />	
+					<Vertice x="-5" y="5" z="-10" />
 			</Shape> 
 			<!-- Cara Izquierda -->
 			<Shape 	tipo = "Poligono"
@@ -54,6 +82,20 @@
 					>
 					<Vertice x="-5" y="5" z="10" />
 					<Vertice x="-5" y="5" z="-10" />
+					<Vertice x="-5" y="-5" z="-10" />	
+			</Shape> 
+			<Shape 	tipo = "Poligono"
+					transp = "0.0"
+					refle = "0.0"
+					refra = "0.0"
+					Ramb="102" Gamb="0" Bamb="0"
+					Rdif="102" Gdif="0" Bdif="0"
+					Resp="102" Gesp="0" Besp="0"
+					constEsp="1.0"
+					radio="1.0" 
+					x="0.0" y="2" z="3.0"
+					>
+					<Vertice x="-5" y="5" z="10" />
 					<Vertice x="-5" y="-5" z="-10" />	
 					<Vertice x="-5" y="-5" z="10" />
 			</Shape> 
@@ -108,7 +150,7 @@
 					<Vertice x="-5" y="-5" z="10" />	
 					<Vertice x="-5" y="-5" z="-10" />
 			</Shape> 
-<!-- Mesa ------------------------------------------------------------------------------------->
+<!-- Mesa -->
 			<!-- Cara Trasera -->
 			<Shape 	tipo = "Poligono"
 					transp = "0.0"
@@ -142,7 +184,7 @@
 					<Vertice x="-4" y="-2" z="6" />		
 					<Vertice x="-4" y="-5" z="6" />	
 					<Vertice x="3" y="-5" z="6" />
-			</Shape> 
+			</Shape>
 			<!-- Cara Izquierda -->
 			<Shape 	tipo = "Poligono"
 					transp = "0.0"
@@ -211,14 +253,30 @@
 					<Vertice x="-4" y="-5" z="6" />	
 					<Vertice x="-4" y="-5" z="8" />
 			</Shape> 
+<!--
+<Shape 	tipo = "Prisma"
+		transp = "0.0"
+		refle = "0.0"
+		refra = "0.0"
+		Ramb="100" Gamb="100" Bamb="100"
+		Rdif="100" Gdif="100" Bdif="100"
+		Resp="100" Gesp="100" Besp="100"
+		constEsp="1.0"
+		altura="3"
+		>
+		<Vertice x="3" y="-5" z="8" />
+		<Vertice x="3" y="-5" z="6" />
+		<Vertice x="-4" y="-5" z="6" />	
+		<Vertice x="-4" y="-5" z="8" />
+</Shape> -->
 <!-- Esfera Espejada -->
 	<Shape 	tipo = "Esfera"
 			transp = "0.0"
 			refle = "1"
 			refra = "0.0"
-			Ramb="100" Gamb="150" Bamb="0"
-			Rdif="100" Gdif="150" Bdif="0"
-			Resp="100" Gesp="150" Besp="0"
+			Ramb="0" Gamb="0" Bamb="0"
+			Rdif="0" Gdif="0" Bdif="0"
+			Resp="0" Gesp="0" Besp="0"
 			constEsp="2.0"
 			radio="0.7" 
 			x="2.0" y="-1.3" z="7.0"

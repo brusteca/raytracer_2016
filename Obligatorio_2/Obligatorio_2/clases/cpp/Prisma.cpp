@@ -14,7 +14,8 @@ Prisma::Prisma(vector<Punto> ps, float altura, float refle, float refra, float t
 	if ((ps.size() < 4)||(altura == 0))
 		return;
 	//Calcular los triángulos en base a esos 4 puntos
-	Punto directriz = ((ps[0] - ps[1]).productoVectorial(ps[1] - ps[2])).normalizar();
+	//Punto directriz = ((ps[0] - ps[1]).productoVectorial(ps[1] - ps[2])).normalizar();
+	Punto directriz = ((ps[1] - ps[2]).productoVectorial(ps[0] - ps[1])).normalizar();
 	// Cara inferior
 	vector<Punto> inferior_1;
 	inferior_1.push_back(ps[0]);
@@ -114,6 +115,8 @@ int Prisma::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 			// Agregar al array
 			resultadoAux[cant] = res[0];
 			delete[]res;
+			normal = poligonos[i].calcularNormal(resultadoAux[cant]);
+			/*
 			bool yaExiste = false;
 			for (vector<pair<Punto, Punto>>::iterator it = normalesDeColision.begin(); it != normalesDeColision.end(); it++) {
 				if (it->first == resultadoAux[cant]) {
@@ -123,7 +126,7 @@ int Prisma::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 				}
 			}
 			if (!yaExiste)
-				normalesDeColision.push_back(pair<Punto,Punto>(resultadoAux[cant],poligonos[i].calcularNormal(resultadoAux[cant])));
+				normalesDeColision.push_back(pair<Punto,Punto>(resultadoAux[cant],poligonos[i].calcularNormal(resultadoAux[cant])));*/
 			cant++;
 			// Si choqué contra par,entonces no chequeo la impar
 			if (i % 2 == 0)
@@ -139,12 +142,14 @@ int Prisma::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 }
 Punto Prisma::calcularNormal(Punto p) {
 	//return boundingShape->calcularNormal(p);
+	/*
 	for (vector<pair<Punto, Punto>>::iterator it = normalesDeColision.begin(); it != normalesDeColision.end(); it++) {
 		if (it->first == p) {
 			return it->second;
 		}
 	}
-	return Punto();
+	return Punto();*/
+	return normal;
 }
 
 Prisma::~Prisma() { poligonos.clear(); normalesDeColision.clear(); }

@@ -19,9 +19,9 @@
 					x="0.0" y="2" z="3.0"
 					>
 					<Vertice x="5" y="5" z="10" />
-					<Vertice x="5" y="-5" z="10" />
-					<Vertice x="-5" y="-5" z="10" />	
 					<Vertice x="-5" y="5" z="10" />		
+					<Vertice x="-5" y="-5" z="10" />	
+					<Vertice x="5" y="-5" z="10" />
 			</Shape> 
 			<!-- Cara Delantera (no visible) -->
 			<Shape 	tipo = "Poligono"
@@ -36,9 +36,9 @@
 					x="0.0" y="2" z="3.0"
 					>
 					<Vertice x="5" y="5" z="-10" />
-					<Vertice x="5" y="-5" z="-10" />
-					<Vertice x="-5" y="-5" z="-10" />	
 					<Vertice x="-5" y="5" z="-10" />		
+					<Vertice x="-5" y="-5" z="-10" />	
+					<Vertice x="5" y="-5" z="-10" />
 			</Shape> 
 			<!-- Cara Izquierda -->
 			<Shape 	tipo = "Poligono"
@@ -53,9 +53,9 @@
 					x="0.0" y="2" z="3.0"
 					>
 					<Vertice x="-5" y="5" z="10" />
-					<Vertice x="-5" y="-5" z="10" />
-					<Vertice x="-5" y="-5" z="-10" />	
 					<Vertice x="-5" y="5" z="-10" />
+					<Vertice x="-5" y="-5" z="-10" />	
+					<Vertice x="-5" y="-5" z="10" />
 			</Shape> 
 			<!-- Cara Derecha -->
 			<Shape 	tipo = "Poligono"
@@ -70,9 +70,9 @@
 					x="0.0" y="2" z="3.0"
 					>
 					<Vertice x="5" y="5" z="10" />
-					<Vertice x="5" y="5" z="-10" />
-					<Vertice x="5" y="-5" z="-10" />	
 					<Vertice x="5" y="-5" z="10" />
+					<Vertice x="5" y="-5" z="-10" />	
+					<Vertice x="5" y="5" z="-10" />
 			</Shape> 
 			<!-- Cara Superior -->
 			<Shape 	tipo = "Poligono"
@@ -87,9 +87,9 @@
 					x="0.0" y="2" z="3.0"
 					>
 					<Vertice x="-5" y="5" z="-10" />
-					<Vertice x="5" y="5" z="-10" />
-					<Vertice x="5" y="5" z="10" />	
 					<Vertice x="-5" y="5" z="10" />
+					<Vertice x="5" y="5" z="10" />	
+					<Vertice x="5" y="5" z="-10" />
 			</Shape> 
 			<!-- Cara Inferior -->
 			<Shape 	tipo = "Poligono"
@@ -104,9 +104,9 @@
 					x="0.0" y="2" z="3.0"
 					>
 					<Vertice x="5" y="-5" z="-10" />
-					<Vertice x="-5" y="-5" z="-10" />
-					<Vertice x="-5" y="-5" z="10" />	
 					<Vertice x="5" y="-5" z="10" />
+					<Vertice x="-5" y="-5" z="10" />	
+					<Vertice x="-5" y="-5" z="-10" />
 			</Shape> 
 <!-- Mesa ------------------------------------------------------------------------------------->
 			<!-- Cara Trasera -->
@@ -122,9 +122,9 @@
 					x="0.0" y="2" z="3.0"
 					>
 					<Vertice x="3" y="-2" z="8" />
-					<Vertice x="-4" y="-2" z="8" />
-					<Vertice x="-4" y="-5" z="8" />	
 					<Vertice x="3" y="-5" z="8" />		
+					<Vertice x="-4" y="-5" z="8" />	
+					<Vertice x="-4" y="-2" z="8" />
 			</Shape> 
 			<!-- Cara Delantera -->
 			<Shape 	tipo = "Poligono"
@@ -139,9 +139,9 @@
 					x="0.0" y="2" z="3.0"
 					>
 					<Vertice x="3" y="-2" z="6" />
-					<Vertice x="3" y="-5" z="6" />
-					<Vertice x="-4" y="-5" z="6" />	
 					<Vertice x="-4" y="-2" z="6" />		
+					<Vertice x="-4" y="-5" z="6" />	
+					<Vertice x="3" y="-5" z="6" />
 			</Shape> 
 			<!-- Cara Izquierda -->
 			<Shape 	tipo = "Poligono"
@@ -156,9 +156,9 @@
 					x="0.0" y="2" z="3.0"
 					>
 					<Vertice x="-4" y="-2" z="8" />
-					<Vertice x="-4" y="-2" z="6" />
-					<Vertice x="-4" y="-5" z="6" />	
 					<Vertice x="-4" y="-5" z="8" />
+					<Vertice x="-4" y="-5" z="6" />	
+					<Vertice x="-4" y="-2" z="6" />
 			</Shape> 
 			<!-- Cara Derecha -->
 			<Shape 	tipo = "Poligono"
@@ -173,9 +173,9 @@
 					x="0.0" y="2" z="3.0"
 					>
 					<Vertice x="3" y="-2" z="8" />
-					<Vertice x="3" y="-5" z="8" />
-					<Vertice x="3" y="-5" z="6" />	
 					<Vertice x="3" y="-2" z="6" />
+					<Vertice x="3" y="-5" z="6" />	
+					<Vertice x="3" y="-5" z="8" />
 			</Shape> 
 			<!-- Cara Superior -->
 			<Shape 	tipo = "Poligono"
@@ -190,9 +190,9 @@
 					x="0.0" y="2" z="3.0"
 					>
 					<Vertice x="3" y="-2" z="8" />
-					<Vertice x="3" y="-2" z="6" />
-					<Vertice x="-4" y="-2" z="6" />	
 					<Vertice x="-4" y="-2" z="8" />
+					<Vertice x="-4" y="-2" z="6" />	
+					<Vertice x="3" y="-2" z="6" />
 			</Shape> 
 			<!-- Cara Inferior -->
 			<Shape 	tipo = "Poligono"
@@ -207,9 +207,9 @@
 					x="0.0" y="2" z="3.0"
 					>
 					<Vertice x="3" y="-5" z="8" />
-					<Vertice x="-4" y="-5" z="8" />
-					<Vertice x="-4" y="-5" z="6" />	
 					<Vertice x="3" y="-5" z="6" />
+					<Vertice x="-4" y="-5" z="6" />	
+					<Vertice x="-4" y="-5" z="8" />
 			</Shape> 
 <!-- Esfera Espejada -->
 	<Shape 	tipo = "Esfera"
@@ -218,23 +218,24 @@
 			refra = "0.0"
 			Ramb="100" Gamb="150" Bamb="0"
 			Rdif="100" Gdif="150" Bdif="0"
-			Resp="100" Gesp="100" Besp="100"
+			Resp="100" Gesp="150" Besp="0"
 			constEsp="1.0"
 			radio="0.7" 
 			x="2.0" y="-1.3" z="7.0"
 			/>
 <!-- Esfera Transparente -->
 	<Shape 	tipo = "Esfera"
-			transp = "1"
+			transp = "0.8"
 			refle = "0.0"
-			refra = "0.0"
-			Ramb="100" Gamb="150" Bamb="0"
-			Rdif="100" Gdif="150" Bdif="0"
-			Resp="100" Gesp="100" Besp="100"
-			constEsp="1.0"
+			refra = "1.1"
+			Ramb="100" Gamb="150" Bamb="250"
+			Rdif="100" Gdif="150" Bdif="250"
+			Resp="100" Gesp="150" Besp="250"
+			constEsp="0.0"
 			radio="1.2" 
 			x="-1.5" y="-0.8" z="7.0"
 			/>
+<!-- Cilindro -->
 <Shape 	tipo = "Cilindro"
 		transp = "0.0"
 		refle = "0.0"

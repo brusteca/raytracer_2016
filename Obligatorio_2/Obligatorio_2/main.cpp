@@ -3,7 +3,6 @@
 #include <iostream>
 
 #define OUTPUT_FOLDER "historial"
-#define THREADING true
 #include <sstream>
 #include <iomanip>
 #include <time.h>
@@ -160,6 +159,16 @@ void calcularImagen(Color* matriz, Color* matrizRefle, Color* matrizRefra,
 
 int main(int argc, char** argv) {
 	Mundo::crearInstance();
+
+	// Cargar parámetros
+	bool THREADING = true;
+	bool AUXILIARES = false;
+	for (int i = 0; i < argc; i++) {
+		if (string(argv[i]) == "-nothread")
+			THREADING = false;
+		else if (string(argv[i]) == "-aux")
+			AUXILIARES = true;
+	}
 	// Leer archivo xml y construir shapes
 	//string directorio = "mundo/mundo_prisma.xml";
 	string directorio = string(argv[1]);
@@ -308,18 +317,28 @@ int main(int argc, char** argv) {
 					int iMin, int iMax, int jMin, int jMax) {*/
 
 	//Threading
-	thread first(calcularImagen, matriz, matrizRefle, matrizRefra, infIzq, supDer,
-				 width, height, posicionCamara, profundidadVentana,
-				 0, height/2, 0, width/2);
-	thread second(calcularImagen, matriz, matrizRefle, matrizRefra, infIzq, supDer,
-		width, height, posicionCamara, profundidadVentana,
-		height/2, height, 0, width/2);
-	thread third(calcularImagen, matriz, matrizRefle, matrizRefra, infIzq, supDer,
-		width, height, posicionCamara, profundidadVentana,
-		0, height / 2, width/2, width);
-	thread fourth(calcularImagen, matriz, matrizRefle, matrizRefra, infIzq, supDer,
-		width, height, posicionCamara, profundidadVentana,
-		height / 2, height, width/2, width);
+	thread* first;
+	thread* second = NULL;
+	thread* third = NULL;
+	thread* fourth = NULL;
+	if (THREADING) {
+		first = new thread(calcularImagen, matriz, matrizRefle, matrizRefra, infIzq, supDer,
+			width, height, posicionCamara, profundidadVentana,
+			0, height / 2, 0, width / 2);
+		second = new thread (calcularImagen, matriz, matrizRefle, matrizRefra, infIzq, supDer,
+			width, height, posicionCamara, profundidadVentana,
+			height / 2, height, 0, width / 2);
+		third = new thread(calcularImagen, matriz, matrizRefle, matrizRefra, infIzq, supDer,
+			width, height, posicionCamara, profundidadVentana,
+			0, height / 2, width / 2, width);
+		fourth = new thread(calcularImagen, matriz, matrizRefle, matrizRefra, infIzq, supDer,
+			width, height, posicionCamara, profundidadVentana,
+			height / 2, height, width / 2, width);
+	}
+	else
+		first = new thread(calcularImagen, matriz, matrizRefle, matrizRefra, infIzq, supDer,
+			width, height, posicionCamara, profundidadVentana,
+			0, height, 0, width);
 	/*
 	Punto pixel;
 	Shape* shapeElegido = NULL;
@@ -379,13 +398,17 @@ int main(int argc, char** argv) {
 				);
 		}
 	}*/
-	first.join();
-	second.join();
-	third.join();
-	fourth.join();
+	first->join();
+	if (THREADING) {
+		second->join();
+		third->join();
+		fourth->join();
+	}
 	//imprimir imagen
 	guardarImagen(width, height, matriz, "");
-	guardarImagen(width, height, matrizRefle, "_refle");
-	guardarImagen(width, height, matrizRefra, "_refra");
+	if (AUXILIARES) {
+		guardarImagen(width, height, matrizRefle, "_refle");
+		guardarImagen(width, height, matrizRefra, "_refra");
+	}
 
 }

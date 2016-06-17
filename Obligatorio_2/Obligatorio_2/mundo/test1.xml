@@ -1,0 +1,81 @@
+<!-- Información de cámara e imágen -->
+<Resolucion height="500" width="500"/>
+<PosicionCamara x="0.0" y="0.0" z="-3.0" /> 
+<PuntosVentana xI="-2.0" yI="-2.0" xD="2.0" yD="2.0" prof="0.0"/>
+<!-- Información de Color -->
+<Background red="50" green="100" blue="0" />
+<!-- Objetos -->
+<Shape 	tipo = "Esfera"
+		transp = "0.8"
+		refle = "1"
+		refra = "1.1"
+		Ramb="100" Gamb="150" Bamb="250"
+		Rdif="100" Gdif="150" Bdif="250"
+		Resp="100" Gesp="150" Besp="250"
+		constEsp="0.0"
+		radio="1.0" 
+		x="0.0" y="0" z="3.0"
+		/>
+<Shape 	tipo = "Esfera"
+		transp = "0.0"
+		refle = "1"
+		refra = "0.0"
+		Ramb="0" Gamb="150" Bamb="250"
+		Rdif="0" Gdif="150" Bdif="250"
+		Resp="0" Gesp="150" Besp="250"
+		constEsp="0.0"
+		radio="2" 
+		x="-2.0" y="1" z="6.0"
+		/>
+<Shape 	tipo = "Esfera"
+		transp = "0.0"
+		refle = "1"
+		refra = "0.0"
+		Ramb="200" Gamb="250" Bamb="0"
+		Rdif="200" Gdif="250" Bdif="250"
+		Resp="200" Gesp="250" Besp="250"
+		constEsp="0.0"
+		radio="1.0" 
+		x="2.0" y="2" z="5.0"
+		/>
+<Shape 	tipo = "Esfera"
+		transp = "0.0"
+		refle = "1"
+		refra = "0.0"
+		Ramb="200" Gamb="0" Bamb="0"
+		Rdif="200" Gdif="0" Bdif="0"
+		Resp="200" Gesp="0" Besp="0"
+		constEsp="0.0"
+		radio="2.5" 
+		x="1.5" y="-2" z="5.0"
+		/>
+<Shape 	tipo = "Esfera"
+		transp = "0.0"
+		refle = "1"
+		refra = "0.0"
+		Ramb="50" Gamb="20" Bamb="150"
+		Rdif="50" Gdif="20" Bdif="150"
+		Resp="50" Gesp="20" Besp="150"
+		constEsp="0.0"
+		radio="5" 
+		x="0" y="6" z="8"
+		/>
+<Shape 	tipo = "Poligono"
+		transp = "0.0"
+		refle = "0.0"
+		refra = "0.0"
+		Ramb="250" Gamb="150" Bamb="0"
+		Rdif="250" Gdif="150" Bdif="0"
+		Resp="250" Gesp="100" Besp="100"
+		constEsp="0.0"
+		>
+		<Vertice x="-6" y="-3" z="0" />
+		<Vertice x="-6" y="3" z="0" />	
+		<Vertice x="0" y="6" z="10" />	
+</Shape> 
+<!-- Luces -->
+<Luz 	x="-2" y="3" z = "1" 
+		Ramb="0.2" Gamb="0.2" Bamb="0.2"
+		Rdif="1.0" Gdif="1.0" Bdif="1.0"
+		Resp="1.0" Gesp="1.0" Besp="1.0"
+		/>

@@ -5,6 +5,8 @@
 #include "Color.h"
 #include "Luz.h"
 
+#include <math.h>
+
 using namespace std;
 
 
@@ -59,10 +61,13 @@ ColorInt Shape::calcularColorLuz(Punto colision, Punto p1, Punto p2) {
 	return colorInt;
 }
 
-ColorInt Shape::calcularColorReflexion(Punto colision, Punto p1, Punto p2, int profundidad) {
+ColorInt Shape::calcularColorReflexion(Punto colision, Punto p1, Punto p2, int profundidad, float material) {
 	//hay pila de cosas que ya estaban calculadas para la luz que las calculo de nuevo
 	//podria ser una forma de optimizar quizas
 	Punto normal = calcularNormal(colision);
+	if (this->refraccion == material) {
+		normal = normal.negado();
+	}
 	Punto direccionFuente = (p1 - colision).normalizar();
 	//esto deberia simetrizar direccionFuente respecto a normal
 	Punto direccionReflejo = normal.productoEscalar(2 * (normal * direccionFuente)) - direccionFuente;
@@ -79,14 +84,72 @@ ColorInt Shape::calcularColorReflexion(Punto colision, Punto p1, Punto p2, int p
 						);
 	}
 	else {
-		return shapeResultado->calcularColor(resultado[indiceMasCercano], colision, p2Refle, profundidad);
+		return shapeResultado->calcularColor(resultado[indiceMasCercano], colision, p2Refle, profundidad, material);
 	}
 }
 
+//limitacion: no puede haber una cosa transparente adentro de otra
+//para solucionar esto hay que transformar material en un stack
+ColorInt Shape::calcularColorRefraccion(Punto colision, Punto p1, Punto p2, int profundidad, float material) {
+	//para calcular el vector de salida:
+	//		-transformo el vector de incidencia en uno que sale del punto colision (direccionFuente)
+	//		-calculo el cross product entre direccionFuente y la normal para hallar el vector perpendicular
+	//		-calculo el angulo entre el direccionFuente y la normal
+	//		-calculo el angulo de salida usando los materiales
+	//		-roto usando la matriz de rotacion respecto a ese angulo y el eje es el del cross product
+	//		-si todo sale bien me sale un vector para el lado correcto
+	Punto normal = calcularNormal(colision);
+	if (this->refraccion == material) {
+		normal = normal.negado();
+	}
+	Punto direccionFuente = (p1 - colision).normalizar();
+	//el orden de los operadores lo pense pero podria estar mal
+	Punto eje = normal.productoVectorial(direccionFuente).normalizar();
+	//espero que me de el angulo 'chico'
+	float anguloEntrada = direccionFuente.angulo(normal);
+	//logica de adentro/afuera: si el rayo viene con el mismo material es que estoy adentro y por lo tanto tengo que salir afuera
+	//esto implica que no puede haber un objeto refractante dentro de otro
+	float materialOpuesto;
+	if (this->refraccion != material) {
+		materialOpuesto = this->refraccion;
+	} else {
+		materialOpuesto = Mundo::inst()->refraccionAire;
+	}
+	//reflexion interna total
+	float anguloCritico = asin(materialOpuesto / material);
+	if (anguloEntrada >= anguloCritico) {
+		return ColorInt();
+	}
+	float anguloSalida = asin( (sin(anguloEntrada) * (material / materialOpuesto)) );
+
+
+	Punto vectorSalida = normal.negado().rotar(eje, anguloSalida);
+	//esto es para que no colisione con la superficie de salida
+	Punto colision_noError = colision + vectorSalida.productoEscalar(0.0001f);
+	Punto p2Refrac = vectorSalida + colision_noError;
+
+	Punto * resultado = NULL;
+	int indiceMasCercano;
+	Shape * shapeResultado = NULL;
+	// paso null en el shape de origen para que pueda colisionar consigo mismo
+	int cantidadPuntos = Shape::trace(colision_noError, p2Refrac, vectorSalida, resultado, indiceMasCercano, shapeResultado, NULL);
+	if (cantidadPuntos == 0) {
+		return ColorInt(Mundo::inst()->background.red,
+			Mundo::inst()->background.green,
+			Mundo::inst()->background.blue
+			);
+	}
+	else {
+		ColorInt output = shapeResultado->calcularColor(resultado[indiceMasCercano], colision, p2Refrac, profundidad, materialOpuesto);
+		return output;
+	}
+
+
+}
 
 //	Retorna NULL si no hay intersección, si la hay retorna el punto con menor z positivo.
 //	Determina el color en el punto 'colision' para el rayo ->p1p2
-ColorInt Shape::calcularColor(Punto colision, Punto p1, Punto p2, int profundidad) {
+ColorInt Shape::calcularColor(Punto colision, Punto p1, Punto p2, int profundidad, float material) {
 		//trabajo con int y despues los trunco
 		//calculo si la superficie tiene luz o sombra
 		ColorInt lightComponent = calcularColorLuz(colision, p1, p2);
@@ -98,13 +161,17 @@ ColorInt Shape::calcularColor(Punto colision, Punto p1, Punto p2, int profundida
 			//reflexion la uso ahora para determinar si una superficie es reflectante o no
 			//con esto puedo hacer superficies espejadas o superficies que son simplemente bruñidas
 			if ((constanteEspecular > 0.0f) && (reflexion > 0.0f)){
-				refleComponent = calcularColorReflexion(colision, p1, p2, profundidad -1);
+				refleComponent = calcularColorReflexion(colision, p1, p2, profundidad -1, material);
+			}
+			//calculo la refraccion
+			if (transparencia > 0.0f) {
+				refraComponent = calcularColorRefraccion(colision, p1, p2, profundidad - 1, material);
 			}
 		}
 
-		return ColorInt(	/*(1 - reflexion) * */lightComponent.red + constanteEspecular * refleComponent.red,
-							/*(1 - reflexion) * */lightComponent.green + constanteEspecular * refleComponent.green, 
-							/*(1 - reflexion) * */lightComponent.blue + constanteEspecular * refleComponent.blue
+		return ColorInt(	(1 - transparencia) * (lightComponent.red + constanteEspecular * refleComponent.red ) + transparencia * refraComponent.red,
+							(1 - transparencia) * (lightComponent.green + constanteEspecular * refleComponent.green ) + transparencia * refraComponent.green,
+							(1 - transparencia) * (lightComponent.blue + constanteEspecular * refleComponent.blue ) + transparencia * refraComponent.blue
 							);
 
 }

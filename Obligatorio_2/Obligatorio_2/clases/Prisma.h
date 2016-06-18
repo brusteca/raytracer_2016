@@ -13,6 +13,7 @@ class Prisma : public Shape {
 		vector<Poligono> poligonos;
 		Shape* boundingShape;
 		vector<pair<Punto, Punto>> normalesDeColision;
+		Punto normal;
 	public:
 		Prisma();
 		Prisma(vector<Punto> ps, float altura, float refle, float refra, float transp, Color amb, Color dif, Color esp, float constEsp);

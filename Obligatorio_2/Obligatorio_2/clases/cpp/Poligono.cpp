@@ -148,6 +148,7 @@ int Poligono::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 Punto Poligono::calcularNormal(Punto p) {
 	// Precondición: El punto pertenece al polígono
 	// Retornar la normal del plano normalizada:
+	puntos[0];
 	return normal.normalizar();
 }
 

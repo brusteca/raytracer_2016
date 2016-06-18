@@ -152,8 +152,7 @@ ColorInt Shape::calcularColorRefraccion(Punto colision, Punto p1, Punto p2, int 
 ColorInt Shape::calcularColor(Punto colision, Punto p1, Punto p2, int profundidad, float material) {
 		//trabajo con int y despues los trunco
 		//calculo si la superficie tiene luz o sombra
-		//ColorInt lightComponent = calcularColorLuz(colision, p1, p2);
-		ColorInt lightComponent(0, 0, 0);
+		ColorInt lightComponent = calcularColorLuz(colision, p1, p2);
 
 		ColorInt refleComponent = ColorInt();
 		ColorInt refraComponent = ColorInt();

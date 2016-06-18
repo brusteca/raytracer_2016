@@ -53,6 +53,8 @@ Intensidad Luz::determinarIluminacion(Punto p, Shape *s) {
 				}
 			}
 		}
+		if (cantPuntos > 0)
+			delete[] puntoResultado;
 	}
 finLoop:
 	return iluminacion;

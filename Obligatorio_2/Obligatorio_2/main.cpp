@@ -409,7 +409,7 @@ int main(int argc, char** argv) {
 	delete third;
 	delete fourth;
 	//imprimir imagen
-	//guardarImagen(width, height, matriz, "");
+	guardarImagen(width, height, matriz, "");
 	if (AUXILIARES) {
 		guardarImagen(width, height, matrizRefle, "_refle");
 		guardarImagen(width, height, matrizRefra, "_refra");

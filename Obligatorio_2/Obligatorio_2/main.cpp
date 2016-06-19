@@ -20,7 +20,6 @@
 #include "clases\Color.h"
 #include "clases\Punto.h"
 #include "clases\Shape.h"
-#include "clases\Prisma.h"
 #include "clases\Plano.h"
 
 #include "clases\Mundo.h"
@@ -242,21 +241,6 @@ int main(int argc, char** argv) {
 				}
 				Shape* poligono = new Poligono(puntosPoligono, refle, refra, transp, amb, dif, esp, constEsp);
 				Mundo::inst()->shapes.push_back(poligono);
-			}
-			else if (tipo == "Prisma") {
-				vector<Punto> vertices;
-				for (pugi::xml_node_iterator puntos = nodo->begin(); puntos != nodo->end(); puntos++) {
-					if (string(puntos->name()) == "Vertice") {
-						// Crear cada punto e ingresarlo en el vector
-						Punto ingreso = Punto(stof(puntos->attribute("x").value()),
-							stof(puntos->attribute("y").value()),
-							stof(puntos->attribute("z").value())
-							);
-						vertices.push_back(ingreso);
-					}
-				}
-				float alt = stof(nodo->attribute("altura").value());
-				Mundo::inst()->shapes.push_back(new Prisma(vertices, alt, refle, refra, transp, amb, dif, esp, constEsp));
 			}
 			else if (tipo == "Plano") {
 				Punto ps[3];

@@ -92,6 +92,12 @@ void GridAA(Punto pixel, float ladoXpixel, float ladoYpixel, Punto * puntosAA) {
 		pixel.z
 		);
 }
+//sin antialiasing, para testing
+void NullAA(Punto pixel, float ladoXpixel, float ladoYpixel, Punto * puntosAA) {
+	for (int i = 0; i < 4; ++i) {
+		puntosAA[i] = pixel;
+	}
+}
 
 void calcularImagen(Color* matriz, Color* matrizRefle, Color* matrizRefra,
 					Punto infIzq, Punto supDer, int width, int height, 
@@ -317,26 +323,23 @@ int main(int argc, char** argv) {
 					int iMin, int iMax, int jMin, int jMax) {*/
 
 	//Threading
-	thread* first = NULL;
-	thread* second = NULL;
-	thread* third = NULL;
-	thread* fourth = NULL;
+	thread threads[4];
 	if (THREADING) {
-		first = new thread(calcularImagen, matriz, matrizRefle, matrizRefra, infIzq, supDer,
+		threads[0] = thread(calcularImagen, matriz, matrizRefle, matrizRefra, infIzq, supDer,
 			width, height, posicionCamara, profundidadVentana,
 			0, height / 2, 0, width / 2);
-		second = new thread (calcularImagen, matriz, matrizRefle, matrizRefra, infIzq, supDer,
+		threads[1] = thread (calcularImagen, matriz, matrizRefle, matrizRefra, infIzq, supDer,
 			width, height, posicionCamara, profundidadVentana,
 			height / 2, height, 0, width / 2);
-		third = new thread(calcularImagen, matriz, matrizRefle, matrizRefra, infIzq, supDer,
+		threads[2] = thread(calcularImagen, matriz, matrizRefle, matrizRefra, infIzq, supDer,
 			width, height, posicionCamara, profundidadVentana,
 			0, height / 2, width / 2, width);
-		fourth = new thread(calcularImagen, matriz, matrizRefle, matrizRefra, infIzq, supDer,
+		threads[3] = thread(calcularImagen, matriz, matrizRefle, matrizRefra, infIzq, supDer,
 			width, height, posicionCamara, profundidadVentana,
 			height / 2, height, width / 2, width);
 	}
 	else
-		first = new thread(calcularImagen, matriz, matrizRefle, matrizRefra, infIzq, supDer,
+		threads[0] = thread(calcularImagen, matriz, matrizRefle, matrizRefra, infIzq, supDer,
 			width, height, posicionCamara, profundidadVentana,
 			0, height, 0, width);
 	/*
@@ -398,16 +401,12 @@ int main(int argc, char** argv) {
 				);
 		}
 	}*/
-	first->join();
+	threads[0].join();
 	if (THREADING) {
-		second->join();
-		third->join();
-		fourth->join();
+		threads[1].join();
+		threads[2].join();
+		threads[3].join();
 	}
-	delete first;
-	delete second;
-	delete third;
-	delete fourth;
 	//imprimir imagen
 	guardarImagen(width, height, matriz, "");
 	if (AUXILIARES) {

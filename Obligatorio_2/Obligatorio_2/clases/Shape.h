@@ -2,9 +2,12 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 
-#define constAtt 0.03f
-#define linearAtt 0.2f
-#define quadAtt 0.012f
+//#define constAtt 0.03f
+//#define linearAtt 0.2f
+//#define quadAtt 0.012f
+#define constAtt 1.0f
+#define linearAtt 0.0f
+#define quadAtt 0.00f
 #define nPhong 5
 
 #include "Color.h"

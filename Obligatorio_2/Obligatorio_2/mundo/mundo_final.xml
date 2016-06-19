@@ -3,7 +3,7 @@
 <PosicionCamara x="0.0" y="0.0" z="-3.0" /> 
 <PuntosVentana xI="-2.0" yI="-2.0" xD="2.0" yD="2.0" prof="0.0"/>
 <!-- Información de Color -->
-<Background red="0" green="100" blue="150" />
+<Background red="0" green="0" blue="0" />
 <!-- Objetos -->
 <!-- Cuarto ----------------------------------------------------------------------------------->
 			<!-- Cara Trasera (visible) -->
@@ -283,13 +283,13 @@
 			/>
 <!-- Esfera Transparente -->
 	<Shape 	tipo = "Esfera"
-			transp = "0.4"
+			transp = "0.92"
 			refle = "0.0"
-			refra = "1.4"
-			Ramb="120" Gamb="120" Bamb="120"
-			Rdif="120" Gdif="120" Bdif="120"
-			Resp="120" Gesp="120" Besp="120"
-			constEsp="0.5"
+			refra = "1.3333"
+			Ramb="100" Gamb="0" Bamb="0"
+			Rdif="100" Gdif="0" Bdif="0"
+			Resp="100" Gesp="100" Besp="100"
+			constEsp="0.9"
 			radio="1.2" 
 			x="-1.5" y="-0.8" z="7.0"
 			/>
@@ -307,13 +307,13 @@
 		x="-0.7" y="-2" z="7"
 		/>
 <!-- Luces -->
-<Luz 	x="0" y="3.5" z = "5" 
-		Ramb="0.5" Gamb="0.5" Bamb="0.5"
-		Rdif="1.0" Gdif="1.0" Bdif="1.0"
-		Resp="1.0" Gesp="1.0" Besp="1.0"
+<Luz 	x="0" y="4.5" z = "5" 
+		Ramb="0.1" Gamb="0.1" Bamb="0.1"
+		Rdif="0.5" Gdif="0.5" Bdif="0.5"
+		Resp="0.5" Gesp="0.5" Besp="0.5"
 		/>
-<Luz 	x="0" y="3.5" z = "8" 
+<Luz 	x="0" y="4.5" z = "9" 
 		Ramb="0.0" Gamb="0.0" Bamb="0.0"
-		Rdif="1.0" Gdif="1.0" Bdif="1.0"
-		Resp="1.0" Gesp="1.0" Besp="1.0"
+		Rdif="0.6" Gdif="0.6" Bdif="0.6"
+		Resp="0.3" Gesp="0.3" Besp="0.3"
 		/>

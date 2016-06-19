@@ -62,8 +62,13 @@ int Poligono::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 			return 0;
 		}
 		resultado = new Punto[1];
-		resultado[0] = p1 + (p2 - p1).productoEscalar(res[2]);
 		delete[] res;
+		float denominador = normal * (p2 - p1);
+		if (denominador == 0.0)
+			return 0;
+		// Denominador no es cero, puedo continuar
+		float t = (-(normal * p1 + d)) / denominador;
+		resultado[0] = p1 + (p2 - p1).productoEscalar(t);
 		return 1;
 		
 	}
@@ -148,7 +153,6 @@ int Poligono::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 Punto Poligono::calcularNormal(Punto p) {
 	// Precondición: El punto pertenece al polígono
 	// Retornar la normal del plano normalizada:
-	puntos[0];
 	return normal.normalizar();
 }
 

@@ -16,7 +16,7 @@ class Plano : public Shape{
 		Plano();
 		Plano(Punto* ps, float refle, float refra, float transp, Color amb, Color dif, Color esp, float constEsp);
 
-		int colisionaCon(Punto p1, Punto p2, Punto* resultado);
+		int colisionaCon(Punto p1, Punto p2, Punto* &resultado);
 		Punto calcularNormal(Punto p);
 
 		~Plano();

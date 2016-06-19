@@ -22,7 +22,7 @@ Plano::Plano(Punto* ps, float refle, float refra, float transp, Color amb, Color
 
 }
 
-int Plano::colisionaCon(Punto p1, Punto p2, Punto* resultado) {
+int Plano::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 	/*
 	* Colisionar rayo con el plano
 	* Considero ecuación paramétrica del rayo: p1 + t * (p2 - p1)
@@ -35,8 +35,8 @@ int Plano::colisionaCon(Punto p1, Punto p2, Punto* resultado) {
 	// Denominador no es cero, puedo continuar
 	float t = (-(normal * p1 + d)) / denominador;
 	Punto interseccion = Punto(p1 + (p2 - p1).productoEscalar(t));
-	resultado = new Punto();
-	*resultado = interseccion;
+	resultado = new Punto [1];
+	resultado[0] = interseccion;
 	return 1;
 }
 Punto Plano::calcularNormal(Punto p) {

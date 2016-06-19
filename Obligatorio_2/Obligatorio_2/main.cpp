@@ -21,6 +21,7 @@
 #include "clases\Punto.h"
 #include "clases\Shape.h"
 #include "clases\Prisma.h"
+#include "clases\Plano.h"
 
 #include "clases\Mundo.h"
 
@@ -256,6 +257,13 @@ int main(int argc, char** argv) {
 				}
 				float alt = stof(nodo->attribute("altura").value());
 				Mundo::inst()->shapes.push_back(new Prisma(vertices, alt, refle, refra, transp, amb, dif, esp, constEsp));
+			}
+			else if (tipo == "Plano") {
+				Punto ps[3];
+				ps[0] = Punto(stof(nodo->attribute("x1").value()), stof(nodo->attribute("y1").value()), stof(nodo->attribute("z1").value()));
+				ps[1] = Punto(stof(nodo->attribute("x2").value()), stof(nodo->attribute("y2").value()), stof(nodo->attribute("z2").value()));
+				ps[2] = Punto(stof(nodo->attribute("x3").value()), stof(nodo->attribute("y3").value()), stof(nodo->attribute("z3").value()));
+				Mundo::inst()->shapes.push_back(new Plano(ps, refle, refra, transp, amb, dif, esp, constEsp));
 			}
 		} 
 		else if (nombre == "Luz") {

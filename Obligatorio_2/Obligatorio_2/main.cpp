@@ -115,7 +115,7 @@ void calcularImagen(Color* matriz, Color* matrizRefle, Color* matrizRefra,
 			);
 			//defino los 4 puntos que voy a usar en AA
 			Punto puntosAA[4];
-			JitteredAA(pixel, ladoXpixel, ladoYpixel, puntosAA);
+			GridAA(pixel, ladoXpixel, ladoYpixel, puntosAA);
 			ColorInt coloresAA[4];
 			ColorInt coloresAARefle[4];
 			ColorInt coloresAARefra[4];

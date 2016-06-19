@@ -29,6 +29,12 @@ Poligono::Poligono(/*Punto* ps, int c*/ vector<Punto> ps, float refle, float ref
 
 }
 
+Poligono::Poligono(const Poligono &p){
+	puntos = p.puntos;
+	normal = p.normal;
+	d = p.d;
+}
+
 int Poligono::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 	if (puntos.size() < 3)
 		return 0;
@@ -51,13 +57,13 @@ int Poligono::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 
 		// Resolver sistema
 		float* res = NULL;
-		bool ok; //= true;
+		bool terminado; //= true;
 		//res = new float[3];
 		//res[0] = res[1] = res[2] = 0;
-		ok = matriz.resolverSistema(coeficientes, res);
+		terminado = matriz.resolverSistema(coeficientes, res);
 		delete[] coeficientes;
-		if ((!ok) || (res[0] < 0) || (res[1] < 0) || (res[0] + res[1] >= 1)){
-			if (ok)
+		if ((!terminado) || (res[0] < 0) || (res[1] < 0) || (res[0] + res[1] >= 1)){
+			if (terminado)
 				delete[] res;
 			return 0;
 		}
@@ -148,6 +154,10 @@ int Poligono::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 	else {
 		return 0;
 	}
+}
+
+bool Poligono::perteneceA(Punto p) {
+	return (normal * p == -d);
 }
 
 Punto Poligono::calcularNormal(Punto p) {

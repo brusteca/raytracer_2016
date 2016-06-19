@@ -27,6 +27,7 @@ class Poligono : public Shape {
 	public:
 		Poligono();
 		Poligono( vector<Punto> p, float refle, float refra, float transp, Color amb, Color dif, Color esp, float constEsp);
+		Poligono(const Poligono &p);
 
 		/* La colisión entre un rayo y un polígono se analiza en dos pasos:
 				1) Colisionar rayo con plano en el que se encuentra el polígono.
@@ -34,6 +35,8 @@ class Poligono : public Shape {
 				
 		*/
 		int colisionaCon(Punto p1, Punto p2, Punto* &resultado);
+
+		bool perteneceA(Punto p);
 
 		Punto calcularNormal(Punto p);
 

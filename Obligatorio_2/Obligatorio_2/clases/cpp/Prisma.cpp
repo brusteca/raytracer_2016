@@ -94,8 +94,6 @@ Prisma::Prisma(vector<Punto> ps, float altura, float refle, float refra, float t
 }
 
 int Prisma::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
-	// Eliminar normalesDeColision
-	normalesDeColision.clear();
 	// Ver si colisiona con la bounding shape
 	Punto* resBS;
 	int cantBS;
@@ -115,18 +113,6 @@ int Prisma::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 			// Agregar al array
 			resultadoAux[cant] = res[0];
 			delete[]res;
-			normal = poligonos[i].calcularNormal(resultadoAux[cant]);
-			/*
-			bool yaExiste = false;
-			for (vector<pair<Punto, Punto>>::iterator it = normalesDeColision.begin(); it != normalesDeColision.end(); it++) {
-				if (it->first == resultadoAux[cant]) {
-					// Recalcular normal
-					it->second = (it->second + poligonos[i].calcularNormal(resultadoAux[cant])).normalizar();
-					yaExiste = true;
-				}
-			}
-			if (!yaExiste)
-				normalesDeColision.push_back(pair<Punto,Punto>(resultadoAux[cant],poligonos[i].calcularNormal(resultadoAux[cant])));*/
 			cant++;
 			// Si choqué contra par,entonces no chequeo la impar
 			if (i % 2 == 0)
@@ -140,16 +126,17 @@ int Prisma::colisionaCon(Punto p1, Punto p2, Punto* &resultado) {
 		resultado = resultadoAux;
 	return cant;
 }
-Punto Prisma::calcularNormal(Punto p) {
-	//return boundingShape->calcularNormal(p);
-	/*
-	for (vector<pair<Punto, Punto>>::iterator it = normalesDeColision.begin(); it != normalesDeColision.end(); it++) {
-		if (it->first == p) {
-			return it->second;
-		}
+Punto Prisma::calcularNormal(Punto p) {	
+	// Chequear a qué polígono pertenece ese punto
+	Punto* res = NULL;
+	int i = 0;
+	while ((i < poligonos.size()) && (!poligonos[i].perteneceA(p))) {
+		i++;
 	}
-	return Punto();*/
-	return normal;
+	if (i < poligonos.size())
+		return poligonos[i].calcularNormal(p);
+	else
+		return Punto();
 }
 
-Prisma::~Prisma() { poligonos.clear(); normalesDeColision.clear(); }
+Prisma::~Prisma() { poligonos.clear();}

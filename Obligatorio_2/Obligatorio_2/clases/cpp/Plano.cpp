@@ -5,7 +5,9 @@ using namespace std;
 Plano::Plano() {
 	puntos[0] = Punto(1, 0, 0);
 	puntos[1] = Punto(0, 0, 1);
-	puntos[2] = 
+	puntos[2] = Punto(1, 0, 1);
+	normal = Punto(0, 1, 0);
+	d = 0;
 }
 Plano::Plano(Punto* ps, float refle, float refra, float transp, Color amb, Color dif, Color esp, float constEsp) : 
 	Shape(refle, refra, transp, amb, dif, esp, constEsp) {

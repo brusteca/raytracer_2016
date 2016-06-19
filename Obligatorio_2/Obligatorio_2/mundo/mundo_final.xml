@@ -83,7 +83,8 @@
 					<Vertice x="-5" y="5" z="10" />
 					<Vertice x="-5" y="5" z="-10" />
 					<Vertice x="-5" y="-5" z="-10" />	
-			</Shape> 
+					<Vertice x="-5" y="-5" z="10" />
+			</Shape> <!--
 			<Shape 	tipo = "Poligono"
 					transp = "0.0"
 					refle = "0.0"
@@ -98,7 +99,7 @@
 					<Vertice x="-5" y="5" z="10" />
 					<Vertice x="-5" y="-5" z="-10" />	
 					<Vertice x="-5" y="-5" z="10" />
-			</Shape> 
+			</Shape> -->
 			<!-- Cara Derecha -->
 			<Shape 	tipo = "Poligono"
 					transp = "0.0"
@@ -307,12 +308,12 @@
 		x="-0.7" y="-2" z="7"
 		/>
 <!-- Luces -->
-<Luz 	x="0" y="4.5" z = "5" 
+<Luz 	x="0" y="3.5" z = "5" 
 		Ramb="0.1" Gamb="0.1" Bamb="0.1"
 		Rdif="0.5" Gdif="0.5" Bdif="0.5"
 		Resp="0.5" Gesp="0.5" Besp="0.5"
 		/>
-<Luz 	x="0" y="4.5" z = "9" 
+<Luz 	x="0" y="3.5" z = "8" 
 		Ramb="0.0" Gamb="0.0" Bamb="0.0"
 		Rdif="0.6" Gdif="0.6" Bdif="0.6"
 		Resp="0.3" Gesp="0.3" Besp="0.3"

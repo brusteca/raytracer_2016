@@ -131,6 +131,7 @@
     <ClCompile Include="clases\cpp\Luz.cpp" />
     <ClCompile Include="clases\cpp\Matriz.cpp" />
     <ClCompile Include="clases\cpp\Mundo.cpp" />
+    <ClCompile Include="clases\cpp\Plano.cpp" />
     <ClCompile Include="clases\cpp\Poligono.cpp" />
     <ClCompile Include="clases\cpp\Prisma.cpp" />
     <ClCompile Include="clases\cpp\Punto.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="clases\Luz.h" />
     <ClInclude Include="clases\Matriz.h" />
     <ClInclude Include="clases\Mundo.h" />
+    <ClInclude Include="clases\Plano.h" />
     <ClInclude Include="clases\Poligono.h" />
     <ClInclude Include="clases\Prisma.h" />
     <ClInclude Include="clases\Punto.h" />

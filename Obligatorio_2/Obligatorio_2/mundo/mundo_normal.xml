@@ -7,23 +7,6 @@
 <!-- Objetos -->
 <!-- Cuarto ----------------------------------------------------------------------------------->
 			
-			<Shape 	tipo = "Poligono"
-					transp = "0.0"
-					refle = "0.0"
-					refra = "0.0"
-					Ramb="0" Gamb="0" Bamb="0"
-					Rdif="0" Gdif="0" Bdif="0"
-					Resp="0" Gesp="0" Besp="0"
-					constEsp="1.0"
-					radio="1.0" 
-					x="0.0" y="2" z="3.0"
-					>
-					<Vertice x="5" y="5" z="10" />
-					<Vertice x="5" y="5" z="-10" />					
-					<Vertice x="5" y="-5" z="-10" />
-					<Vertice x="5" y="-5" z="10" />
-			</Shape> 
-			
 			<!-- Cara Izquierda -->
 			<Shape 	tipo = "Poligono"
 					transp = "0.0"
@@ -51,9 +34,9 @@
 					radio="1.0" 
 					x="0.0" y="2" z="3.0"
 					>
-					<Vertice x="-5" y="5" z="10" />
-					<Vertice x="-5" y="-5" z="-10" />	
-					<Vertice x="-5" y="-5" z="10" />
+					<Vertice x="5" y="5" z="10" />
+					<Vertice x="5" y="-5" z="10" />
+					<Vertice x="5" y="-5" z="-10" />	
 			</Shape> 
 <!-- Luces -->
 <Luz 	x="0" y="3.5" z = "5" 

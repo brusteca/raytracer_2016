@@ -5,10 +5,9 @@
 <!-- Información de Color -->
 <Background red="0" green="0" blue="0" />
 <!-- Objetos -->
-			
 <!-- Cuarto ----------------------------------------------------------------------------------->
 			<!-- Cara Trasera (visible) -->
-			<Shape 	tipo = "Poligono"
+			<Shape 	tipo = "Plano"
 					transp = "0.0"
 					refle = "0.0"
 					refra = "0.0"
@@ -16,30 +15,12 @@
 					Rdif="255" Gdif="255" Bdif="255"
 					Resp="255" Gesp="255" Besp="255"
 					constEsp="1.0"
-					radio="1.0" 
-					x="0.0" y="2" z="3.0"
-					>
-					<Vertice x="5" y="5" z="10" />
-					<Vertice x="-5" y="5" z="10" />		
-					<Vertice x="-5" y="-5" z="10" />	
-			</Shape> 
-			<Shape 	tipo = "Poligono"
-					transp = "0.0"
-					refle = "0.0"
-					refra = "0.0"
-					Ramb="255" Gamb="255" Bamb="255"
-					Rdif="255" Gdif="255" Bdif="255"
-					Resp="255" Gesp="255" Besp="255"
-					constEsp="1.0"
-					radio="1.0" 
-					x="0.0" y="2" z="3.0"
-					>
-					<Vertice x="5" y="5" z="10" />		
-					<Vertice x="-5" y="-5" z="10" />	
-					<Vertice x="5" y="-5" z="10" />
-			</Shape> 
+					x1="5" y1="5" z1="10"
+					x2="-5" y2="5" z2="10"
+					x3="-5" y3="-5" z3="10"
+					/>
 			<!-- Cara Delantera (no visible) -->
-			<Shape 	tipo = "Poligono"
+			<Shape 	tipo = "Plano"
 					transp = "0.0"
 					refle = "0.0"
 					refra = "0.0"
@@ -47,30 +28,12 @@
 					Rdif="0" Gdif="0" Bdif="0"
 					Resp="0" Gesp="0" Besp="0"
 					constEsp="1.0"
-					radio="1.0" 
-					x="0.0" y="2" z="3.0"
-					>
-					<Vertice x="5" y="5" z="-10" />
-					<Vertice x="5" y="-5" z="-10" />
-					<Vertice x="-5" y="-5" z="-10" />		
-			</Shape> 
-			<Shape 	tipo = "Poligono"
-					transp = "0.0"
-					refle = "0.0"
-					refra = "0.0"
-					Ramb="0" Gamb="0" Bamb="0"
-					Rdif="0" Gdif="0" Bdif="0"
-					Resp="0" Gesp="0" Besp="0"
-					constEsp="1.0"
-					radio="1.0" 
-					x="0.0" y="2" z="3.0"
-					>
-					<Vertice x="5" y="5" z="-10" />		
-					<Vertice x="-5" y="-5" z="-10" />	
-					<Vertice x="-5" y="5" z="-10" />
-			</Shape> 
-			<!-- Cara Izquierda -->
-			<Shape 	tipo = "Poligono"
+					x1="5" y1="5" z1="-10"
+					x2="5" y2="-5" z2="-10"
+					x3="-5" y3="-5" z3="-10"	
+					/>
+			<!-- Cara Izquierda --> 
+			<Shape 	tipo = "Plano"
 					transp = "0.0"
 					refle = "0.0"
 					refra = "0.0"
@@ -78,31 +41,12 @@
 					Rdif="102" Gdif="0" Bdif="0"
 					Resp="102" Gesp="0" Besp="0"
 					constEsp="1.0"
-					radio="1.0" 
-					x="0.0" y="2" z="3.0"
-					>
-					<Vertice x="-5" y="5" z="10" />
-					<Vertice x="-5" y="5" z="-10" />
-					<Vertice x="-5" y="-5" z="-10" />	
-					<Vertice x="-5" y="-5" z="10" />
-			</Shape> <!--
-			<Shape 	tipo = "Poligono"
-					transp = "0.0"
-					refle = "0.0"
-					refra = "0.0"
-					Ramb="102" Gamb="0" Bamb="0"
-					Rdif="102" Gdif="0" Bdif="0"
-					Resp="102" Gesp="0" Besp="0"
-					constEsp="1.0"
-					radio="1.0" 
-					x="0.0" y="2" z="3.0"
-					>
-					<Vertice x="-5" y="5" z="10" />
-					<Vertice x="-5" y="-5" z="-10" />	
-					<Vertice x="-5" y="-5" z="10" />
-			</Shape> -->
-			<!-- Cara Derecha -->
-			<Shape 	tipo = "Poligono"
+					x1="-5" y1="5" z1="10"
+					x2="-5" y2="5" z2="-10"
+					x3="-5" y3="-5" z3="-10"
+					/>
+			<!-- Cara Derecha --> 
+			<Shape 	tipo = "Plano"
 					transp = "0.0"
 					refle = "0.0"
 					refra = "0.0"
@@ -110,16 +54,12 @@
 					Rdif="0" Gdif="102" Bdif="0"
 					Resp="0" Gesp="102" Besp="0"
 					constEsp="1.0"
-					radio="1.0" 
-					x="0.0" y="2" z="3.0"
-					>
-					<Vertice x="5" y="5" z="10" />
-					<Vertice x="5" y="-5" z="10" />
-					<Vertice x="5" y="-5" z="-10" />	
-					<Vertice x="5" y="5" z="-10" />
-			</Shape> 
+					x1="5" y1="5" z1="10"
+					x2="5" y2="-5" z2="10"
+					x3="5" y3="-5" z3="-10"
+					/>
 			<!-- Cara Superior -->
-			<Shape 	tipo = "Poligono"
+			<Shape 	tipo = "Plano"
 					transp = "0.0"
 					refle = "0.0"
 					refra = "0.0"
@@ -127,16 +67,12 @@
 					Rdif="71" Gdif="69" Bdif="69"
 					Resp="71" Gesp="69" Besp="69"
 					constEsp="1.0"
-					radio="1.0" 
-					x="0.0" y="2" z="3.0"
-					>
-					<Vertice x="-5" y="5" z="-10" />
-					<Vertice x="-5" y="5" z="10" />
-					<Vertice x="5" y="5" z="10" />	
-					<Vertice x="5" y="5" z="-10" />
-			</Shape> 
+					x1="-5" y1="5" z1="-10"
+					x2="-5" y2="5" z2="10"
+					x3="5" y3="5" z3="10"
+					/>
 			<!-- Cara Inferior -->
-			<Shape 	tipo = "Poligono"
+			<Shape 	tipo = "Plano"
 					transp = "0.0"
 					refle = "0.0"
 					refra = "0.0"
@@ -144,29 +80,36 @@
 					Rdif="255" Gdif="255" Bdif="255"
 					Resp="255" Gesp="255" Besp="255"
 					constEsp="1.0"
-					radio="1.0" 
-					x="0.0" y="2" z="3.0"
-					>
-					<Vertice x="5" y="-5" z="-10" />
-					<Vertice x="5" y="-5" z="10" />
-					<Vertice x="-5" y="-5" z="10" />	
-					<Vertice x="-5" y="-5" z="-10" />
-			</Shape> 
+					x1="5" y1="-5" z1="-10"
+					x2="5" y2="-5" z2="10"
+					x3="-5" y3="-5" z3="10"
+					/>
 <!-- Mesa -->
 			<!-- Cara Trasera -->
 			<Shape 	tipo = "Poligono"
 					transp = "0.0"
 					refle = "0.0"
 					refra = "0.0"
-					Ramb="50" Gamb="50" Bamb="50"
-					Rdif="50" Gdif="50" Bdif="50"
-					Resp="50" Gesp="50" Besp="50"
+					Ramb="200" Gamb="200" Bamb="200"
+					Rdif="200" Gdif="200" Bdif="200"
+					Resp="200" Gesp="200" Besp="200"
 					constEsp="1.0"
-					radio="1.0" 
-					x="0.0" y="2" z="3.0"
 					>
 					<Vertice x="3" y="-2" z="8" />
 					<Vertice x="3" y="-5" z="8" />		
+					<Vertice x="-4" y="-5" z="8" />	
+
+			</Shape> 
+			<Shape 	tipo = "Poligono"
+					transp = "0.0"
+					refle = "0.0"
+					refra = "0.0"
+					Ramb="200" Gamb="200" Bamb="200"
+					Rdif="200" Gdif="200" Bdif="200"
+					Resp="200" Gesp="200" Besp="200"
+					constEsp="1.0"
+					>
+					<Vertice x="3" y="-2" z="8" />	
 					<Vertice x="-4" y="-5" z="8" />	
 					<Vertice x="-4" y="-2" z="8" />
 			</Shape> 
@@ -175,15 +118,29 @@
 					transp = "0.0"
 					refle = "0.0"
 					refra = "0.0"
-					Ramb="50" Gamb="50" Bamb="50"
-					Rdif="50" Gdif="50" Bdif="50"
-					Resp="50" Gesp="50" Besp="50"
+					Ramb="200" Gamb="200" Bamb="200"
+					Rdif="200" Gdif="200" Bdif="200"
+					Resp="200" Gesp="200" Besp="200"
 					constEsp="1.0"
 					radio="1.0" 
 					x="0.0" y="2" z="3.0"
 					>
 					<Vertice x="3" y="-2" z="6" />
 					<Vertice x="-4" y="-2" z="6" />		
+					<Vertice x="-4" y="-5" z="6" />	
+			</Shape>
+			<Shape 	tipo = "Poligono"
+					transp = "0.0"
+					refle = "0.0"
+					refra = "0.0"
+					Ramb="200" Gamb="200" Bamb="200"
+					Rdif="200" Gdif="200" Bdif="200"
+					Resp="200" Gesp="200" Besp="200"
+					constEsp="1.0"
+					radio="1.0" 
+					x="0.0" y="2" z="3.0"
+					>
+					<Vertice x="3" y="-2" z="6" />
 					<Vertice x="-4" y="-5" z="6" />	
 					<Vertice x="3" y="-5" z="6" />
 			</Shape>
@@ -192,15 +149,29 @@
 					transp = "0.0"
 					refle = "0.0"
 					refra = "0.0"
-					Ramb="50" Gamb="50" Bamb="50"
-					Rdif="50" Gdif="50" Bdif="50"
-					Resp="50" Gesp="50" Besp="50"
+					Ramb="200" Gamb="200" Bamb="200"
+					Rdif="200" Gdif="200" Bdif="200"
+					Resp="200" Gesp="200" Besp="200"
 					constEsp="1.0"
 					radio="1.0" 
 					x="0.0" y="2" z="3.0"
 					>
 					<Vertice x="-4" y="-2" z="8" />
 					<Vertice x="-4" y="-5" z="8" />
+					<Vertice x="-4" y="-5" z="6" />	
+			</Shape> 
+			<Shape 	tipo = "Poligono"
+					transp = "0.0"
+					refle = "0.0"
+					refra = "0.0"
+					Ramb="200" Gamb="200" Bamb="200"
+					Rdif="200" Gdif="200" Bdif="200"
+					Resp="200" Gesp="200" Besp="200"
+					constEsp="1.0"
+					radio="1.0" 
+					x="0.0" y="2" z="3.0"
+					>
+					<Vertice x="-4" y="-2" z="8" />
 					<Vertice x="-4" y="-5" z="6" />	
 					<Vertice x="-4" y="-2" z="6" />
 			</Shape> 
@@ -209,15 +180,29 @@
 					transp = "0.0"
 					refle = "0.0"
 					refra = "0.0"
-					Ramb="50" Gamb="50" Bamb="50"
-					Rdif="50" Gdif="50" Bdif="50"
-					Resp="50" Gesp="50" Besp="50"
+					Ramb="200" Gamb="200" Bamb="200"
+					Rdif="200" Gdif="200" Bdif="200"
+					Resp="200" Gesp="200" Besp="200"
 					constEsp="1.0"
 					radio="1.0" 
 					x="0.0" y="2" z="3.0"
 					>
 					<Vertice x="3" y="-2" z="8" />
 					<Vertice x="3" y="-2" z="6" />
+					<Vertice x="3" y="-5" z="6" />	
+			</Shape> 
+			<Shape 	tipo = "Poligono"
+					transp = "0.0"
+					refle = "0.0"
+					refra = "0.0"
+					Ramb="200" Gamb="200" Bamb="200"
+					Rdif="200" Gdif="200" Bdif="200"
+					Resp="200" Gesp="200" Besp="200"
+					constEsp="1.0"
+					radio="1.0" 
+					x="0.0" y="2" z="3.0"
+					>
+					<Vertice x="3" y="-2" z="8" />
 					<Vertice x="3" y="-5" z="6" />	
 					<Vertice x="3" y="-5" z="8" />
 			</Shape> 
@@ -226,15 +211,29 @@
 					transp = "0.0"
 					refle = "0.0"
 					refra = "0.0"
-					Ramb="50" Gamb="50" Bamb="50"
-					Rdif="50" Gdif="50" Bdif="50"
-					Resp="50" Gesp="50" Besp="50"
+					Ramb="200" Gamb="200" Bamb="200"
+					Rdif="200" Gdif="200" Bdif="200"
+					Resp="200" Gesp="200" Besp="200"
 					constEsp="1.0"
 					radio="1.0" 
 					x="0.0" y="2" z="3.0"
 					>
 					<Vertice x="3" y="-2" z="8" />
 					<Vertice x="-4" y="-2" z="8" />
+					<Vertice x="-4" y="-2" z="6" />	
+			</Shape> 
+			<Shape 	tipo = "Poligono"
+					transp = "0.0"
+					refle = "0.0"
+					refra = "0.0"
+					Ramb="200" Gamb="200" Bamb="200"
+					Rdif="200" Gdif="200" Bdif="200"
+					Resp="200" Gesp="200" Besp="200"
+					constEsp="1.0"
+					radio="1.0" 
+					x="0.0" y="2" z="3.0"
+					>
+					<Vertice x="3" y="-2" z="8" />
 					<Vertice x="-4" y="-2" z="6" />	
 					<Vertice x="3" y="-2" z="6" />
 			</Shape> 
@@ -243,9 +242,9 @@
 					transp = "0.0"
 					refle = "0.0"
 					refra = "0.0"
-					Ramb="50" Gamb="50" Bamb="50"
-					Rdif="50" Gdif="50" Bdif="50"
-					Resp="50" Gesp="50" Besp="50"
+					Ramb="200" Gamb="200" Bamb="200"
+					Rdif="200" Gdif="200" Bdif="200"
+					Resp="200" Gesp="200" Besp="200"
 					constEsp="1.0"
 					radio="1.0" 
 					x="0.0" y="2" z="3.0"
@@ -253,24 +252,22 @@
 					<Vertice x="3" y="-5" z="8" />
 					<Vertice x="3" y="-5" z="6" />
 					<Vertice x="-4" y="-5" z="6" />	
+			</Shape> 
+			<Shape 	tipo = "Poligono"
+					transp = "0.0"
+					refle = "0.0"
+					refra = "0.0"
+					Ramb="200" Gamb="200" Bamb="200"
+					Rdif="200" Gdif="200" Bdif="200"
+					Resp="200" Gesp="200" Besp="200"
+					constEsp="1.0"
+					radio="1.0" 
+					x="0.0" y="2" z="3.0"
+					>
+					<Vertice x="3" y="-5" z="8" />
+					<Vertice x="-4" y="-5" z="6" />	
 					<Vertice x="-4" y="-5" z="8" />
 			</Shape> 
-<!--
-<Shape 	tipo = "Prisma"
-		transp = "0.0"
-		refle = "0.0"
-		refra = "0.0"
-		Ramb="100" Gamb="100" Bamb="100"
-		Rdif="100" Gdif="100" Bdif="100"
-		Resp="100" Gesp="100" Besp="100"
-		constEsp="1.0"
-		altura="3"
-		>
-		<Vertice x="3" y="-5" z="8" />
-		<Vertice x="3" y="-5" z="6" />
-		<Vertice x="-4" y="-5" z="6" />	
-		<Vertice x="-4" y="-5" z="8" />
-</Shape> -->
 <!-- Esfera Espejada -->
 	<Shape 	tipo = "Esfera"
 			transp = "0.0"

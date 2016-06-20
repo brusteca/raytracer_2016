@@ -133,7 +133,6 @@
     <ClCompile Include="clases\cpp\Mundo.cpp" />
     <ClCompile Include="clases\cpp\Plano.cpp" />
     <ClCompile Include="clases\cpp\Poligono.cpp" />
-    <ClCompile Include="clases\cpp\Prisma.cpp" />
     <ClCompile Include="clases\cpp\Punto.cpp" />
     <ClCompile Include="clases\cpp\Shape.cpp" />
     <ClCompile Include="clases\cpp\Utils.cpp" />
@@ -152,7 +151,6 @@
     <ClInclude Include="clases\Mundo.h" />
     <ClInclude Include="clases\Plano.h" />
     <ClInclude Include="clases\Poligono.h" />
-    <ClInclude Include="clases\Prisma.h" />
     <ClInclude Include="clases\Punto.h" />
     <ClInclude Include="clases\Esfera.h" />
     <ClInclude Include="clases\Shape.h" />

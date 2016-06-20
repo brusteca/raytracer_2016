@@ -36,9 +36,6 @@
     <ClCompile Include="clases\cpp\Cilindro.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="clases\cpp\Prisma.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="clases\cpp\Matriz.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -78,9 +75,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="clases\Color.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="clases\Prisma.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="clases\Matriz.h">
